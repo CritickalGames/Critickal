@@ -45,3 +45,7 @@ table{
 .custom-select option {
     padding: 10px; /* Espaciado interno */
 }
+
+.row {
+    --bs-gutter-x: 0;
+}

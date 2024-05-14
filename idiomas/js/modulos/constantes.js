@@ -2,10 +2,15 @@
 
 const cst = {
     html_id: {
-        collapse: {
+        contenedor_botones: {
             idiomas: "_idiomas",
             cursos: "_cursos",
             clases: "_clases",
+        },
+        collapse: {
+            idiomas: "collapseIdiomas",
+            cursos: "collapseCursos",
+            clases: "collapseClases",
         },
         dataset: {
             idiomas:"data-idioma",

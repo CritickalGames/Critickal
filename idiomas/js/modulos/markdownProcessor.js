@@ -1,7 +1,8 @@
+import * as etikedo from "./manipular_html.js";
 // Módulo de procesamiento de Markdown
 const MarkdownProcessor = {
     // Lista para almacenar las listas ordenadas creadas
-    orderedLists: [],
+    orderedLists: [], html_p: etikedo.krei("p"), sangria: false,
 
     // Método para procesar el contenido Markdown y darle etiquetas y estilo
     process: function(markdownContent) {
@@ -11,20 +12,23 @@ const MarkdownProcessor = {
         // Separar las líneas del contenido Markdown
         const lines = markdownContent.split('\n');
 
-        let cxu_lista = false, cerrar_lista = false;
+        let cxu_lista = false, lista_cerrada = false, cerrar_lista= false;
         // Iterar sobre cada línea del contenido Markdown
         lines.forEach(line => {
             // Procesar la línea
             if (line.match(/^\s+\d+\.\s.+/) || line.match(/^\d+\.\s.+/)) {
                 cxu_lista = true;
-                cerrar_lista = false;
+                lista_cerrada = false; //marca si la lista está abierta
+                cerrar_lista = true; //Sin esto, cierra la lista por cada iteración que mientras la lista esté cerrada
             } else {
                 cxu_lista = false;
-                cerrar_lista = true;
+                lista_cerrada = true;
             }
-            if (cerrar_lista) {
+            if (lista_cerrada && cerrar_lista) {
                 processedContent += this.closeOrderedLists();
+                cerrar_lista = false
             }
+            
             switch (true) {
                 case cxu_lista:
                     // Elemento de lista ordenada
@@ -38,13 +42,29 @@ const MarkdownProcessor = {
                     // Imagen
                     processedContent += this.processImage(line);
                     break;
+                case this.sangria: // agrega un tab si el parrafo no tiene sangría
+                    // Texto con tabulación
+                    this.processParrafo(line); 
+                    break;
+                case /^\s*$/.test(line):
+                    // Línea vacía
+                    if (this.html_p.textContent) {
+                        processedContent += `<p>${this.html_p.textContent}</p>`;
+                    }
+                    this.sangria = true;
+                    this.html_p = etikedo.krei("p");
+                    break;
                 default:
-                    // Otros elementos (párrafos, enlaces, etc.)
-                    processedContent += `${line}\n`;
+                    // extensión de parrafo
+                    etikedo.aldoniTekston("<br>"+line, this.html_p);
                     break;
             }
             
         });
+
+        if (this.html_p.textContent != "") {
+            processedContent += `<p>${this.html_p.textContent}</p>`;
+        }
 
         // Devolver el contenido procesado
         return processedContent;
@@ -97,7 +117,12 @@ const MarkdownProcessor = {
         // Eliminar los caracteres "#" del inicio de la línea
         const headerContent = line.replace(/^#+\s*/, '');
         // Devolver el título con el formato HTML correspondiente
-        return `<h${headerLevel}>${headerContent}</h${headerLevel}>`;
+        if (headerLevel != 2) {
+            return `<h${headerLevel}>${headerContent}</h${headerLevel}>`
+        }
+        else {
+            return `<center><h${headerLevel}>${headerContent}</h${headerLevel}></center>`
+        }
     },
     
     // Método para procesar una línea que contiene una imagen
@@ -106,6 +131,11 @@ const MarkdownProcessor = {
         const imageUrl = line.match(/\[\[(.*?)\]\]/)[1];
         // Devolver la etiqueta de imagen con la URL correspondiente
         return `<img src="${imageUrl}" alt="Imagen">`;
+    },
+    //Método para procesar las lineas que inician con sangría
+    processParrafo: function (line) {
+        this.sangria = false;
+        etikedo.aldoniTekston(line, this.html_p);
     }
 };
 

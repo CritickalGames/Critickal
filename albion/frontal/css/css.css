@@ -1,0 +1,7 @@
+table {
+    border-collapse: collapse; /* Combina los bordes de las celdas adyacentes */
+    border: 1px solid black; /* Borde de la tabla */
+  }
+  th, td {
+    border: 1px solid black; /* Borde de las celdas */
+  }

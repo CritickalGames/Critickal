@@ -16,7 +16,7 @@ const insertar_botones = {
             const OBJ_DESTINO = etikedo.troviIdn(id_del_destino);
             const ARCH = await abrirJson(dir,archivo);
             const BOTONES = ARCH.filas;
-        
+            etikedo.malplenigi(OBJ_DESTINO);
             for (let index = 0; index < BOTONES.length; index++) {
                 const OBJ_HIJO = etikedo.krei("button");
                 etikedo.aldoniTekston(BOTONES[index][0], OBJ_HIJO);
@@ -25,7 +25,7 @@ const insertar_botones = {
                 etikedo.aldoniFilon(OBJ_HIJO, OBJ_DESTINO);
             }
         } catch (error) {
-            consola(error);
+            console.log(error);
         }
     },
     cxioj_datumaroj(dataset) {

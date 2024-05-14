@@ -7,7 +7,7 @@ import * as etikedo from "./modulos/manipular_html.js";
 import insertar_botones from "./modulos/iniciar_botones.js";
 
 let idioma_elegido = "";
-
+let textoBoton = "";
 
 async function main() {
     try {
@@ -19,23 +19,27 @@ async function main() {
 }
 
 async function insertar_idiomas() {
-    await insertar_botones.insertar("./Clases", "btn_idioma", cst.html_id.collapse.idiomas, cst.html_id.dataset.idiomas, "col-1 mx-3 my-1 btn btn-secondary");
+    await insertar_botones.insertar("./Clases", "btn_idioma", cst.html_id.contenedor_botones.idiomas, cst.html_id.dataset.idiomas, "col-1 mx-3 my-1 btn btn-secondary");
 }
 async function insertar_cursos_disponibles(dir) {
     const DIR = `./Clases/${dir}`;
-    await insertar_botones.insertar(DIR, "btn_cursos", cst.html_id.collapse.cursos, cst.html_id.dataset.cursos, "col-1 mx-3 my-1 btn btn-secondary");
+    console.log("IDIOMA Y DIR: "+idioma_elegido+"----"+DIR);
+    await insertar_botones.insertar(DIR, "btn_cursos", cst.html_id.contenedor_botones.cursos, cst.html_id.dataset.cursos, "col-1 mx-3 my-1 btn btn-secondary");
     return DIR;
 }
 async function insertar_clases(dir, dir2) {
     const DIR = `${dir}/${dir2}`;
-    await insertar_botones.insertar(DIR, "btn_clases", cst.html_id.collapse.clases, cst.html_id.dataset.clases, "col-1 mx-3 my-1 btn btn-secondary");
+    console.log("IDIOMA Y DIR: "+idioma_elegido+"----"+DIR);
+    await insertar_botones.insertar(DIR, "btn_clases", cst.html_id.contenedor_botones.clases, cst.html_id.dataset.clases, "col-1 mx-3 my-1 btn btn-secondary");
     return DIR;
 }
+
 function eventos() {
     eventos_btn_idiomas();
 }
 function eventos_btn_idiomas() {
     const BTN_IDIOMAS = insertar_botones.cxioj_datumaroj(cst.html_id.dataset.idiomas);
+    
     BTN_IDIOMAS.forEach(btn => {
         btn.addEventListener("click", on_Click_idioma)
     });
@@ -46,7 +50,6 @@ function eventos_btn_cursos() {
         btn.addEventListener("click", on_Click_curso)
     });
 }
-
 function eventos_btn_clases() {
     const BTN_CURSOS = insertar_botones.cxioj_datumaroj(cst.html_id.dataset.clases);
     BTN_CURSOS.forEach(btn => {
@@ -55,40 +58,42 @@ function eventos_btn_clases() {
 }
 
 async function on_Click_idioma(event) {
-    const textoBoton = event.target.dataset.idioma;
-    console.log(textoBoton);
+    textoBoton = event.target.dataset.idioma;
     aparecer_btn_cursos();
     idioma_elegido = await insertar_cursos_disponibles(textoBoton);
     eventos_btn_cursos();
+}
+async function on_Click_curso(event) {
+    textoBoton = event.target.dataset.curso;
+    aparecer_btn_clases();
+    await insertar_clases(idioma_elegido, textoBoton);
+    eventos_btn_clases();
+}
+function on_Click_clases(event) {
+    const textoBoton_auxiliar = event.target.dataset.clase;
+    procesador_markdown(textoBoton_auxiliar);
 }
 
 function aparecer_btn_cursos() {
     let etiqueta = etikedo.troviIdn(cst.html_id.elegir_curso);
     etikedo.aldoniAtributon(etiqueta, "style", "");
+    etiqueta = etikedo.troviIdn(cst.html_id.collapse.cursos);
+    etikedo.aldoniKlasojn(etiqueta, "collapse show");
 }
-
-async function on_Click_curso(event) {
-    const textoBoton = event.target.dataset.curso;
-    aparecer_btn_clases();
-    idioma_elegido = await insertar_clases(idioma_elegido, textoBoton);
-    eventos_btn_clases();
-}
-
 function aparecer_btn_clases() {
     let etiqueta = etikedo.troviIdn(cst.html_id.elegir_clase);
     etikedo.aldoniAtributon(etiqueta, "style", "");
+    etiqueta = etikedo.troviIdn(cst.html_id.collapse.clases);
+    etikedo.aldoniKlasojn(etiqueta, "collapse show");
 }
 
-function on_Click_clases(event) {
-    const textoBoton = event.target.dataset.clases;
-    procesador_markdown(textoBoton);
-}
 
 function procesador_markdown(archivo) {
     // Ruta del archivo Markdown
-    archivo = "documento.md";
-    const markdownFile = `${idioma_elegido}/${archivo}`;
-    alert(markdownFile)
+    //archivo = "documento.md"; //Esto es sólo para test
+    let idioma = idioma_elegido + "/" + textoBoton;
+    const markdownFile = `${idioma}/${archivo}.md`;
+    //alert(markdownFile);
     // Obtener el contenido del archivo Markdown
     fetch(markdownFile)
         .then(response => {

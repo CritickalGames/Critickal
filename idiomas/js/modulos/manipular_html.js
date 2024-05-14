@@ -8,11 +8,7 @@ export function aldoniFilon(filo, patro) {
     return patro;
 }
 
-export function aldoniKlasojn(objHTML, Array) {
-    let valor="";
-    for (const key in Array) {
-        valor+=Array[key]+" ";
-    }
+export function aldoniKlasojn(objHTML, valor) {
     aldoniAtributon(objHTML, "class" ,valor);  
     return objHTML;
 }
@@ -56,8 +52,12 @@ export function krei(etiqueta) {
     return document.createElement(etiqueta)
 }
 
-function kreiNodon(txt) {
+export function kreiNodon(txt) {
     return document.createTextNode(txt)
+}
+
+export function malplenigi(obj) {
+    return obj.innerHTML = '';
 }
 
 function ripariStilon(style, valor) {
