@@ -175,7 +175,7 @@ const MarkdownProcessor = {
     
         tableHTML += '</tbody></table>';
         return tableHTML;
-    }    
+    }   
 };
 
 // Exportar el módulo MarkdownProcessor para su uso en otros archivos
