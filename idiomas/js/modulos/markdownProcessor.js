@@ -2,68 +2,45 @@ import * as etikedo from "./manipular_html.js";
 
 // Módulo de procesamiento de Markdown
 const MarkdownProcessor = {
-    // Lista para almacenar las listas ordenadas creadas
-    orderedLists: [],
+    // Contenedores. Su contenido se descarga en el processTrash.
+    contenedorDeEstructurasHtmlGrandres: [],
     html_p: etikedo.krei("p"),
-    sangria: false,
-
+    bandera: { cxuTablo: false, cxuListo: false },
+    
     // Método para procesar el contenido Markdown y darle etiquetas y estilo
     process: function (markdownContent) {
         // Div para contener el contenido procesado
         let processedContent = '';
-
         // Separar las líneas del contenido Markdown
         const lines = markdownContent.split('\n');
-
-        let cxu_lista = false,
-            lista_cerrada = false,
-            cerrar_lista = false;
-
-        // Iterar sobre cada línea del contenido Markdown
         lines.forEach(line => {
-            // Procesar la línea
-            if (line.match(/^\s*\d+\.\s.+/)) {
-                cxu_lista = true;
-                lista_cerrada = false; // Marca si la lista está abierta
-                cerrar_lista = true; // Sin esto, cierra la lista por cada iteración mientras la lista esté cerrada
-            } else {
-                cxu_lista = false;
-                lista_cerrada = true;
-            }
-
-            if (lista_cerrada && cerrar_lista) {
-                processedContent += this.closeOrderedLists();
-                cerrar_lista = false;
-            }
-
             switch (true) {
-                case cxu_lista:
-                    // Elemento de lista ordenada
-                    processedContent += this.processOrderedListItem(line);
-                    break;
-                case line.startsWith('#'):
+                case line.startsWith('#'): // Título
+                    //ProcessTrash, para inyectar todo en orden
+                    processedContent += this.processTrash();
                     // Título
                     processedContent += this.processHeader(line);
                     break;
-                case line.startsWith('![['):
-                    // Imagen
-                    processedContent += this.processImage(line);
+                case line.trim() === '': //No hace nada en los espacios vacíos
+                    
                     break;
-                case this.sangria: // Agrega un tab si el párrafo no tiene sangría
-                    // Texto con tabulación
-                    this.processParrafo(line);
+                case line.startsWith('|'): // Tabla
+                    this.contenedorDeEstructurasHtmlGrandres.push(line);
+                    this.bandera.cxuTablo = true;
                     break;
-                case /^\s*$/.test(line):
-                    // Línea vacía
-                    if (this.html_p.textContent) {
-                        processedContent += `<p>${this.html_p.textContent}</p>`;
-                    }
-                    this.sangria = true;
-                    this.html_p = etikedo.krei("p");
+                case /^\d+\.\s/.test(line): // Lista ordenada
+                    this.contenedorDeEstructurasHtmlGrandres.push(line);
+                    this.bandera.cxuListo = true;
+                    break;
+                case /^-\s/.test(line): // Lista no ordenada
+                    this.contenedorDeEstructurasHtmlGrandres.push(line);
+                    this.bandera.cxuListo = true;
                     break;
                 default:
                     // Extensión de párrafo
-                    etikedo.aldoniTekston("<br>" + line, this.html_p);
+                    etikedo.aldoniTekston(line, this.html_p);
+                    //Procesar todo lo no procesable o inyectar código (procesar basura)
+                    processedContent += this.processTrash();
                     break;
             }
         });
@@ -76,12 +53,42 @@ const MarkdownProcessor = {
         return processedContent;
     },
 
+    // Cuando hay un recolector (como tablo), descarga su contenido en el processedContent
+    processTrash: function () {
+        let processedContent = "";
+        // Línea sin caracteres
+        if (this.html_p.textContent) {
+            processedContent += `<p>${this.html_p.textContent}</p>`;
+        }
+        this.html_p = etikedo.krei("p");
+        switch (this.bandera) {
+            case this.bandera.cxuTablo: // Inyección de tabla
+                this.cxuTablo = false;
+                processedContent += this.processTable(this.contenedorDeEstructurasHtmlGrandres);
+                processedContent += "<br>";
+                break;
+            case this.bandera.cxuListo: // Inyección de lista
+                this.cxuListo = false;
+                processedContent += this.processList(this.contenedorDeEstructurasHtmlGrandres);
+                processedContent += "<br>";
+                break;
+        }
+        if (this.cxuTablo) {
+            
+        }else if (this.cxuListo) { 
+            
+        }
+
+
+        this.contenedorDeEstructurasHtmlGrandres.length = 0;
+        return processedContent;
+    },
     // Método para procesar una línea que contiene un elemento de lista ordenada
-    processOrderedListItem: function (line) {
+    processList: function (line) {
         // Separar el número y el contenido del elemento de lista
         const [, indent, number, content] = line.match(/^(\s*)(\d+)\.\s(.+)/);
 
-        // Usar expresión regular para encontrar coincidencias de '\t'
+        // Usar expresión regular para encontrar coincidencias de '\t' tabulador
         const matches = line.match(/\t/g);
 
         // Calcular el nivel de la lista según la cantidad de espacios y tabulaciones
@@ -115,7 +122,6 @@ const MarkdownProcessor = {
         }
         return closingTags + content;
     },
-
     // Método para procesar una línea que contiene un título
     processHeader: function (line) {
         // Contar la cantidad de caracteres "#" al inicio de la línea para determinar el nivel del título
@@ -142,8 +148,44 @@ const MarkdownProcessor = {
     processParrafo: function (line) {
         this.sangria = false;
         etikedo.aldoniTekston(line, this.html_p);
+    },
+    processTable: function(lines) {
+        // Separar las filas de la tabla
+        const rows = lines.filter(line => line.includes('|')).map(line => line.split('|').map(cell => cell.trim()));
+    
+        // Extraer los encabezados de la tabla
+        const headers = rows.shift();
+    
+        // Saltar la primera fila después del encabezado
+        if (rows.length > 0) {
+            rows.shift();
+        }
+    
+        // Crear el HTML de la tabla
+        let tableHTML = '<table><thead><tr>';
+        headers.forEach(header => {
+            if (header) {
+                tableHTML += `<th>${header}</th>`;
+            }
+        });
+        tableHTML += '</tr></thead><tbody>';
+    
+        // Agregar las filas de la tabla
+        rows.forEach(row => {
+            tableHTML += '<tr>';
+            row.forEach(cell => {
+                if (cell) {
+                    tableHTML += `<td>${cell}</td>`;
+                }
+            });
+            tableHTML += '</tr>';
+        });
+    
+        tableHTML += '</tbody></table>';
+        return tableHTML;
     }
 };
 
 // Exportar el módulo MarkdownProcessor para su uso en otros archivos
 export default MarkdownProcessor;
+
