@@ -4,8 +4,14 @@
         ["clase 2","es_jp2"],
         ["clase 3","es_jp3"],
         ["calse 4", "es_jp4"],
-        ["calse 4.1", "es_jp4_1"],
-        ["calse 4.2", "es_jp4_2"],
-        ["calse 4.3", "es_jp4_3"]
+        ["calse 4.1", "es_jp4-1"],
+        ["calse 4.2", "es_jp4-2"],
+        ["calse 4.3", "es_jp4-3"],
+        ["calse 4.4", "es_jp4-4"],
+        ["calse 4.5", "es_jp4-5"],
+        ["calse 4.6", "es_jp4-6"],
+        ["calse 4.7", "es_jp4-7"],
+        ["calse 4.8", "es_jp4-8"],
+        ["calse 4.9", "es_jp4-9"]
     ]
 }

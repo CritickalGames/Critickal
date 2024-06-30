@@ -14,7 +14,7 @@ function getJson(carpeta, JS, resolve, reject) {
         if (this.readyState == 4) {
         if (this.status == 200) {
             resultadoJsonGlobal = JSON.parse(this.responseText);
-            console.log(`Se ha abierto: ${archivo}`);
+            //console.log(`Se ha abierto: ${archivo}`);
             resolve(resultadoJsonGlobal);
         } else {
             reject(new Error("Error al cargar el archivo JSON: "+ JS));

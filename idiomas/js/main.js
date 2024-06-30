@@ -29,7 +29,7 @@ async function insertar_cursos_disponibles(dir) {
 }
 async function insertar_clases(dir, dir2) {
     const DIR = `${dir}/${dir2}`;
-    console.log("IDIOMA Y DIR: "+idioma_elegido+"----"+DIR);
+    //console.log("IDIOMA Y DIR: "+idioma_elegido+"----"+DIR);
     await insertar_botones.insertar(DIR, "btn_clases", cst.html_id.contenedor_botones.clases, cst.html_id.dataset.clases, "col-1 mx-3 my-1 btn btn-secondary");
     return DIR;
 }
@@ -87,12 +87,12 @@ function aparecer_btn_clases() {
     etikedo.aldoniKlasojn(etiqueta, "collapse show");
 }
 
-
 function procesador_markdown(archivo) {
     // Ruta del archivo Markdown
     //archivo = "documento.md"; //Esto es sólo para test
     let idioma = idioma_elegido + "/" + textoBoton;
     const markdownFile = `${idioma}/${archivo}.md`;
+    document.getElementById(cst.html_id._section).innerHTML = "";
     //alert(markdownFile);
     // Obtener el contenido del archivo Markdown
     fetch(markdownFile)
