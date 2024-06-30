@@ -22,9 +22,17 @@ const MarkdownProcessor = {
                     processedContent += this.processHeader(line);
                     break;
                 case line.startsWith('|'): // Tabla
-                    this.tablo.push(line);
-                    this.cxuTablo = true;
-                    break;                    
+                    this.contenedorDeEstructurasHtmlGrandres.push(line);
+                    this.bandera.cxuTablo = true;
+                    break;
+                case /^\d+\.\s/.test(line):
+                    this.contenedorDeEstructurasHtmlGrandres.push(line);
+                    this.bandera.cxuListo = true;
+                    break;
+                case /^-\s/.test(line):
+                    this.contenedorDeEstructurasHtmlGrandres.push(line);
+                    this.bandera.cxuListo = true;
+                    break;
                 default:
                     // Extensión de párrafo
                     etikedo.aldoniTekston(line, this.html_p);
@@ -54,21 +62,14 @@ const MarkdownProcessor = {
             case this.bandera.cxuTablo: // Inyección de tabla
                 this.cxuTablo = false;
                 processedContent += this.processTable(this.contenedorDeEstructurasHtmlGrandres);
-                processedContent += "<br>";
                 break;
             case this.bandera.cxuListo: // Inyección de lista
                 this.cxuListo = false;
                 processedContent += this.processList(this.contenedorDeEstructurasHtmlGrandres);
-                processedContent += "<br>";
                 break;
         }
-        if (this.cxuTablo) {
-            
-        }else if (this.cxuListo) { 
-            
-        }
 
-
+        processedContent += "<br>";
         this.contenedorDeEstructurasHtmlGrandres.length = 0;
         return processedContent;
     },
