@@ -29,9 +29,9 @@ const MarkdownProcessor = {
                     this.contenedorDeEstructurasHtmlGrandres.push(line);
                     this.bandera.cxuListo = true;
                     break;
-                case /^-\s/.test(line):
-                    this.contenedorDeEstructurasHtmlGrandres.push(line);
-                    this.bandera.cxuListo = true;
+                case /^\s*-\s/.test(line):
+                    //this.contenedorDeEstructurasHtmlGrandres.push(line);
+                    //this.bandera.cxuListo = true;
                     break;
                 default:
                     // Extensión de párrafo
@@ -58,24 +58,22 @@ const MarkdownProcessor = {
             processedContent += `<p>${this.html_p.textContent}</p>`;
         }
         this.html_p = etikedo.krei("p");
-        switch (this.bandera) {
-            case this.bandera.cxuTablo: // Inyección de tabla
-                this.cxuTablo = false;
-                processedContent += this.processTable(this.contenedorDeEstructurasHtmlGrandres);
-                processedContent += "<br>";
-                break;
-            case this.bandera.cxuListo: // Inyección de lista
-                this.cxuListo = false;
-                processedContent += this.processList(this.contenedorDeEstructurasHtmlGrandres);
-                processedContent += "<br>";
-                break;
+        if (this.bandera.cxuTablo) {
+            this.cxuTablo = false;
+            processedContent += this.processTable(this.contenedorDeEstructurasHtmlGrandres);
+            processedContent += "<br>";
+        } else if (this.bandera.cxuListo) {
+            this.cxuListo = false;
+            processedContent += this.processList(this.contenedorDeEstructurasHtmlGrandres);
+            processedContent += "<br>";
         }
-
+        
         this.contenedorDeEstructurasHtmlGrandres.length = 0;
         return processedContent;
     },
     // Método para procesar una línea que contiene un elemento de lista ordenada
     processList: function (line) {
+        console.log("hola");/*
         // Separar el número y el contenido del elemento de lista
         const [, indent, number, content] = line.match(/^(\s*)(\d+)\.\s(.+)/);
 
@@ -100,7 +98,13 @@ const MarkdownProcessor = {
                 // Agregar el elemento a la lista ordenada actual
                 return `<li>${content}</li>`;
             }
-        }
+        }*/
+        let processedContent = "";
+        line.forEach(line => {
+            processedContent += line;
+            processedContent += "<br>"
+        });
+        return processedContent;
     },
 
     // Método para cerrar todas las listas ordenadas abiertas hasta cierto nivel
