@@ -21,21 +21,10 @@ const MarkdownProcessor = {
                     // Título
                     processedContent += this.processHeader(line);
                     break;
-                case line.trim() === '': //No hace nada en los espacios vacíos
-                    
-                    break;
                 case line.startsWith('|'): // Tabla
-                    this.contenedorDeEstructurasHtmlGrandres.push(line);
-                    this.bandera.cxuTablo = true;
-                    break;
-                case /^\d+\.\s/.test(line): // Lista ordenada
-                    this.contenedorDeEstructurasHtmlGrandres.push(line);
-                    this.bandera.cxuListo = true;
-                    break;
-                case /^-\s/.test(line): // Lista no ordenada
-                    this.contenedorDeEstructurasHtmlGrandres.push(line);
-                    this.bandera.cxuListo = true;
-                    break;
+                    this.tablo.push(line);
+                    this.cxuTablo = true;
+                    break;                    
                 default:
                     // Extensión de párrafo
                     etikedo.aldoniTekston(line, this.html_p);
@@ -151,39 +140,41 @@ const MarkdownProcessor = {
     },
     processTable: function(lines) {
         // Separar las filas de la tabla
-        const rows = lines.filter(line => line.includes('|')).map(line => line.split('|').map(cell => cell.trim()));
+        const rows = lines.filter(line => line.includes('|')).map(line => {
+            const cells = line.split('|').map(cell => cell.trim());
+            // Eliminar la primera y última celda vacía si existen
+            if (cells.length > 0 && cells[0] === '') cells.shift();
+            if (cells.length > 0 && cells[cells.length - 1] === '') cells.pop();
+            return cells;
+        });
     
         // Extraer los encabezados de la tabla
         const headers = rows.shift();
     
-        // Saltar la primera fila después del encabezado
-        if (rows.length > 0) {
-            rows.shift();
-        }
-    
         // Crear el HTML de la tabla
         let tableHTML = '<table><thead><tr>';
         headers.forEach(header => {
-            if (header) {
-                tableHTML += `<th>${header}</th>`;
-            }
+            tableHTML += `<th>${header}</th>`;
         });
         tableHTML += '</tr></thead><tbody>';
+    
+        // Omitir la primera fila después del encabezado
+        if (rows.length > 0) {
+            rows.shift();
+        }
     
         // Agregar las filas de la tabla
         rows.forEach(row => {
             tableHTML += '<tr>';
             row.forEach(cell => {
-                if (cell) {
-                    tableHTML += `<td>${cell}</td>`;
-                }
+                tableHTML += `<td>${cell}</td>`;
             });
             tableHTML += '</tr>';
         });
     
         tableHTML += '</tbody></table>';
         return tableHTML;
-    }
+    }    
 };
 
 // Exportar el módulo MarkdownProcessor para su uso en otros archivos

@@ -35,17 +35,20 @@ No recomiendo que uses estos pronombres, son problemáticos. Pero, los enseño p
 | Tú         | お前         | おまえ     | (Viril, descortés y ofensivo) |
 | Vosotros   | お前ら        | おまえら    | (Viril, descortés y ofensivo) |
 
+
 | En español | En japonés | Lectura | Aclaración                                                                                                |
 | ---------- | ---------- | ------- | --------------------------------------------------------------------------------------------------------- |
 | Yo         | あたし        | あたし     | (Femenino, se supone que sea 'Lindo')                                                                     |
 | Tú         | あんた        | あんた     | (Sólo usado entre amigos y gente de confianza, fuera de ahí es ofensivo y no es ni masculino ni femenino) |
 
+
+
 | En español | En japonés | Lectura | Aclaración                                          |
 | ---------- | ---------- | ------- | --------------------------------------------------- |
 | Yo         | 僕          | ぼく      | Masculino, informal, no agresivo, propio de jóvenes |
 | Tú         | 君          | きみ      | Informal, no es agresivo, es más cercano que 貴方     |
-| Nosotros   | 僕ら         | ぼくら     |                                                     |
-| Vosotros   | 君たち        | きみたち    |                                                     |
+| Nosotros   | 僕ら         | ぼくら     | Sólo es la versión en plural                        |
+| Vosotros   | 君たち        | きみたち    | Sólo es la versión en plural                        |
 ### Plural en Japonés
 
 En japonés, el plural se forma de diferentes maneras dependiendo del pronombre o sustantivo que se utiliza. Aquí te explico cómo se forma el plural para las personas:
