@@ -274,7 +274,7 @@ Si hay un な antes de の, depende de si
 	1. Aunque la oración 彼女のことが好き? significa "¿Te gusta ella?", enfatizamos más que lo que nos sorprende es que te guste "ella" diciendo のことが (se parece a nuestra forma de enfatizar con la voz para decir "en serio te gusta ELLA de entre todas") y con の enfatizamos la pregunta. Pero como 好き es un adjetivo tipo な debe escribirse なの
 	2. 彼女のことが好きなの? significa exactamente lo mismo, pero enfatiza que nos sorprende que te guste "ella"
 	3. La oración también está "nominalizada" por lo que si quieres puedes usarla dentro de otra oración.
-		1. 彼女<font color="#ffc000">の</font>こと<font color="#00b0f0">が</font>好き<font color="#ffc000">なの</font>はわかる
+		1. 彼女<font color="#ffc000">の</font>こと<font color="#00b0f0">が</font>好き<font color="#ffc000">なの</font><font color="#00b0f0">は</font>わかる
 			1. Comprendo que te guste ella
 		2. 彼女<font color="#ffc000">の</font>こと<font color="#00b0f0">が</font>好き<font color="#ffc000">なの</font><font color="#00b0f0">を</font>知っています
 			1. Sé que te gusta ella
