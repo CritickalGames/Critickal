@@ -58,44 +58,44 @@ Si dices
 Estás diciendo "YO soy quien faltó". Ambas se traducen como "Yo falté" pero la segunda se interpreta con más énfasis en quién fue el que faltó.
 
 1. <font color="#92d050">私</font><font color="#00b0f0">は</font>学生です。
-   1. <font color="#92d050">わたし</font><font color="#00b0f0">は</font>がくせいです。
-   2. <font color="#92d050">Yo</font> soy estudiante.
-2.<font color="#92d050"> 彼</font><font color="#00b0f0">は</font>先生です。
-   1. <font color="#92d050">かれ</font><font color="#00b0f0">は</font>せんせいです。
-   2. <font color="#92d050">Él</font> es profesor.
+    1. <font color="#92d050">わたし</font><font color="#00b0f0">は</font>がくせいです。
+    2. <font color="#92d050">Yo</font> soy estudiante
+2. <font color="#92d050">彼</font><font color="#00b0f0">は</font>先生です。
+    4. <font color="#92d050">かれ</font><font color="#00b0f0">は</font>せんせいです。
+    5. <font color="#92d050">Él</font> es profesor.
 3. <font color="#92d050">彼女</font><font color="#00b0f0">は</font>歌が上手です。
-   1. <font color="#92d050">かのじょ</font><font color="#00b0f0">は</font>うたがじょうずです。
-   2. <font color="#92d050">Ella</font> canta bien.
-4.<font color="#92d050"> 昨日</font><font color="#00b0f0">は</font>雨でした。
-   1. <font color="#92d050">きのう</font><font color="#00b0f0">は</font>あめでした。
-   2. <font color="#92d050">Ayer</font> llovió.
+    1. <font color="#92d050">かのじょ</font><font color="#00b0f0">は</font>うたがじょうずです。
+    2. <font color="#92d050">Ella</font> canta bien.
+4. <font color="#92d050">昨日</font><font color="#00b0f0">は</font>雨でした。
+    1. <font color="#92d050">きのう</font><font color="#00b0f0">は</font>あめでした。
+    2. <font color="#92d050">Ayer</font> llovió.
 5. <font color="#ffff00">今日</font><font color="#ffc000">の</font><font color="#92d050">天気</font><font color="#00b0f0">は</font><font color="#b2a2c7">晴れ</font>です。
-   1. <font color="#ffff00">きょう</font><font color="#ffc000">の</font><font color="#92d050">てんき</font><font color="#00b0f0">は</font><font color="#b2a2c7">はれ</font>です。
-   2. <font color="#92d050">El clima</font> <font color="#ffc000">de</font> <font color="#ffff00">hoy</font> <font color="#b2a2c7">está soleado</font>.
-   3. El tema de la conversación es "El clima de hoy" pero quería resaltar que "の" es una partícula y que que 今日 es "hoy".
-   4. Hare (no ware) está en morado, para señalar que "desu" no es el verbo "ser". です agrega un sentido de "afirmación" y un grado de formalidad, por lo que traducirlo como le verbo "ser" no está mal y si se conjuga el verbo です la traducción cambiaría el verbo "ser" en éste contexto, pero la oración no cambia su significado si quitamos です.
-   5. 今日の天気は晴れ sigue significando "El clima de hoy está soleado" (o, "hoy está soleado")
-   6. 今日の天気は晴れでした sería que "El clima de hoy estuvo soleado"
+    1. <font color="#ffff00">きょう</font><font color="#ffc000">の</font><font color="#92d050">てんき</font><font color="#00b0f0">は</font><font color="#b2a2c7">はれ</font>です。
+    2. <font color="#92d050">El clima</font> <font color="#ffc000">de</font> <font color="#ffff00">hoy</font> <font color="#b2a2c7">está soleado</font>.
+    3. El tema de la conversación es "El clima de hoy" pero quería resaltar que "の" es una partícula y que que 今日 es "hoy".
+    4. Hare (no ware) está en morado, para señalar que "desu" no es el verbo "ser". です agrega un sentido de "afirmación" y un grado de formalidad, por lo que traducirlo como le verbo "ser" no está mal y si se conjuga el verbo です la traducción cambiaría el verbo "ser" en éste contexto, pero la oración no cambia su significado si quitamos です.
+    5. 今日の天気は晴れ sigue significando "El clima de hoy está soleado" (o, "hoy está soleado")
+    6. 今日の天気は晴れでした sería que "El clima de hoy estuvo soleado"
 6. <font color="#92d050">夕飯</font><font color="#00b0f0">は</font>カレーです。
-   1. <font color="#92d050">ゆうはん</font><font color="#00b0f0">は</font>かれーです。
-   2. <font color="#92d050">La cena</font> es curry.
-   3. Repito que "です" agrega un sentido de "afirmación", y suena mejor si lo usas, pero hay veces que no hace falta y que significa lo mismo. Sólo sería menos formal.
-   4. En otros casos, puede sonar raro si no lo usarlo, pero eso es algo que podrás ver con el tiempo y la practica.
+    1. <font color="#92d050">ゆうはん</font><font color="#00b0f0">は</font>かれーです。
+    2. <font color="#92d050">La cena</font> es curry.
+    3. Repito que "です" agrega un sentido de "afirmación", y suena mejor si lo usas, pero hay veces que no hace falta y que significa lo mismo. Sólo sería menos formal.
+    4. En otros casos, puede sonar raro si no lo usarlo, pero eso es algo que podrás ver con el tiempo y la practica.
 7. <font color="#92d050">東京</font><font color="#00b0f0">は</font>大きいです。
-   1. <font color="#92d050">とうきょう</font><font color="#00b0f0">は</font>おおきいです。
-   2. <font color="#92d050">Tokio</font> es grande.
+    1. <font color="#92d050">とうきょう</font><font color="#00b0f0">は</font>おおきいです。
+    2. <font color="#92d050">Tokio</font> es grande.
 8. <font color="#92d050">その映画</font><font color="#00b0f0">は</font>面白かったです。
-   1. <font color="#92d050">そのえいが</font><font color="#00b0f0">は</font>おもしろかったです。
-   2. Esa película fue interesante.
-   3. その es un pronombre demostrativo, así que の no es una partícula.
-   4. かった es la forma pasado del adjetivo 面白い. Recuerda la clase de adjetivos.
+    1. <font color="#92d050">そのえいが</font><font color="#00b0f0">は</font>おもしろかったです。
+    2. Esa película fue interesante.
+    3. その es un pronombre demostrativo, así que の no es una partícula.
+    4. かった es la forma pasado del adjetivo 面白い. Recuerda la clase de adjetivos.
 9. <font color="#92d050">この本</font><font color="#00b0f0">は</font>難しいです。
-   1. <font color="#92d050">このほん</font><font color="#00b0f0">は</font>むずかしいです。
-   2. <font color="#92d050">Éste libro</font> es difícil.
-   3. この también es un pronombre, así que の no es una partícula.
+    1. <font color="#92d050">このほん</font><font color="#00b0f0">は</font>むずかしいです。
+    2. <font color="#92d050">Éste libro</font> es difícil.
+    3. この también es un pronombre, así que の no es una partícula.
 10. <font color="#92d050">日本</font><font color="#00b0f0">は</font>美しい国です。
-    1. <font color="#92d050">にほん</font><font color="#00b0f0">は</font>うつくしいくにです。
-    2. <font color="#92d050">Japón</font> es un país hermoso.
+     1. <font color="#92d050">にほん</font><font color="#00b0f0">は</font>うつくしいくにです。
+     2. <font color="#92d050">Japón</font> es un país hermoso.
 
 Espero que hayas recordado leer el <font color="#00b0f0">は</font> que está remarcado, como "wa" y no como "ha".
 ### 2. を
@@ -104,44 +104,44 @@ Algunos verbos se aplican a un objeto. Éste objeto se llama "Objeto directo" y 
 
 Ejemplos de oraciones:
 1. <font color="#92d050">リンゴ</font><font color="#00b0f0">を</font>食べます。
-   1. (<font color="#92d050">りんご</font>・<font color="#00b0f0">を</font>・たべます。)
-   2. "Voy a comer <font color="#92d050">una manzana</font>."
-   3. Lo que se come es <font color="#92d050">la manzana</font>.
-   4. "Una" también está en verde, porque no existe en japonés, pero es parte importante en el español y nosotros lo debemos agregar.
+    1. (<font color="#92d050">りんご</font>・<font color="#00b0f0">を</font>・たべます。)
+    2. "Voy a comer <font color="#92d050">una manzana</font>."
+    3. Lo que se come es <font color="#92d050">la manzana</font>.
+    4. "Una" también está en verde, porque no existe en japonés, pero es parte importante en el español y nosotros lo debemos agregar.
 2. <font color="#92d050">本</font><font color="#00b0f0">を</font>読みます。
-   6. (<font color="#92d050">ほん</font>・<font color="#00b0f0">を</font>・よみます。)
-   7. "Voy a leer <font color="#92d050">un libro</font>."
-   8. La oración original se interpretó en primera persona, (yo), pero en verdad no sabemos quién va leer el libro. Podrías ser tú, o podría ser él.
-   9. Tampoco sabemos si "voy a leerlo" o "iré a leerlo". Porque el futuro no se diferencia del presente con el verbo.
-   10. Si queremos dilucidar todos esos detalles, necesitamos contexto, pero a falta de contexto, simplemente asumiremos lo más común: yo hago.
+    6. (<font color="#92d050">ほん</font>・<font color="#00b0f0">を</font>・よみます。)
+    7. "Voy a leer <font color="#92d050">un libro</font>."
+    8. La oración original se interpretó en primera persona, (yo), pero en verdad no sabemos quién va leer el libro. Podrías ser tú, o podría ser él.
+    9. Tampoco sabemos si "voy a leerlo" o "iré a leerlo". Porque el futuro no se diferencia del presente con el verbo.
+    10. Si queremos dilucidar todos esos detalles, necesitamos contexto, pero a falta de contexto, simplemente asumiremos lo más común: yo hago.
 3. <font color="#92d050">コーヒー</font><font color="#00b0f0">を</font>飲みます。
-   1. (<font color="#92d050">こーひー</font>・<font color="#00b0f0">を</font>・のみます。)
-   2. "Voy a beber <font color="#92d050">café</font>."
-   3. コーヒー se lee koohii y se escribe en katakana, porque "café" está dicho en inglés. No existe una palabra japonesa para la bebida "café".
+    1. (<font color="#92d050">こーひー</font>・<font color="#00b0f0">を</font>・のみます。)
+    2. "Voy a beber <font color="#92d050">café</font>."
+    3. コーヒー se lee koohii y se escribe en katakana, porque "café" está dicho en inglés. No existe una palabra japonesa para la bebida "café".
 4. <font color="#92d050">映画</font><font color="#00b0f0">を</font>見ます。
-   1. (<font color="#92d050">えいが</font>・<font color="#00b0f0">を</font>・みます。)
-   2. "Voy a ver <font color="#92d050">una película</font>."
-   3. "Eega" sí existe en japonés, así que hasta tiene kanjis.
+    1. (<font color="#92d050">えいが</font>・<font color="#00b0f0">を</font>・みます。)
+    2. "Voy a ver <font color="#92d050">una película</font>."
+    3. "Eega" sí existe en japonés, así que hasta tiene kanjis.
 5. <font color="#92d050">犬</font><font color="#00b0f0">を</font>飼っています。
-   1. (<font color="#92d050">いぬ</font>・<font color="#00b0f0">を</font>・かっています。)
-   2. "Tengo <font color="#92d050">un perro</font>."
+    1. (<font color="#92d050">いぬ</font>・<font color="#00b0f0">を</font>・かっています。)
+    2. "Tengo <font color="#92d050">un perro</font>."
 6. <font color="#92d050">日本語</font><font color="#00b0f0">を</font>勉強します。
-   1. (<font color="#92d050">にほんご</font>・<font color="#00b0f0">を</font>・べんきょうします。)
-   2. "Estudio <font color="#92d050">japonés</font>."
+    1. (<font color="#92d050">にほんご</font>・<font color="#00b0f0">を</font>・べんきょうします。)
+    2. "Estudio <font color="#92d050">japonés</font>."
 7. <font color="#92d050">質問</font><font color="#00b0f0">を</font>します。
-   1. (<font color="#92d050">しつもん</font>・<font color="#00b0f0">を</font>・します。)
-   2. "Hago <font color="#92d050">una pregunta</font>."
+    1. (<font color="#92d050">しつもん</font>・<font color="#00b0f0">を</font>・します。)
+    2. "Hago <font color="#92d050">una pregunta</font>."
 8. <font color="#92d050">友達</font><font color="#00b0f0">を</font>助けます。
-   1. (<font color="#92d050">ともだち</font>・<font color="#00b0f0">を</font>・たすけます。)
-   2. "Ayudo a mi <font color="#92d050">amigo</font>."
-   3. La oración original dice "ayuda a un amigo", pero se asume que es "mi amigo".
+    1. (<font color="#92d050">ともだち</font>・<font color="#00b0f0">を</font>・たすけます。)
+    2. "Ayudo a mi <font color="#92d050">amigo</font>."
+    3. La oración original dice "ayuda a un amigo", pero se asume que es "mi amigo".
 9. <font color="#92d050">音楽</font><font color="#00b0f0">を</font>聞きます。
-   1. (<font color="#92d050">おんがく</font>・<font color="#00b0f0">を</font>・ききます。)
-   2. "Escucho <font color="#92d050">música</font>."
+    1. (<font color="#92d050">おんがく</font>・<font color="#00b0f0">を</font>・ききます。)
+    2. "Escucho <font color="#92d050">música</font>."
 10. <font color="#92d050">宿題</font><font color="#00b0f0">を</font>します。
-   1. (<font color="#92d050">しゅくだい</font>・<font color="#00b0f0">を</font>・します。)
-   2. "Hago <font color="#92d050">la tarea</font>."
-   3. La palabra "la" no existe en japonés, por eso la pinto en verde como parte del sustantivo.
+    1. (<font color="#92d050">しゅくだい</font>・<font color="#00b0f0">を</font>・します。)
+    2. "Hago <font color="#92d050">la tarea</font>."
+    3. La palabra "la" no existe en japonés, por eso la pinto en verde como parte del sustantivo.
 ### 3. が
 
 La partícula が no tiene cambio de lectura.
@@ -164,77 +164,77 @@ Una amiga estaba linda y le dijo "今日が" ella le tuvo que explicar que si lo
 Aquí hay oraciones con la partícula が (ga) y cómo podrían confundirse con el uso de は (wa):
 
 1. **<font color="#92d050">猫</font><font color="#00b0f0">が</font>好きです。**
-   1. <font color="#92d050">ねこ</font><font color="#00b0f0">が</font>すきです。
-   2. Me gustan <font color="#92d050">los gatos</font>.
-   3. (correcto) - Enfatiza que me gustan los gatos.
-   4. (incorrecto) - <font color="#92d050">ねこ</font><font color="#00b0f0">は</font>好きです
-      1. (<font color="#92d050">ねこ</font><font color="#00b0f0">は</font>すきです)
-      2. podría implicar una comparación con otras cosas que también me gustan.
+    1. <font color="#92d050">ねこ</font><font color="#00b0f0">が</font>すきです。
+    2. Me gustan <font color="#92d050">los gatos</font>.
+    3. (correcto) - Enfatiza que me gustan los gatos.
+    4. (incorrecto) - <font color="#92d050">ねこ</font><font color="#00b0f0">は</font>好きです
+       1. (<font color="#92d050">ねこ</font><font color="#00b0f0">は</font>すきです)
+       2. podría implicar una comparación con otras cosas que también me gustan.
 2. **<font color="#92d050">雨</font><font color="#00b0f0">が</font>降っています。**
-   1. <font color="#92d050">あめ</font><font color="#00b0f0">が</font>ふっています。
-   2. Está <font color="#92d050">lloviendo</font>.
-      1. En japonés "lluvia" es un sustantivo y el verbo es "caer"
-   3. (correcto) - Enfatiza que está ocurriendo lluvia.
-   4. (incorrecto) - <font color="#92d050">あめ</font><font color="#00b0f0">は</font>降っています
-      1. (<font color="#92d050">あめ</font><font color="#00b0f0">は</font>ふっています)
-      2. podría sugerir una comparación o una declaración sobre la lluvia en general.
+    1. <font color="#92d050">あめ</font><font color="#00b0f0">が</font>ふっています。
+    2. Está <font color="#92d050">lloviendo</font>.
+       1. En japonés "lluvia" es un sustantivo y el verbo es "caer"
+    3. (correcto) - Enfatiza que está ocurriendo lluvia.
+    4. (incorrecto) - <font color="#92d050">あめ</font><font color="#00b0f0">は</font>降っています
+       1. (<font color="#92d050">あめ</font><font color="#00b0f0">は</font>ふっています)
+       2. podría sugerir una comparación o una declaración sobre la lluvia en general.
 3. **<font color="#92d050">犬</font><font color="#00b0f0">が</font>走っています。**
-   1. <font color="#92d050">いぬ</font><font color="#00b0f0">が</font>はしっています。
-   2. <font color="#92d050">Un perro</font> está corriendo.
-   3. (correcto) - Enfatiza que es un perro específico el que está corriendo.
-   4. (incorrecto) - <font color="#92d050">犬</font><font color="#00b0f0">は</font>走っています
-      1. (<font color="#92d050">いぬ</font><font color="#00b0f0">は</font>はしっています)
-      2. podría interpretarse como una declaración general sobre los perros que corren.
+    1. <font color="#92d050">いぬ</font><font color="#00b0f0">が</font>はしっています。
+    2. <font color="#92d050">Un perro</font> está corriendo.
+    3. (correcto) - Enfatiza que es un perro específico el que está corriendo.
+    4. (incorrecto) - <font color="#92d050">犬</font><font color="#00b0f0">は</font>走っています
+       1. (<font color="#92d050">いぬ</font><font color="#00b0f0">は</font>はしっています)
+       2. podría interpretarse como una declaración general sobre los perros que corren.
 4. **<font color="#92d050">彼</font><font color="#00b0f0">が</font>来ました。**
-   1. <font color="#92d050">かれ</font><font color="#00b0f0">が</font>きました。
-   2. Él vino.
-   3. (correcto) - Enfatiza que fue él quien vino.
-   4. (incorrecto) - <font color="#92d050">彼</font><font color="#00b0f0">は</font>来ました
-      1. (<font color="#92d050">かれ</font><font color="#00b0f0">は</font>きました)
-      2. podría implicar una comparación con otras personas que también podrían haber venido.
+    1. <font color="#92d050">かれ</font><font color="#00b0f0">が</font>きました。
+    2. Él vino.
+    3. (correcto) - Enfatiza que fue él quien vino.
+    4. (incorrecto) - <font color="#92d050">彼</font><font color="#00b0f0">は</font>来ました
+       1. (<font color="#92d050">かれ</font><font color="#00b0f0">は</font>きました)
+       2. podría implicar una comparación con otras personas que también podrían haber venido.
 5. **<font color="#92d050">その映画</font><font color="#00b0f0">が</font>面白かった。**
-   1. <font color="#92d050">そのえいが</font><font color="#00b0f0">が</font>おもしろかった。
-   2. <font color="#92d050">Esa película</font> fue interesante.
-   3. (correcto) - Enfatiza que específicamente esa película fue interesante.
-   4. (incorrecto) - <font color="#92d050">その映画</font><font color="#00b0f0">は</font>面白かった
-      1. (<font color="#92d050">そのえいが</font><font color="#00b0f0">は</font>おもしろかった)
-      2. podría implicar una comparación con otras películas.
+    1. <font color="#92d050">そのえいが</font><font color="#00b0f0">が</font>おもしろかった。
+    2. <font color="#92d050">Esa película</font> fue interesante.
+    3. (correcto) - Enfatiza que específicamente esa película fue interesante.
+    4. (incorrecto) - <font color="#92d050">その映画</font><font color="#00b0f0">は</font>面白かった
+       1. (<font color="#92d050">そのえいが</font><font color="#00b0f0">は</font>おもしろかった)
+       2. podría implicar una comparación con otras películas.
 6. **<font color="#ffff00">今日</font><font color="#00b0f0">は</font><font color="#92d050">雨</font><font color="#00b0f0">が</font>降るでしょう。**
-   1. <font color="#ffff00">きょう</font><font color="#00b0f0">は</font><font color="#92d050">あめ</font><font color="#00b0f0">が</font>ふるでしょう。
-   2. <font color="#ffff00">Hoy</font> probablemente <font color="#92d050">lloverá</font>.
-   3. (correcto) - Enfatiza que hoy se espera que llueva.
-   4. (incorrecto) - <font color="#ffff00">今日</font><font color="#00b0f0">は</font><font color="#92d050">雨</font><font color="#00b0f0">は</font>降るでしょう
-      1. (<font color="#ffff00">きょう</font><font color="#00b0f0">は</font><font color="#92d050">あめ</font><font color="#00b0f0">は</font>ふるでしょう)
-      2. podría sugerir una comparación o una declaración redundante sobre la lluvia hoy.
+    1. <font color="#ffff00">きょう</font><font color="#00b0f0">は</font><font color="#92d050">あめ</font><font color="#00b0f0">が</font>ふるでしょう。
+    2. <font color="#ffff00">Hoy</font> probablemente <font color="#92d050">lloverá</font>.
+    3. (correcto) - Enfatiza que hoy se espera que llueva.
+    4. (incorrecto) - <font color="#ffff00">今日</font><font color="#00b0f0">は</font><font color="#92d050">雨</font><font color="#00b0f0">は</font>降るでしょう
+       1. (<font color="#ffff00">きょう</font><font color="#00b0f0">は</font><font color="#92d050">あめ</font><font color="#00b0f0">は</font>ふるでしょう)
+       2. podría sugerir una comparación o una declaración redundante sobre la lluvia hoy.
 7. **<font color="#92d050">誰</font><font color="#00b0f0">が</font><font color="#ffff00">それ</font><font color="#00b0f0">を</font>しましたか？**
-   1. <font color="#92d050">だれ</font><font color="#00b0f0">が</font><font color="#ffff00">それ</font><font color="#00b0f0">を</font>しましたか？
-   2. ¿<font color="#92d050">Quién</font> hizo <font color="#ffff00">eso</font>?
-   3. (correcto) - Pregunta por la persona específica que realizó la acción.
-   4. (incorrecto) - <font color="#92d050">誰</font><font color="#00b0f0">は</font><font color="#ffff00">それ</font><font color="#00b0f0">を</font>しましたか
-      1. (<font color="#92d050">だれ</font><font color="#00b0f0">は</font><font color="#ffff00">それ</font><font color="#00b0f0">を</font>しましたか)
-      2. es gramaticalmente incorrecto y poco natural.
+    1. <font color="#92d050">だれ</font><font color="#00b0f0">が</font><font color="#ffff00">それ</font><font color="#00b0f0">を</font>しましたか？
+    2. ¿<font color="#92d050">Quién</font> hizo <font color="#ffff00">eso</font>?
+    3. (correcto) - Pregunta por la persona específica que realizó la acción.
+    4. (incorrecto) - <font color="#92d050">誰</font><font color="#00b0f0">は</font><font color="#ffff00">それ</font><font color="#00b0f0">を</font>しましたか
+       1. (<font color="#92d050">だれ</font><font color="#00b0f0">は</font><font color="#ffff00">それ</font><font color="#00b0f0">を</font>しましたか)
+       2. es gramaticalmente incorrecto y poco natural.
 8. **<font color="#92d050">彼</font><font color="#00b0f0">が</font>好きです。**
-   1. <font color="#92d050">かれ</font><font color="#00b0f0">が</font>すきです。
-   2. Me gusta <font color="#92d050">él</font>.
-   3. (correcto) - Enfatiza que es específicamente él a quien me gusta.
-   4. (incorrecto) - <font color="#92d050">彼</font><font color="#00b0f0">は</font>好きです
-      1. (<font color="#92d050">かれ</font><font color="#00b0f0">は</font>すきです)
-      2. podría implicar una comparación con otras personas que también podrían gustarme.
+    1. <font color="#92d050">かれ</font><font color="#00b0f0">が</font>すきです。
+    2. Me gusta <font color="#92d050">él</font>.
+    3. (correcto) - Enfatiza que es específicamente él a quien me gusta.
+    4. (incorrecto) - <font color="#92d050">彼</font><font color="#00b0f0">は</font>好きです
+       1. (<font color="#92d050">かれ</font><font color="#00b0f0">は</font>すきです)
+       2. podría implicar una comparación con otras personas que también podrían gustarme.
 9. **<font color="#92d050">何</font><font color="#00b0f0">が</font><font color="#c3d69b">一番</font>好きですか？**
-   1. <font color="#92d050">なに</font><font color="#00b0f0">が</font><font color="#c3d69b">いちばん</font>すきですか？
-   2. ¿<font color="#92d050">Qué</font> es <font color="#c3d69b">lo que más</font> te gusta?
-	   1. 一番 lo marco con otro color, para remarcar que es un adverbio y no es parte del verbo.
-   3. (correcto) - Pregunta por la cosa específica que más gusta.
-   4. (incorrecto) - <font color="#92d050">何</font><font color="#00b0f0">は</font><font color="#c3d69b">一番</font>好きですか
-      1. (<font color="#92d050">なに</font><font color="#00b0f0">は</font><font color="#c3d69b">いちばん</font>すきですか)
-      2. es gramaticalmente incorrecto y poco natural.
+    1. <font color="#92d050">なに</font><font color="#00b0f0">が</font><font color="#c3d69b">いちばん</font>すきですか？
+    2. ¿<font color="#92d050">Qué</font> es <font color="#c3d69b">lo que más</font> te gusta?
+	    1. 一番 lo marco con otro color, para remarcar que es un adverbio y no es parte del verbo.
+    3. (correcto) - Pregunta por la cosa específica que más gusta.
+    4. (incorrecto) - <font color="#92d050">何</font><font color="#00b0f0">は</font><font color="#c3d69b">一番</font>好きですか
+       1. (<font color="#92d050">なに</font><font color="#00b0f0">は</font><font color="#c3d69b">いちばん</font>すきですか)
+       2. es gramaticalmente incorrecto y poco natural.
 10. **<font color="#92d050">彼女</font><font color="#00b0f0">が</font>歌っています。**
-    1. <font color="#92d050">かのじょ</font><font color="#00b0f0">が</font>うたっています。
-    2. <font color="#92d050">Ella</font> está cantando.
-    3. (correcto) - Enfatiza que es específicamente ella quien está cantando.
-    4. (incorrecto) - <font color="#92d050">彼女</font><font color="#00b0f0">は</font>歌っています
-       1. (<font color="#92d050">かのじょ</font><font color="#00b0f0">は</font>うたっています)
-       2. podría interpretarse como una declaración general sobre su actividad habitual.
+     1. <font color="#92d050">かのじょ</font><font color="#00b0f0">が</font>うたっています。
+     2. <font color="#92d050">Ella</font> está cantando.
+     3. (correcto) - Enfatiza que es específicamente ella quien está cantando.
+     4. (incorrecto) - <font color="#92d050">彼女</font><font color="#00b0f0">は</font>歌っています
+         1. (<font color="#92d050">かのじょ</font><font color="#00b0f0">は</font>うたっています)
+         2. podría interpretarse como una declaración general sobre su actividad habitual.
 
 Varias veces dije que si se usaba el "は" en vez de "が" se podría confundir con una comparación. Bueno, aquí la estructura para hacer una comparación
 

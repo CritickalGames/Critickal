@@ -80,7 +80,7 @@ const MarkdownProcessor = {
         const [, indent, number, content] = line.match(/^(\s*)(\d+)\.\s(.+)/);
 
         // Usar expresión regular para encontrar coincidencias de '\t' tabulador
-        const matches = line.match(/\t/g);
+        const matches = line.match(/\t/);
 
         // Calcular el nivel de la lista según la cantidad de espacios y tabulaciones
         // Contar el número de coincidencias
