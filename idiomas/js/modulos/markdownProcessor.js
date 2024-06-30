@@ -62,14 +62,15 @@ const MarkdownProcessor = {
             case this.bandera.cxuTablo: // Inyección de tabla
                 this.cxuTablo = false;
                 processedContent += this.processTable(this.contenedorDeEstructurasHtmlGrandres);
+                processedContent += "<br>";
                 break;
             case this.bandera.cxuListo: // Inyección de lista
                 this.cxuListo = false;
                 processedContent += this.processList(this.contenedorDeEstructurasHtmlGrandres);
+                processedContent += "<br>";
                 break;
         }
 
-        processedContent += "<br>";
         this.contenedorDeEstructurasHtmlGrandres.length = 0;
         return processedContent;
     },
