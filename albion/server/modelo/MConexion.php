@@ -1,57 +1,88 @@
 <?php
-
-class MConexion
+class MConexion_Singleton
 {
-    private $conexion;
-    private function abrirConexion() {
+    private static ?MConexion_Singleton $instance = null;
+    private ?mysqli $_conexion_obj = null;
+
+    /**
+     * TODO: $this->db_obj = MConexion_Singleton::getInstance(); en el cosntructor del modelo
+     */
+    private function __construct() {
+        $this->_abrirConexion();
+    }
+    /**
+     * TODO: $this->db_obj = MConexion_Singleton::getInstance(); en el cosntructor del modelo
+     * @return MConexion_Singleton
+     */
+    public static function getInstance(): MConexion_Singleton {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    private function _abrirConexion(): void {
         $server = 'localhost:3306';
         $usuario = 'root';
         $contraseña = '';
         $basededatos = 'albion_tabla';
-        $this->conexion = new mysqli($server, $usuario, $contraseña, $basededatos);
-        if ($this->conexion->connect_error) {
-            die("Conexion fallida: " . $this->conexion->connect_error);
+        $this->_conexion_obj = new mysqli($server, $usuario, $contraseña, $basededatos);
+        if ($this->_conexion_obj->connect_error) {
+            die("Conexión fallida: " . $this->_conexion_obj->connect_error);
         }
-        return $this->conexion;
     }
-    private function cerrarConexion() {
-        $this->conexion->close();
+
+    public function cerrarConexion(): void {
+        if ($this->_conexion_obj) {
+            $this->_conexion_obj->close();
+        }
     }
-    private function enviarConsulta(string $sql){
-        $conexion = $this->abrirConexion();
-        $result=mysqli_query($conexion,$sql);
-        $this->cerrarConexion();
+
+    public function comprobar_conexion(): string {
+        return ($this->_conexion_obj !== null) ? "true" : "false";
+    }
+
+    private function _enviarConsulta(string $sql) {
+        if (!isset($this->_conexion_obj)) {
+            die("La conexión no está inicializada.");
+        }
+        $result = mysqli_query($this->_conexion_obj, $sql);
+        if ($result === false) {
+            die("Error en la consulta: " . mysqli_error($this->_conexion_obj));
+        }
         return $result;
     }
-    private function get(string $sql){
-        $result=$this->enviarConsulta($sql);
-        if(mysqli_num_rows($result)>0){
-            $row= $result -> fetch_all(MYSQLI_ASSOC);
-            return $row;
-        }else{
-            return $row=[mysqli_num_rows($result)];
+
+    public function set(string $tabla, string $atr, string $valores): bool {
+        return $this->_enviarConsulta("INSERT INTO $tabla($atr) VALUES($valores)") !== false;
+    }
+
+    public function delete(string $tabla, string $condicion): bool {
+        return $this->_enviarConsulta("DELETE FROM $tabla WHERE $condicion") !== false;
+    }
+
+    public function get_json_encode(string $sql): string {
+        $json = $this->get($sql);
+        return json_encode($json);
+    }
+
+    public function get_json_decode(string $sql): array {
+        return $this->get($sql);
+    }
+
+    private function get(string $sql): array {
+        $result = $this->_enviarConsulta($sql);
+        if (mysqli_num_rows($result) > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
         }
     }
 
-    public function delete(string $tabla, string $condicion){
-        return $this->enviarConsulta("DELETE FROM $tabla WHERE $condicion");
-    }
+    private function __clone() {}
 
-    public function get_json_encode(string $sql){
-        $json = $this->get($sql);
-        return (json_encode($json));
+    public function __wakeup() {
+        self::getInstance();
     }
-    public function get_json_decode(string $sql){
-        $json = $this->get($sql);
-        return $json;
-    }
-
-    public function set(string $tabla, string $atr, string $valores){
-        return $this->enviarConsulta("INSERT INTO $tabla($atr) VALUES($valores)");
-    }
-    
 }
-
-$conexionBD = new MConexion();
-
 ?>
