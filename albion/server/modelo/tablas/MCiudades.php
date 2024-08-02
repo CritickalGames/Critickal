@@ -1,32 +1,35 @@
 <?php
 require_once "./../MConexion.php";
+require_once "./MTabla_generica.php"; // Asegúrate de incluir la clase base
 
-class MCiudades
-{
-    private MConexion_Singleton $db_obj;
+class MCiudades extends MTabla_generica {
+    protected const TABLA = "ciudades";
+    protected const ATRIBUTOS = "ID, Nombre";
 
-    const _tabla = "ciudades";
-    const _atributos = "ID, Nombre";
-
-    public function __construct() {
-        $this->db_obj = MConexion_Singleton::getInstance();
+    protected function insert_into(string ...$valores): bool {
+        return parent::insert_into(...$valores);
+    }
+    // Para que insert_into funcione, con argumentos distintos a ...$valores
+    public function insert(string $id, string $nombre){
+        $this->insert_into($id, $nombre);
     }
 
-    public function borrar(string $condicion) {
-        $_tabla = self::_tabla;
-        return $this->db_obj->delete($_tabla, $condicion);
+    public function borrar(string $condicion): bool {
+        return parent::borrar($condicion);
     }
 
-    public function insert(string $id, string $nombre) {
-        $_tabla = self::_tabla;
-        $_atributos = self::_atributos;
-        return $this->db_obj->set($_tabla, $_atributos, "'$id', '$nombre'");
+    public function select_todo(): array {
+        return parent::select_todo();
     }
 }
 
+// Ejemplo de uso
 $ciudades = new MCiudades();
 echo "Iniciamos: ";
-echo " ";
-//$ciudades->insert("pp","ppantano");
-$ciudades->borrar("ID = 'pp'");
+// Insertar una ciudad
+//$ciudades->insert("pp", "ppantano");
+// Borrar una ciudad
+//$ciudades->borrar("ID = 'pp'");
+// Seleccionar todas las ciudades
+print_r($ciudades->select_todo());
 ?>
