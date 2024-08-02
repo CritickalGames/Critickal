@@ -1,16 +1,16 @@
 <?php
 require_once "./MTabla_generica.php"; // Asegúrate de incluir la clase base
 
-class MCiudades extends MTabla_generica {
-    protected const TABLA = "ciudades";
-    protected const ATRIBUTOS = "ID, Nombre";
+class MJugadores_historial extends MTabla_generica {
+    protected const TABLA = "jugadores_historial";
+    protected const ATRIBUTOS = "id_movimiento, id_jugador, id_item, monto";
 
     protected function insert_into(string ...$valores): bool {
         return parent::insert_into(...$valores);
     }
     // Para que insert_into funcione, con argumentos distintos a ...$valores
-    public function insert(string $id, string $nombre){
-        $this->insert_into($id, $nombre);
+    public function insert(string $id_movimiento, string $id_jugador, string $id_item, string $monto){
+        $this->insert_into($id_movimiento, $id_jugador, $id_item, $monto);
     }
 
     public function borrar(string $condicion): bool {

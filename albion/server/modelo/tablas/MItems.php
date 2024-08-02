@@ -1,16 +1,19 @@
 <?php
 require_once "./MTabla_generica.php"; // Asegúrate de incluir la clase base
 
-class MCiudades extends MTabla_generica {
-    protected const TABLA = "ciudades";
-    protected const ATRIBUTOS = "ID, Nombre";
+class MItems extends MTabla_generica {
+    protected const TABLA = "items";
+    protected const ATRIBUTOS = "ID, tipo, nombreprincipal, tier, nivel, rareza";
 
     protected function insert_into(string ...$valores): bool {
         return parent::insert_into(...$valores);
     }
     // Para que insert_into funcione, con argumentos distintos a ...$valores
-    public function insert(string $id, string $nombre){
-        $this->insert_into($id, $nombre);
+    public function insert(
+        string $ID, string $tipo, 
+        string $nombreprincipal, string $tier, 
+        string $nivel, string $rareza){
+        $this->insert_into($ID, $tipo, $nombreprincipal, $tier, $nivel, $rareza);
     }
 
     public function borrar(string $condicion): bool {
@@ -24,7 +27,7 @@ class MCiudades extends MTabla_generica {
     public function select_todo(){
         $this->select_();
     }
-    
+
     protected function update_(string $set, string $condicion="1", string $update_tipo=""): array|string {
         return parent::update_($set, $condicion, $update_tipo);
     }
@@ -36,13 +39,4 @@ class MCiudades extends MTabla_generica {
     }
 }
 
-// Ejemplo de uso
-$ciudades = new MCiudades();
-echo "Iniciamos: ";
-// Insertar una ciudad
-//$ciudades->insert("pp", "ppantano");
-// Borrar una ciudad
-//$ciudades->borrar("ID = 'pp'");
-// Seleccionar todas las ciudades
-print_r($ciudades->select_todo());
 ?>
