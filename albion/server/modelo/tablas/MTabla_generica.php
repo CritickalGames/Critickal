@@ -38,4 +38,5 @@ class MTabla_generica {
         return $this->db_obj->update_set(static::TABLA, $set, $condicion, $update_tipo);
     }
 }
+
 ?>
