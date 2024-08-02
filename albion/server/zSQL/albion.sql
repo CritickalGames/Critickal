@@ -1,3 +1,6 @@
+CREATE DATABASE albion_tabla;
+USE albion_tabla;
+
 CREATE table ciudades(
     ID char(2) not null PRIMARY KEY,
     nombre varchar(9)
@@ -11,24 +14,17 @@ CREATE table items(
     rarerza varchar(10) not null
 );
 
-CREATE table ordcompras(
+CREATE table ordenes(
     ciudadID char(2) not null,
     itemID INT not null,
-    precio INT not null,
+    precio_compra INT not null,
+    precio_venta INT not null,
     FOREIGN KEY (ciudadID) REFERENCES ciudades(ID),
     FOREIGN KEY (itemID) REFERENCES items(ID),
     PRIMARY KEY (ciudadID, itemID)
 );
-CREATE table ordventas(
-    ciudadID char(2) not null,
-    itemID INT not null,
-    precio INT not null,
-    PRIMARY KEY (ciudadID, itemID),
-    FOREIGN KEY (ciudadID) REFERENCES ciudades(ID),
-    FOREIGN KEY (itemID) REFERENCES items(ID)
-);
 
-CREATE table img(
+CREATE table imgs(
     itemID varchar(100) NOT NULL,
     dir varchar(200) DEFAULT NULL,
     archivo varchar(100) DEFAULT NULL,

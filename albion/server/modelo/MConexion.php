@@ -1,4 +1,7 @@
 <?php
+/**
+ * Sólo es llamado por "tablas/MTabla_generica.php"
+ */
 class MConexion_Singleton
 {
     private static ?MConexion_Singleton $instance = null;
