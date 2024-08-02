@@ -24,12 +24,12 @@ class MCiudades extends MTabla_generica {
 }
 
 // Ejemplo de uso
-$ciudades = new MCiudades();
-echo "Iniciamos: ";
+//$ciudades = new MCiudades();
+//echo "Iniciamos: ";
 // Insertar una ciudad
 //$ciudades->insert("pp", "ppantano");
 // Borrar una ciudad
 //$ciudades->borrar("ID = 'pp'");
 // Seleccionar todas las ciudades
-print_r($ciudades->select_todo());
+//print_r($ciudades->select_todo());
 ?>
