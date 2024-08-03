@@ -9,8 +9,11 @@ CREATE table jugadores(
 );
 
 CREATE table ciudades(
-    ID char(2) not null PRIMARY KEY,
-    nombre varchar(9)
+    ID ENUM("pl","pm","pb","pd","pp","cl","cm","cb","cd","cp") not null PRIMARY KEY,
+    nombre ENUM(
+        "p_llanura","p_montaña","p_bosque","p_desierto","p_pantano",
+        "c_llanura","c_montaña","c_bosque","c_desierto","c_pantano"
+    ) not null
 );
 
 CREATE table items(
@@ -33,7 +36,7 @@ CREATE table jugadores_historial(
 );
 
 CREATE table ordenes(
-    ciudadID char(2) not null,
+    ciudadID ENUM("pl","pm","pb","pd","pp","cl","cm","cb","cd","cp") not null,
     itemID INT not null,
     precio_compra INT not null,
     precio_venta INT not null,

@@ -1,5 +1,6 @@
-//!Elige el usuario
+//?Elige el usuario
 //!De momento, sólo habrá un usuario
+//TODO_Arreglar:cuando agrego un elemento que no cumple las condiciones, lo agrega igualmente
 
 import { CCiudades } from './controladores/CCiudades.js'; // Asegúrate de que la ruta sea correcta
 
