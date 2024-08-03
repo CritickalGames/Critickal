@@ -12,7 +12,6 @@ export class CCiudades {
                 type: 'POST',
                 data: { action: 'insert', id: id, nombre: nombre },
             });
-    
             const result = JSON.parse(response);
             if (result.success || result.success == null) {
                 console.log('Ciudad agregada correctamente');
@@ -27,7 +26,6 @@ export class CCiudades {
             return false;
         }
     }
-
     async mostrar(callback) { // Legi
         try {
             const response = await $.ajax({
