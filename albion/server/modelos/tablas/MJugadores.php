@@ -15,11 +15,7 @@ class MJugadores extends MTabla_generica {
     protected function select_(string $atr="*", string $condicion="1"): array|string {
         return parent::select_($atr, $condicion);
     }
-
-    public function select_todo(){
-        $this->select_();
-    }
-
+    
     public function update_generico(string $atr, string $nuevo_valor, string $where = "1"){
         $set = "$atr=$nuevo_valor";
         $condicion = $where;
@@ -34,15 +30,23 @@ class MJugadores extends MTabla_generica {
     public function borrar(string $condicion): bool {
         return parent::borrar($condicion);
     }
+    protected function executeAction($action): array {
+        switch ($action) {
+            case 'insert':
+                //ID, Nombre, presupuesto
+                $id = $_POST['id'] ?? null;
+                $Nombre = $_POST['Nombre'] ?? null;
+                $presupuesto = $_POST['presupuesto'] ?? null;
+                return ['success' => $this->insert($id, $Nombre, $presupuesto)];
+            default:
+                return parent::executeAction($action); // Llama al método de la clase base para acciones no específicas
+        }
+    }
 }
 
-// Ejemplo de uso
-$ciudades = new MCiudades();
-echo "Iniciamos: ";
-// Insertar una ciudad
-//$ciudades->insert("pp", "ppantano");
-// Borrar una ciudad
-//$ciudades->borrar("ID = 'pp'");
-// Seleccionar todas las ciudades
-print_r($ciudades->select_todo());
+//Gestor de AJAX
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $obj = new MCiudades();
+    $obj->gestionarAjax();
+}
 ?>

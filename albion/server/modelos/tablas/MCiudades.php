@@ -1,19 +1,16 @@
 <?php
 require_once "./MTabla_generica.php"; // Asegúrate de incluir la clase base
 
-class MOrdenes extends MTabla_generica {
-    protected const TABLA = "items";
-    protected const ATRIBUTOS = "ciudadID, itemID, precio_compra, precio_venta";
+class MCiudades extends MTabla_generica {
+    protected const TABLA = "ciudades";
+    protected const ATRIBUTOS = "ID, Nombre";
 
     protected function insert_into(string ...$valores): bool {
         return parent::insert_into(...$valores);
     }
     // Para que insert_into funcione, con argumentos distintos a ...$valores
-    public function insert(
-        string $ID, string $tipo, 
-        string $nombreprincipal, string $tier, 
-        string $nivel, string $rareza){
-        $this->insert_into($ID, $tipo, $nombreprincipal, $tier, $nivel, $rareza);
+    public function insert(string $id, string $nombre){
+        $this->insert_into($id, $nombre);
     }
 
     public function borrar(string $condicion): bool {
@@ -23,11 +20,7 @@ class MOrdenes extends MTabla_generica {
     protected function select_(string $atr="*", string $condicion="1"): array|string {
         return parent::select_($atr, $condicion);
     }
-
-    public function select_todo(){
-        $this->select_();
-    }
-
+    
     protected function update_(string $set, string $condicion="1", string $update_tipo=""): array|string {
         return parent::update_($set, $condicion, $update_tipo);
     }
@@ -37,6 +30,23 @@ class MOrdenes extends MTabla_generica {
         $condicion = $where;
         $this->update_($set, $condicion);
     }
+
+
+    protected function executeAction($action): array {
+        switch ($action) {
+            case 'insert':
+                $id = $_POST['id'] ?? null;
+                $nombre = $_POST['nombre'] ?? null;
+                return ['success' => $this->insert($id, $nombre)];
+            default:
+                return parent::executeAction($action);// Llama al método de la clase base para acciones no específicas
+        }
+    }
 }
 
+//Gestor de AJAX
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $obj = new MCiudades();
+    $obj->gestionarAjax();
+}
 ?>

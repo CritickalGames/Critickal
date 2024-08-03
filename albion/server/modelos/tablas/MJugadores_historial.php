@@ -20,10 +20,6 @@ class MJugadores_historial extends MTabla_generica {
     protected function select_(string $atr="*", string $condicion="1"): array|string {
         return parent::select_($atr, $condicion);
     }
-
-    public function select_todo(){
-        $this->select_();
-    }
     
     protected function update_(string $set, string $condicion="1", string $update_tipo=""): array|string {
         return parent::update_($set, $condicion, $update_tipo);
@@ -34,15 +30,24 @@ class MJugadores_historial extends MTabla_generica {
         $condicion = $where;
         $this->update_($set, $condicion);
     }
+    protected function executeAction($action): array {
+        switch ($action) {
+            case 'insert':
+                //id_movimiento, id_jugador, id_item, monto
+                $id_movimiento = $_POST['id_movimiento'] ?? null;
+                $id_jugador = $_POST['id_jugador'] ?? null;
+                $id_item = $_POST['id_item'] ?? null;
+                $monto = $_POST['monto'] ?? null;
+                return ['success' => $this->insert($id_movimiento, $id_jugador, $id_item, $monto)];
+            default:
+                return parent::executeAction($action); // Llama al método de la clase base para acciones no específicas
+        }
+    }
 }
 
-// Ejemplo de uso
-$ciudades = new MCiudades();
-echo "Iniciamos: ";
-// Insertar una ciudad
-//$ciudades->insert("pp", "ppantano");
-// Borrar una ciudad
-//$ciudades->borrar("ID = 'pp'");
-// Seleccionar todas las ciudades
-print_r($ciudades->select_todo());
+//Gestor de AJAX
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $obj = new MCiudades();
+    $obj->gestionarAjax();
+}
 ?>

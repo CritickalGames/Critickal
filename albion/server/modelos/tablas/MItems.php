@@ -24,10 +24,6 @@ class MItems extends MTabla_generica {
         return parent::select_($atr, $condicion);
     }
 
-    public function select_todo(){
-        $this->select_();
-    }
-
     protected function update_(string $set, string $condicion="1", string $update_tipo=""): array|string {
         return parent::update_($set, $condicion, $update_tipo);
     }
@@ -37,6 +33,26 @@ class MItems extends MTabla_generica {
         $condicion = $where;
         $this->update_($set, $condicion);
     }
+    protected function executeAction($action): array {
+        switch ($action) {
+            case 'insert':
+                $id = $_POST['id'] ?? null;
+                $tipo = $_POST['tipo'] ?? null;
+                $nombreprincipal = $_POST['nombreprincipal'] ?? null;
+                $tier = $_POST['tier'] ?? null;
+                $nivel = $_POST['nivel'] ?? null;
+                $rareza = $_POST['rareza'] ?? null;
+                return ['success' => $this->insert($id, $tipo, $nombreprincipal, $tier, $nivel, $rareza)];
+            default:
+                return parent::executeAction($action); // Llama al método de la clase base para acciones no específicas
+        }
+    }
+}
+
+//Gestor de AJAX
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $obj = new MCiudades();
+    $obj->gestionarAjax();
 }
 
 ?>

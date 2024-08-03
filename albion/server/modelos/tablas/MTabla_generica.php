@@ -33,9 +33,30 @@ class MTabla_generica {
     protected function select_(string $atr="*", string $condicion="1") {
         return $this->db_obj->select(static::TABLA, $atr, $condicion);
     }
+    public function select_todo(){
+        $return = $this->select_();
+        return $return;
+    }
 
     protected function update_(string $set, string $condicion, string $update_tipo){
         return $this->db_obj->update_set(static::TABLA, $set, $condicion, $update_tipo);
+    }
+
+    public function gestionarAjax() {
+        $action = $_POST['action'] ?? null;
+        $response = $this->executeAction($action);
+
+        echo json_encode($response);
+        exit;
+    }
+
+    protected function executeAction($action): array {
+        switch ($action) {
+            case 'select_todo':
+                return $this->select_todo(); // Método específico para MCiudades
+            default:
+                return $this->select_todo();
+        }
     }
 }
 
