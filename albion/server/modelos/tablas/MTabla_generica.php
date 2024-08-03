@@ -7,13 +7,13 @@ class MTabla_generica {
     protected MConexion_Singleton $db_obj;
 
     protected const TABLA = "";
-    protected const ATRIBUTOS = "";
+    protected const ATRIBUTOS = [""];
 
     public function __construct() {
         $this->db_obj = MConexion_Singleton::getInstance();
     }
 
-    public function borrar(string $condicion) {
+    protected function borrar(string $condicion) {
         return $this->db_obj->delete_set(static::TABLA, $condicion); // Utiliza static:: para acceso polimórfico
     }
     /**
@@ -23,7 +23,8 @@ class MTabla_generica {
      */
     protected function insert_into(string ...$valores) {
         $valores_str = implode(', ', array_map(fn($v) => "'$v'", $valores));
-        return $this->db_obj->insert_into_set(static::TABLA, static::ATRIBUTOS, $valores_str);
+        $atr = implode(', ', array_map(fn($v) => $v, static::ATRIBUTOS));
+        return $this->db_obj->insert_into_set(static::TABLA, $atr, $valores_str);
     }
     /**
      * @param string $atr

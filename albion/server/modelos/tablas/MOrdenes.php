@@ -1,9 +1,10 @@
 <?php
-require_once "./MTabla_generica.php"; // Asegúrate de incluir la clase base
+require_once "./MTabla_generica.php"; 
+// Llamado por su respectivo controlador en el cliente
 
 class MOrdenes extends MTabla_generica {
     protected const TABLA = "items";
-    protected const ATRIBUTOS = "ciudadID, itemID, precio_compra, precio_venta";
+    protected const ATRIBUTOS = ["ciudadID", "itemID", "precio_compra", "precio_venta"];
 
     protected function insert_into(string ...$valores): bool {
         return parent::insert_into(...$valores);
@@ -15,7 +16,7 @@ class MOrdenes extends MTabla_generica {
         $this->insert_into($ciudadID, $itemID, $precio_compra, $precio_venta);
     }
 
-    public function borrar(string $condicion): bool {
+    protected function borrar(string $condicion): bool {
         return parent::borrar($condicion);
     }
 

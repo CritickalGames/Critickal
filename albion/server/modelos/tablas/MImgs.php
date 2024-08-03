@@ -1,9 +1,11 @@
 <?php
-require_once "./MTabla_generica.php"; // Asegúrate de incluir la clase base
+require_once "./MTabla_generica.php"; 
+// Llamado por su respectivo controlador en el cliente
+
 
 class MImg extends MTabla_generica {
     protected const TABLA = "imgs";
-    protected const ATRIBUTOS = "itemID, dir, archivo, formato";
+    protected const ATRIBUTOS = ["itemID", "dir", "archivo", "formato"];
 
     protected function insert_into(string ...$valores): bool {
         return parent::insert_into(...$valores);
@@ -13,7 +15,7 @@ class MImg extends MTabla_generica {
         $this->insert_into($itemID, $dir, $archivo, $formato);
     }
 
-    public function borrar(string $condicion): bool {
+    protected function borrar(string $condicion): bool {
         return parent::borrar($condicion);
     }
 

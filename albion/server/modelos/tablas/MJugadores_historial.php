@@ -1,9 +1,10 @@
 <?php
-require_once "./MTabla_generica.php"; // Asegúrate de incluir la clase base
+require_once "./MTabla_generica.php"; 
+// Llamado por su respectivo controlador en el cliente
 
 class MJugadores_historial extends MTabla_generica {
     protected const TABLA = "jugadores_historial";
-    protected const ATRIBUTOS = "id_movimiento, id_jugador, id_item, monto";
+    protected const ATRIBUTOS = ["id_movimiento", "id_jugador", "id_item", "monto"];
 
     protected function insert_into(string ...$valores): bool {
         return parent::insert_into(...$valores);
@@ -13,7 +14,7 @@ class MJugadores_historial extends MTabla_generica {
         $this->insert_into($id_movimiento, $id_jugador, $id_item, $monto);
     }
 
-    public function borrar(string $condicion): bool {
+    protected function borrar(string $condicion): bool {
         return parent::borrar($condicion);
     }
 
