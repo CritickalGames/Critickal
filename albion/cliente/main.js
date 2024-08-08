@@ -1,5 +1,11 @@
 //?Elige el usuario
 //!De momento, sólo habrá un usuario
+/**
+ * Todo: Login
+ * Todo: Perfiles para la base de datos
+ * !Todo: Evitar inyección SQL
+ * Todo: perfiles en el cliente
+ */
 
 import { CCiudades } from './controladores/CCiudades.js'; // Asegúrate de que la ruta sea correcta
 
