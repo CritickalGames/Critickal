@@ -6,53 +6,45 @@ class MCiudades extends MTabla_generica {
     protected const TABLA = "ciudades";
     protected const ATRIBUTOS = ["ID","nombre"];
 
-    protected function insert_into(string ...$valores): bool {
+    protected function insert_into(string ...$valores){
         return parent::insert_into(...$valores);
     }
-    // Para que insert_into funcione, con argumentos distintos a ...$valores
-    public function insert(string $id, string $nombre){
-        $this->insert_into($id, $nombre);
-    }
-
-    protected function borrar(string $condicion): bool {
-        return parent::borrar($condicion);
-    }
-
-    public function borrar_por_id(string $id){
-        $condicion = self::ATRIBUTOS[0]."='$id'";
-        $this->borrar($condicion);
-    }
-
-    protected function select_(string $atr="*", string $condicion="1"): array|string {
-        return parent::select_($atr, $condicion);
+    protected function select_from_where(string $atr="*", string $condicion="1", array $params=[]) {
+        return parent::select_from_where($atr, $condicion, $params);
     }
     
-    protected function update_(string $set, string $condicion="1", string $update_tipo=""): array|string {
-        return parent::update_($set, $condicion, $update_tipo);
+    protected function update_set_where(string $set, string $condicion = "1", string $update_tipo = "", array $params=[]) {
+        return parent::update_set_where($set, $condicion, $update_tipo, $params);
     }
-    /**
-     * @param string $id
-     * @param string $atr
-     * @param string $nuevo_valor
-     * @return void
-     */
-    public function update_por_id(string $id, string $nuevo_valor){
-        $set = self::ATRIBUTOS[1]."='$nuevo_valor'";
-        $condicion = self::ATRIBUTOS[0]."='$id'";
-        $this->update_($set, $condicion);
+    protected function delete_from_where(string $condicion, array $params=[]) {
+        return parent::delete_from_where($condicion, $params);
     }
-
-
+}
+class CiudadConsultas extends MCiudades{
+    // Para que insert_into funcione, con argumentos distintos a ...$valores
+    public function insertar_fila(string $id, string $nombre){
+        $this->insert_into($id, $nombre);
+    }
+    public function actualizar_por_id(string $id, string $nuevo_valor){
+        $set = self::ATRIBUTOS[1]."=?";
+        $condicion = self::ATRIBUTOS[0]."=?";
+        //El orden de los parametros importa
+        $this->update_set_where($set, $condicion, "", [$nuevo_valor, $id]);
+    }
+    public function borrar_por_id(string $id){
+        $condicion = self::ATRIBUTOS[0]."=?";
+        $this->delete_from_where($condicion, [$id]);
+    }
     protected function executeAction($action): array {
         switch ($action) {
-            case 'insert':
+            case 'insertar_fila':
                 $id = $_POST['id'] ?? null;
                 $nombre = $_POST['nombre'] ?? null;
-                return ['success' => $this->insert($id, $nombre)];
-            case 'update_por_id':
+                return ['success' => $this->insertar_fila($id, $nombre)];
+            case 'actualizar_por_id':
                 $id = $_POST['id'] ?? null;
                 $nuevo_valor = $_POST['nuevo_valor'] ?? null;
-                return ['success' => $this->update_por_id($id, $nuevo_valor)];
+                return ['success' => $this->actualizar_por_id($id, $nuevo_valor)];
             case 'borrar_por_id':
                 $id = $_POST['id'] ?? null;
                 return ['success' => $this->borrar_por_id($id)];
@@ -61,7 +53,6 @@ class MCiudades extends MTabla_generica {
         }
     }
 }
-
 //Gestor de AJAX
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $obj = new MCiudades();

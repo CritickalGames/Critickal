@@ -2,11 +2,9 @@
 /**
  * Sólo es llamado por "tablas/MTabla_generica.php"
  */
-class MConexion_Singleton
+class MConexion_Singleton extends Consultas
 {
     private static ?MConexion_Singleton $instance = null;
-    private ?mysqli $_conexion_obj = null;
-
     /**
      * TODO: $this->db_obj = MConexion_Singleton::getInstance(); en el cosntructor del modelo
      */
@@ -50,93 +48,54 @@ class MConexion_Singleton
     public function debug_comprobar_conexion(): string {
         return ($this->_conexion_obj !== null) ? "true" : "false";
     }
-    /**
-     * Se usa unicamente en el get_() y los terminados en _set()
-     * @param string $sql
-     * @return bool|mysqli_result
-     */
-    private function _enviarConsulta(string $sql) {
+    private function __clone() {}
+
+    public function __wakeup() {
+        self::getInstance();
+    }
+}
+
+class Consultas{
+    protected ?mysqli $_conexion_obj = null;
+    public function enviarConsultaPreparada(string $sql, array $params = []) {
         if (!isset($this->_conexion_obj)) {
             die("La conexión no está inicializada.");
         }
-        $result = mysqli_query($this->_conexion_obj, $sql);
-        if ($result === false) {
-            die("Error en la consulta: " . mysqli_error($this->_conexion_obj));
+
+        $stmt = $this->_conexion_obj->prepare($sql);
+        if ($stmt === false) {
+            die("Error al preparar la consulta: " . $this->_conexion_obj->error);
         }
-        return $result;
+
+        if ($params) {
+            // Asocia los parámetros con el tipo de datos
+            $types = str_repeat('s', count($params)); // 's' para string, cambia según el tipo de datos
+            $stmt->bind_param($types, ...$params);
+        }
+
+        $stmt->execute();
+        return $stmt;
     }
-    /**
-     * !El set y la condición debe ser estructurado en los Modelos de las tablas
-     * sql: insert into _ vales _
-     * @param string $tabla
-     * @param string $atr
-     * @param string $valores
-     * @return bool|mysqli_result
-     */
-    public function insert_into_set(string $tabla, string $atr, string $valores): bool|mysqli_result {
-        return $this->_enviarConsulta("INSERT INTO $tabla($atr) VALUES($valores)");
+    public function enviar_solicitud(string $sql, array $params = []){
+        return $this->_get_json_decode($sql, $params);
     }
-    /**
-     * !El set y la condición debe ser estructurado en los Modelos de las tablas
-     * sql: delete _ where _|1
-     * @param string $tabla
-     * @param string $condicion
-     * @return bool|mysqli_result
-     */
-    public function delete_set(string $tabla, string $condicion="1"): bool|mysqli_result {
-        return $this->_enviarConsulta("DELETE FROM $tabla WHERE $condicion");
-    }
-    /**
-     * !El set y la condición debe ser estructurado en los Modelos de las tablas
-     * sql: update _ set _ where _|1
-     * @param string $tabla
-     * @param string $set
-     * @param string $condicion
-     * @param string $update_tipo Opcional; Ejemplo de uso: INNER JOIN tba on tabla.tba_id = tba.id
-     * @return bool|mysqli_result
-     */
-    public function update_set(string $tabla, string $set, string $condicion="1", string $update_tipo=""): bool|mysqli_result {
-        return $this->_enviarConsulta("UPDATE $update_tipo $tabla SET $set WHERE $condicion");
-    }
-    /**
-     * @param string $sql
-     * @return string devuelve un json
-     */
+
     private function _get_json_encode(string $sql): string {
         $json = $this->get_($sql);
         return json_encode($json);
     }
-    /**
-     * Usado para conseguir consultas de la base de datos.
-     * @param string $sql
-     * @return array
-     */
-    private function _get_json_decode(string $sql): array {
-        return $this->get_($sql);
+    private function _get_json_decode(string $sql, array $params = []): array {
+        return $this->get_($sql, $params);
     }
 
-    private function get_(string $sql): array {
-        $result = $this->_enviarConsulta($sql);
+    private function get_(string $sql, array $params = []): array {
+        $result = $this->enviarConsultaPreparada($sql, $params);
+        $result = $result->get_result();
         if (mysqli_num_rows($result) > 0) {
             return $result->fetch_all(MYSQLI_ASSOC);
         } else {
             return [];
         }
-    }
-    /**
-     * sql: select _ from _ where _|1
-     * @param string $tabla
-     * @param string $atr
-     * @param string $condicion
-     * @return string|array
-     */
-    public function select(string $tabla, string $atr="*", string $condicion="1"){
-        return $this->_get_json_decode("SELECT $atr FROM $tabla WHERE $condicion");
-    }
-    private function __clone() {}
-
-    public function __wakeup() {
-        self::getInstance();
     }
 }
 ?>

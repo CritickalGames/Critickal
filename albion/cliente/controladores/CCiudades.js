@@ -10,7 +10,7 @@ export class CCiudades {
             const response = await $.ajax({
                 url: this.url,
                 type: 'POST',
-                data: { action: 'insert', id: id, nombre: nombre },
+                data: { action: 'insertar_fila', id: id, nombre: nombre },
             });
             const result = JSON.parse(response);
             if (result.success || result.success == null) {
@@ -48,7 +48,7 @@ export class CCiudades {
             const response = await $.ajax({
                 url: this.url,
                 type: 'POST',
-                data: { action: 'update_por_id', id: id, nuevo_valor: nuevo_valor }
+                data: { action: 'actualizar_por_id', id: id, nuevo_valor: nuevo_valor }
             });
     
             const result = JSON.parse(response);

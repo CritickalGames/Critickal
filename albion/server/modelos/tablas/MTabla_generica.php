@@ -13,35 +13,44 @@ class MTabla_generica {
         $this->db_obj = MConexion_Singleton::getInstance();
     }
 
-    protected function borrar(string $condicion) {
-        return $this->db_obj->delete_set(static::TABLA, $condicion); // Utiliza static:: para acceso polimórfico
+    private function enviar_consulta(string $sql, array $params = []){
+        return $this->db_obj->enviarConsultaPreparada($sql, $params);
     }
-    /**
-     * TODO: Crea un "insert" publico que le mande los valores al insert_into
-     * @param string[] $valores
-     * @return bool|mysqli_result
-     */
-    protected function insert_into(string ...$valores) {
-        $valores_str = implode(', ', array_map(fn($v) => "'$v'", $valores));
+    private function enviar_solicitud(string $sql, array $params = []){
+        return $this->db_obj->enviar_solicitud($sql, $params);
+    }
+    protected function insert_into(string ...$params) {
         $atr = implode(', ', array_map(fn($v) => $v, static::ATRIBUTOS));
-        return $this->db_obj->insert_into_set(static::TABLA, $atr, $valores_str);
+        $placeholders = implode(', ', array_fill(0, count($params), '?'));
+
+        $tabla = static::TABLA;
+        $sql = "INSERT INTO $tabla($atr) VALUES($placeholders)";
+        $stmt = $this->enviar_consulta($sql, $params);
+        return $stmt;
     }
-    /**
-     * @param string $atr
-     * @param string $condicion
-     * @return array|string
-     */
-    protected function select_(string $atr="*", string $condicion="1") {
-        return $this->db_obj->select(static::TABLA, $atr, $condicion);
+    protected function select_from_where(string $atr="*", string $condicion="1", array $params=[]) {
+        $tabla = static::TABLA;
+        $sql = "SELECT $atr FROM $tabla WHERE $condicion";
+        $stmt = $this->enviar_solicitud($sql, $params);
+        return $stmt;
+    }
+    protected function update_set_where(string $set, string $condicion = "1", string $update_tipo = "", array $params=[]){
+        $tabla = static::TABLA;
+        $sql = "UPDATE $update_tipo $tabla SET $set WHERE $condicion";
+        $stmt = $this->enviar_consulta($sql, $params);
+        return $stmt;
+    }
+    protected function delete_from_where(string $condicion, array $params=[]) {
+        $tabla = static::TABLA;
+        $sql = "DELETE FROM $tabla WHERE $condicion";
+        $stmt = $this->enviar_consulta($sql, $params);
+        return $stmt;
     }
     public function select_todo(){
-        $return = $this->select_();
+        $return = $this->select_from_where("*", "1");
         return $return;
     }
 
-    protected function update_(string $set, string $condicion, string $update_tipo){
-        return $this->db_obj->update_set(static::TABLA, $set, $condicion, $update_tipo);
-    }
 
     public function gestionarAjax() {
         $action = $_POST['action'] ?? null;
@@ -50,11 +59,8 @@ class MTabla_generica {
         echo json_encode($response);
         exit;
     }
-
     protected function executeAction($action): array {
         switch ($action) {
-            case 'select_todo':
-                return $this->select_todo(); // Método específico para MCiudades
             default:
                 return $this->select_todo();
         }
