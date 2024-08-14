@@ -36,7 +36,7 @@ class CiudadConsultas extends MCiudades{
         $this->delete_from_where($condicion, [$id]);
     }
     protected function executeAction($action): array {
-        switch ($action) {
+        switch ($action) {//Select_all es generico y está en Tabla_generica
             case 'insertar_fila':
                 $id = $_POST['id'] ?? null;
                 $nombre = $_POST['nombre'] ?? null;

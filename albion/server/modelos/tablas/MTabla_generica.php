@@ -66,5 +66,4 @@ class MTabla_generica {
         }
     }
 }
-
 ?>

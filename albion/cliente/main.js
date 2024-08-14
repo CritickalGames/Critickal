@@ -45,15 +45,6 @@ $(document).ready(function() {
     $('#mostrarDatos').on('click', async function() {
         await ciudades.mostrar(actualizarHTML_callback);
     });
-    $("#eliminar").click(async function() {
-        const id = $("#ciudadID").val();
-        const success = await ciudades.eliminar(id);
-        if (success) {
-            await ciudades.mostrar(actualizarHTML_callback);
-        } else {
-            console.log("No se pudo eliminar la ciudad");
-        }
-    });
     $("#actualizar").click(async function() {
         const id = $("#ciudadID").val();
         const nuevoNombre = $("#ciudadNombre").val();
@@ -62,6 +53,15 @@ $(document).ready(function() {
             await ciudades.mostrar(actualizarHTML_callback);
         } else {
             console.log("No se pudo actualizar la ciudad");
+        }
+    });
+    $("#eliminar").click(async function() {
+        const id = $("#ciudadID").val();
+        const success = await ciudades.eliminar(id);
+        if (success) {
+            await ciudades.mostrar(actualizarHTML_callback);
+        } else {
+            console.log("No se pudo eliminar la ciudad");
         }
     });
 });
