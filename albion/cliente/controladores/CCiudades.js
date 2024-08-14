@@ -14,7 +14,9 @@ export class CCiudades {
             });
             const result = JSON.parse(response);
             if (result.success || result.success == null) {
-                console.log('Ciudad agregada correctamente');
+                console.log('Ciudad agregada');
+                console.info(result.success);
+                console.info(result);
                 return true;
             } else {
                 console.error("No tuvo éxito");
@@ -53,7 +55,9 @@ export class CCiudades {
     
             const result = JSON.parse(response);
             if (result.success || result.success == null) {
-                console.log('Ciudad actualizada correctamente');
+                console.log('Ciudad actualizada');
+                console.info(result.success);
+                console.info(result);
                 return true;
             } else {
                 console.error("No tuvo éxito");
@@ -76,7 +80,9 @@ export class CCiudades {
     
             const result = JSON.parse(response);
             if (result.success || result.success == null) {
-                console.log('Ciudad eliminada correctamente');
+                console.log('Ciudad eliminada');
+                console.info(result.success);
+                console.info(result);
                 return true;
             } else {
                 console.error("No tuvo éxito");

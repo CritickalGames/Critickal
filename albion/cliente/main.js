@@ -32,9 +32,11 @@ $(document).ready(function() {
         try {
             const success = await ciudades.agregar(id, nombre);
             if (success) {
+                console.log("Operación: agregar ciudad"); 
+                console.info(success); 
                 await ciudades.mostrar(actualizarHTML_callback);
             } else {
-                console.log("No se pudo agregar la ciudad");
+                console.error("No se pudo agregar la ciudad");
             }
         } catch (error) {
             console.error("Error:", error);
@@ -50,6 +52,7 @@ $(document).ready(function() {
         const nuevoNombre = $("#ciudadNombre").val();
         const success = await ciudades.actualizar(id, nuevoNombre);
         if (success) {
+            console.log("Operación: actualizar ciudad"); 
             await ciudades.mostrar(actualizarHTML_callback);
         } else {
             console.log("No se pudo actualizar la ciudad");
@@ -59,6 +62,7 @@ $(document).ready(function() {
         const id = $("#ciudadID").val();
         const success = await ciudades.eliminar(id);
         if (success) {
+            console.log("Operación: eleminar ciudad"); 
             await ciudades.mostrar(actualizarHTML_callback);
         } else {
             console.log("No se pudo eliminar la ciudad");

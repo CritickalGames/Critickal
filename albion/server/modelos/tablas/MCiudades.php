@@ -55,7 +55,8 @@ class CiudadConsultas extends MCiudades{
 }
 //Gestor de AJAX
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $obj = new MCiudades();
+    $obj = new CiudadConsultas();
     $obj->gestionarAjax();
 }
+
 ?>
