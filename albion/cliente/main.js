@@ -7,7 +7,7 @@
  * Todo: perfiles en el cliente
  */
 
-import { CCiudades } from './controladores/CCiudades.js'; // Asegúrate de que la ruta sea correcta
+import { CCiudades } from './controlador/CCiudades.js'; // Asegúrate de que la ruta sea correcta
 
 $(document).ready(function() {
     // Crear una instancia de CCiudades
