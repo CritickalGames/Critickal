@@ -59,7 +59,7 @@ class MTabla_generica {
         echo json_encode($response);
         exit;
     }
-    protected function executeAction($action): array {
+    protected function executeAction($action): array|string {
         switch ($action) {
             default:
                 return $this->select_todo();

@@ -35,19 +35,58 @@ class CiudadConsultas extends MCiudades{
         $condicion = self::ATRIBUTOS[0]."=?";
         $this->delete_from_where($condicion, [$id]);
     }
-    protected function executeAction($action): array {
+    protected function executeAction($action): array|string{
         switch ($action) {//Select_all es generico y está en Tabla_generica
             case 'insertar_fila':
                 $id = $_POST['id'] ?? null;
                 $nombre = $_POST['nombre'] ?? null;
-                return ['success' => $this->insertar_fila($id, $nombre)];
+                try {
+                    return json_encode(['success' => $this->insertar_fila($id, $nombre)]);
+                } catch (mysqli_sql_exception $e) {
+                    // Captura el error y envíalo en formato JSON
+                    return json_encode([
+                        'success' => false,
+                        'error' => [
+                            'message' => $e->getMessage(),
+                            'code' => $e->getCode(),
+                            'file' => $e->getFile(),
+                            'line' => $e->getLine()
+                        ]
+                    ]);
+                }
             case 'actualizar_por_id':
                 $id = $_POST['id'] ?? null;
                 $nuevo_valor = $_POST['nuevo_valor'] ?? null;
-                return ['success' => $this->actualizar_por_id($id, $nuevo_valor)];
+                try{
+                    return ['success' => $this->actualizar_por_id($id, $nuevo_valor)];
+                } catch (mysqli_sql_exception $e) {
+                    // Captura el error y envíalo en formato JSON
+                    return json_encode([
+                        'success' => false,
+                        'error' => [
+                            'message' => $e->getMessage(),
+                            'code' => $e->getCode(),
+                            'file' => $e->getFile(),
+                            'line' => $e->getLine()
+                        ]
+                    ]);
+                }
             case 'borrar_por_id':
                 $id = $_POST['id'] ?? null;
-                return ['success' => $this->borrar_por_id($id)];
+                try {
+                    return ['success' => $this->borrar_por_id($id)];
+                } catch (mysqli_sql_exception $e) {
+                    // Captura el error y envíalo en formato JSON
+                    return json_encode([
+                        'success' => false,
+                        'error' => [
+                            'message' => $e->getMessage(),
+                            'code' => $e->getCode(),
+                            'file' => $e->getFile(),
+                            'line' => $e->getLine()
+                        ]
+                    ]);
+                }
             default:
                 return parent::executeAction($action);// Llama al método de la clase base para acciones no específicas
         }

@@ -5,13 +5,23 @@
  * Todo: Perfiles para la base de datos
  * !Todo: Evitar inyección SQL
  * Todo: perfiles en el cliente
+ * Todo: un motor de busqueda para items ya que los nombres de los items están separados por categorias.
+ * Todo: Un selector de itmes en forma de lista similar a albion
+ * Todo: Una lista de "objetos favoritos del jugador" para que revise actualice sus precios de formas más rápida
  */
 
-import { CCiudades } from './controlador/CCiudades.js'; // Asegúrate de que la ruta sea correcta
+//import * as ADMIN from './controlador/barriles/Barril_admin.js'; // Asegúrate de que la ruta sea correcta
+import {CCiudades} from './controlador/CCiudades.js'; // Asegúrate de que la ruta sea correcta
 
 $(document).ready(function() {
     // Crear una instancia de CCiudades
-    const ciudades = new CCiudades();
+    //const Ciudades = new ADMIN.Ciudades();
+    let Ciudades = new CCiudades();/*
+    const Imgs = new ADMIN.Imgs();
+    const Items = new ADMIN.Items();
+    const Jugadores_historial = new ADMIN.Jugadores_historial();
+    const Jugadores = new ADMIN.Jugadores();
+    const Ordenes = new ADMIN.Ordenes();*/
     
     
     async function actualizarHTML_callback(data) {
@@ -21,8 +31,9 @@ $(document).ready(function() {
         });
     }
 
-    // Llamar al método mostrar para inicializar la vista
-    ciudades.mostrar(actualizarHTML_callback);
+    async function succes_result(callback, ...parametros) {
+        return callback(...parametros);
+    }
     
     // Ejemplo de uso del método agregar
     $('#agregarCiudad').on('click', async function() {
@@ -30,43 +41,45 @@ $(document).ready(function() {
         const nombre = $('#ciudadNombre').val();
     
         try {
-            const success = await ciudades.agregar(id, nombre);
-            if (success) {
-                console.log("Operación: agregar ciudad"); 
-                console.info(success); 
-                await ciudades.mostrar(actualizarHTML_callback);
+            const success = await Ciudades.agregar(id, nombre);
+            if (success || success==null) {
+                console.log("Operación: agregar ciudad");  
+                await Ciudades.mostrar(actualizarHTML_callback);
             } else {
-                console.error("No se pudo agregar la ciudad");
+                console.error("No se pudo agregar la ciudad", success);
             }
         } catch (error) {
-            console.error("Error:", error);
+            console.error("Error: no se pudo agregar:", error);
         }
     });
     
     // Botón para solo mostrar datos
     $('#mostrarDatos').on('click', async function() {
-        await ciudades.mostrar(actualizarHTML_callback);
+        await Ciudades.mostrar(actualizarHTML_callback);
     });
     $("#actualizar").click(async function() {
         const id = $("#ciudadID").val();
         const nuevoNombre = $("#ciudadNombre").val();
-        const success = await ciudades.actualizar(id, nuevoNombre);
-        if (success) {
+        const success = await Ciudades.actualizar(id, nuevoNombre);
+        if (success || success==null) {
             console.log("Operación: actualizar ciudad"); 
-            await ciudades.mostrar(actualizarHTML_callback);
+            await Ciudades.mostrar(actualizarHTML_callback);
         } else {
             console.log("No se pudo actualizar la ciudad");
         }
     });
     $("#eliminar").click(async function() {
         const id = $("#ciudadID").val();
-        const success = await ciudades.eliminar(id);
-        if (success) {
+        const success = await Ciudades.eliminar(id);
+        if (success || success==null) {
             console.log("Operación: eleminar ciudad"); 
-            await ciudades.mostrar(actualizarHTML_callback);
+            await Ciudades.mostrar(actualizarHTML_callback);
         } else {
             console.log("No se pudo eliminar la ciudad");
         }
     });
+
+    // Llamar al método mostrar para inicializar la vista
+    Ciudades.mostrar(actualizarHTML_callback);
 });
 

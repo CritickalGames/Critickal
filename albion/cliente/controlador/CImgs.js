@@ -1,20 +1,20 @@
 //TODO: KLASx Krei Legi Agordi Sxangxi
 
-export class CCiudades {
+export class CImgs {
     constructor() {
-        this.url = './server/modelos/tablas/MCiudades.php';
+        this.url = './server/modelos/tablas/MImgs.php';
     }// el resto de funciones serán KLASx para trabajar con los modelos
 
-    async agregar(id, nombre) {
+    async agregar(itemID, dir, archivo, formato) {
         try {
             const response = await $.ajax({
                 url: this.url,
                 type: 'POST',
-                data: { action: 'insertar_fila', id: id, nombre: nombre },
+                data: { action: 'insertar_fila', itemID:itemID, dir:dir, archivo:archivo, formato:formato},
             });
             const result = JSON.parse(response);
             if (result.success || result.success == null) {
-                console.log('Ciudad agregada');
+                console.log('Img agregada');
                 console.info(result.success);
                 console.info(result);
                 return true;

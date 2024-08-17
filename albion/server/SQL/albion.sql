@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS albion_tabla;
 CREATE DATABASE IF NOT EXISTS albion_tabla;
 USE albion_tabla;
-
+-- fase 1
 CREATE table jugadores(
     ID int AUTO_INCREMENT not null PRIMARY KEY,
     nombre varchar(25) not null,
@@ -10,19 +10,30 @@ CREATE table jugadores(
 
 CREATE table ciudades(
     ID ENUM("pl","pm","pb","pd","pp","cl","cm","cb","cd","cp") not null PRIMARY KEY,
-    nombre ENUM(
-        "p_llanura","p_montaña","p_bosque","p_desierto","p_pantano",
-        "c_llanura","c_montaña","c_bosque","c_desierto","c_pantano"
-    ) not null
+    nombre varchar(20) not null,
+    CHECK (ID IN ('pl', 'pm', 'pb', 'pd', 'pp', 'cl', 'cm', 'cb', 'cd', 'cp'))
 );
 
 CREATE table items(
-    ID INT not null PRIMARY KEY,
+    ID INT not null,
     tipo varchar(20) not null,
-    nombreprincipal varchar(10) not null,
-    tier INT not null,
-    nivel INT not null,
-    rarerza varchar(10) not null
+    nombreprincipal varchar(20) not null,
+    tier TINYINT not null,
+    nivel TINYINT not null,
+    rarerza int DEFAULT 1,
+    cualidad TINYINT not null,
+    PRIMARY KEY (ID)
+);
+
+-- Fase 2
+CREATE table imgs(
+    itemID INT NOT NULL,
+    dir varchar(200) DEFAULT NULL,
+    archivo varchar(100) DEFAULT NULL,
+    formato SET('.jpg', '.jpeg', '.png') DEFAULT '.jpg' not null,
+    FOREIGN KEY (itemID) REFERENCES items(ID),
+    PRIMARY KEY (itemID),
+    CHECK (formato IN ('.jpg', '.jpeg', '.png'))
 );
 
 CREATE table jugadores_historial(
@@ -43,11 +54,4 @@ CREATE table ordenes(
     FOREIGN KEY (ciudadID) REFERENCES ciudades(ID),
     FOREIGN KEY (itemID) REFERENCES items(ID),
     PRIMARY KEY (ciudadID, itemID)
-);
-
-CREATE table imgs(
-    itemID varchar(100) NOT NULL,
-    dir varchar(200) DEFAULT NULL,
-    archivo varchar(100) DEFAULT NULL,
-    formato SET('.jpg', '.jpeg', '.png') DEFAULT '.jpg'
 );
