@@ -15,7 +15,7 @@
 <body>
     Albion
     <div class="row">
-        <div class="col">
+        <div class="col-12">
             <table class="table table-bordered border-dark table-primary" id="itmes">
                 <tr>
                     <th>IMAGEN</th>
@@ -67,16 +67,86 @@
                 </tr>
             </table>
         </div>
-        <div class="col"></div>
+        <div class="col-12">
+            <h1>Ciudades</h1>
+            <button id="mostrar_Ciudades">Mostrar</button>
+            <button id="agregar_Ciudad">Agregar</button>
+            <button id="eliminar_Ciudad">Eliminar</button>
+            <button id="actualizar_Ciudad">Actualizar</button>
+            <input type="text" id="ciudadID" placeholder="ID Ciudad">
+            <input type="text" id="ciudadNombre" placeholder="Nombre Ciudad">
+            
+            <div id="resultado"></div>
+        </div>
+        <div class="col-12">
+            <h1>Imges</h1>
+            <button id="mostrar_Imges">Mostrar</button>
+            <button id="agregar_Img">Agregar</button>
+            <button id="eliminar_Img">Eliminar</button>
+            <button id="actualizar_Img">Actualizar</button>
+            <input type="text" id="img_itemID" placeholder="itemID img">
+            <input type="text" id="img_dir" placeholder="Dir img">
+            <input type="text" id="img_archivo" placeholder="Archivo img">
+            <input type="text" id="img_formato" placeholder="Formato img">
+            
+            <div id="resultado"></div>
+        </div>
+        <div class="col-12">
+            <h1>Itemes</h1>
+            <button id="mostrar_Itemes">Mostrar</button>
+            <button id="agregar_Item">Agregar</button>
+            <button id="eliminar_Item">Eliminar</button>
+            <button id="actualizar_Item">Actualizar</button>
+            <input type="text" id="itemes_ID" placeholder="ID Itemes">
+            <input type="text" id="itemes_tipo" placeholder="Tipo Itemes">
+            <input type="text" id="itemes_nombrePrincipal" placeholder="Nombre Principal Itemes">
+            <input type="text" id="itemes_tier" placeholder="Tier Itemes">
+            <input type="text" id="itemes_nivel" placeholder="Nivel Itemes">
+            <input type="text" id="itemes_rareza" placeholder="Rareza Itemes">
+            <input type="text" id="itemes_cualidad" placeholder="Cualidad Itemes">            
+            <div id="resultado"></div>
+        </div>
+        <div class="col-12">
+            <h1>Jugadores</h1>
+            <button id="mostrar_Jugadores">Mostrar</button>
+            <button id="agregar_Jugador">Agregar</button>
+            <button id="eliminar_Jugador">Eliminar</button>
+            <button id="actualizar_Jugador">Actualizar</button>
+            <input type="text" id="jugador_ID" placeholder="ID Jugador">
+            <input type="text" id="jugador_nombre" placeholder="Nombre Jugador">
+            <input type="text" id="jugador_presupuesto" placeholder="Presupuesto Jugador">
+            
+            <div id="resultado"></div>
+        </div>
+        <div class="col-12">
+            <h1>Jugadores_historiales</h1>
+            <button id="mostrar_Jugadores_historiales">Mostrar</button>
+            <button id="agregar_Jugador_historial">Agregar</button>
+            <button id="eliminar_Jugador_historial">Eliminar</button>
+            <button id="actualizar_Jugador_historial">Actualizar</button>
+            <input type="text" id="jugador_historial_id_movimiento" placeholder="Id_para eliminar Jugador_historial_">
+            <input type="text" id="jugador_historial_id_jugador" placeholder="Id_jugador Jugador_historial_">
+            <input type="text" id="jugador_historial_id_item" placeholder="Id_item Jugador_historial_">
+            <input type="text" id="jugador_historial_item_cant" placeholder="Cantidad Jugador_historial_">
+            <input type="text" id="jugador_historial_item_precio" placeholder="Precio Jugador_historial_">
+            <input type="text" id="jugador_historial_monto" placeholder="Monto Jugador_historial_">
+            
+            <div id="resultado"></div>
+        </div>
+        <div class="col-12">
+            <h1>Ordenes</h1>
+            <button id="mostrar_Ordenes">Mostrar</button>
+            <button id="agregar_Orden">Agregar</button>
+            <button id="eliminar_Orden">Eliminar</button>
+            <button id="actualizar_Orden">Actualizar</button>
+            <input type="text" id="orden_ciudad" placeholder="Ciudad Orden">
+            <input type="text" id="orden_item" placeholder="Item Orden">
+            <input type="text" id="orden_compra" placeholder="Orden de Compra Orden">
+            <input type="text" id="orden_venta" placeholder="Orden de Venta Orden">
+            
+            <div id="resultado"></div>
+        </div>
     </div>
-    <button id="mostrarDatos">Mostrar Datos</button>
-    <button id="agregarCiudad">Agregar Ciudad</button>
-    <input type="text" id="ciudadID" placeholder="ID Ciudad">
-    <input type="text" id="ciudadNombre" placeholder="Nombre Ciudad">
-    <button id="eliminar">Eliminar Ciudad</button>
-    <button id="actualizar">Actualizar Ciudad</button>
-    <div id="resultado"></div>
-
 </body>
 
 <script type="module" src="./cliente/main.js"></script>

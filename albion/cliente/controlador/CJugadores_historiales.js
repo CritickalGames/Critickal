@@ -1,7 +1,7 @@
 //TODO: KLASx Krei Legi Agordi Sxangxi
 import * as Controlador_generico from "CGenerico";
 
-export class CJugadores_historial extends Controlador_generico{
+export class CJugadores_historiales extends Controlador_generico{
     constructor() {
         this.url = './server/modelos/tablas/MJugadores_historial.php';
     }// el resto de funciones serán KLASx para trabajar con los modelos

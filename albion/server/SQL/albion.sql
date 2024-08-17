@@ -14,7 +14,7 @@ CREATE table ciudades(
     CHECK (ID IN ('pl', 'pm', 'pb', 'pd', 'pp', 'cl', 'cm', 'cb', 'cd', 'cp'))
 );
 
-CREATE table items(
+CREATE table itemes(
     ID INT not null,
     tipo varchar(20) not null,
     nombreprincipal varchar(20) not null,
@@ -26,23 +26,25 @@ CREATE table items(
 );
 
 -- Fase 2
-CREATE table imgs(
+CREATE table imges(
     itemID INT NOT NULL,
     dir varchar(200) DEFAULT NULL,
     archivo varchar(100) DEFAULT NULL,
     formato SET('.jpg', '.jpeg', '.png') DEFAULT '.jpg' not null,
-    FOREIGN KEY (itemID) REFERENCES items(ID),
+    FOREIGN KEY (itemID) REFERENCES itemes(ID),
     PRIMARY KEY (itemID),
     CHECK (formato IN ('.jpg', '.jpeg', '.png'))
 );
 
-CREATE table jugadores_historial(
+CREATE table jugadores_historiales(
     id_movimiento int AUTO_INCREMENT not null,
     id_jugador int not null,
     id_item int not null,
+    item_cant int not null,
+    item_precio int not null,
     monto int DEFAULT 0,
     FOREIGN KEY (id_jugador) REFERENCES jugadores(ID),
-    FOREIGN KEY (id_item) REFERENCES items(ID),
+    FOREIGN KEY (id_item) REFERENCES itemes(ID),
     PRIMARY KEY (id_movimiento, id_jugador)
 );
 
@@ -52,6 +54,6 @@ CREATE table ordenes(
     precio_compra INT not null,
     precio_venta INT not null,
     FOREIGN KEY (ciudadID) REFERENCES ciudades(ID),
-    FOREIGN KEY (itemID) REFERENCES items(ID),
+    FOREIGN KEY (itemID) REFERENCES itemes(ID),
     PRIMARY KEY (ciudadID, itemID)
 );
