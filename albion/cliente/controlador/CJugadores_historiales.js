@@ -1,14 +1,15 @@
 //TODO: KLASx Krei Legi Agordi Sxangxi
-import * as Controlador_generico from "CGenerico";
+import { CGenerico } from "./CGenerico.js";
 
-export class CJugadores_historiales extends Controlador_generico{
+export class CJugadores_historiales extends CGenerico{
     constructor() {
-        this.url = './server/modelos/tablas/MJugadores_historial.php';
+        super();
+        CGenerico.setURL('./server/modelos/tablas/MCiudades.php');
     }// el resto de funciones serán KLASx para trabajar con los modelos
 
     async agregar(id, nombre) {
         await $.ajax({
-            url: this.url,
+            url: CGenerico.getURL(),
             type: 'POST',
             data: { action: 'insertar_fila', id: id, nombre: nombre },
             dataType: 'json',
@@ -36,7 +37,7 @@ export class CJugadores_historiales extends Controlador_generico{
     }
     async actualizar(id, nuevo_valor) { // Agordi
         await $.ajax({
-            url: this.url,
+            url: CGenerico.getURL(),
             type: 'POST',
             data: { action: 'actualizar_por_id', id: id, nuevo_valor: nuevo_valor},
             success: function(response) {
@@ -64,7 +65,7 @@ export class CJugadores_historiales extends Controlador_generico{
     
     async eliminar(id) { // Sxangxi
         await $.ajax({
-            url: this.url,
+            url: CGenerico.getURL(),
             type: 'POST',
             data: { action: 'borrar_por_id', id: id},
             success: function(response) {

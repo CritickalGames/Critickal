@@ -74,7 +74,7 @@ class CiudadConsultas extends MCiudades{
             case 'borrar_por_id':
                 $id = $_POST['id'] ?? null;
                 try {
-                    return ['success' => $this->borrar_por_id($id)];
+                    return json_encode(['success' => $this->borrar_por_id($id)]);
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
                     return json_encode([
@@ -97,5 +97,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $obj = new CiudadConsultas();
     $obj->gestionarAjax();
 }
-
 ?>

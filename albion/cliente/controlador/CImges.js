@@ -1,13 +1,15 @@
 //TODO: KLASx Krei Legi Agordi Sxangxi
-import * as Controlador_generico from "CGenerico";
-export class CImgs extends Controlador_generico{
+import { CGenerico } from "./CGenerico.js";
+
+export class CImgs extends CGenerico{
     constructor() {
-        this.url = './server/modelos/tablas/MImgs.php';
+        super();
+        CGenerico.setURL('./server/modelos/tablas/MCiudades.php');
     }// el resto de funciones serán KLASx para trabajar con los modelos
 
     async agregar(itemID, dir, archivo, formato) {
         await $.ajax({
-            url: this.url,
+            url: CGenerico.getURL(),
             type: 'POST',
             data: { action: 'insertar_fila', itemID:itemID, dir:dir, archivo:archivo, formato:formato},
             dataType: 'json',
@@ -35,7 +37,7 @@ export class CImgs extends Controlador_generico{
     }
     async actualizar(itemID, dir, archivo, formato) { // Agordi
         await $.ajax({
-            url: this.url,
+            url: CGenerico.getURL(),
             type: 'POST',
             data: { action: 'actualizar_por_id', itemID:itemID, dir:dir, archivo:archivo, formato:formato },
             dataType: 'json',
@@ -64,7 +66,7 @@ export class CImgs extends Controlador_generico{
     
     async eliminar(id) { // Sxangxi
         await $.ajax({
-            url: this.url,
+            url: CGenerico.getURL(),
             type: 'POST',
             data: { action: 'borrar_por_id', id: id },
             dataType: 'json',

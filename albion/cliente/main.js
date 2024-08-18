@@ -48,7 +48,7 @@ $(document).ready(function() {
     // Botones de Ciudad
     $('#agregar_Ciudad').on('click', async function() {
         const id = $('#ciudad_ID').val();
-        const nombre = $('#ciudad_Nombre').val();
+        const nombre = $('#ciudad_nombre').val();
     
         const success = await Ciudades.agregar(id, nombre);
         control_errors(success,Ciudades,"agregar");
@@ -58,14 +58,14 @@ $(document).ready(function() {
     });
     $("#actualizar_Ciudad").click(async function() {
         const id = $("#ciudad_ID").val();
-        const nuevoNombre = $("#ciudad_Nombre").val();
+        const nuevoNombre = $("#ciudad_nombre").val();
 
         const success = await Ciudades.actualizar(id, nuevoNombre);
         control_errors(success,Ciudades,"actualizar");
     });
     $("#eliminar_Ciudad").click(async function() {
         const id = $("#ciudad_ID").val();
-
+        
         const success = await Ciudades.eliminar(id);
         control_errors(success,Ciudades,"eliminar");
     });
