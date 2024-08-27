@@ -66,7 +66,6 @@ export class COrdenes extends CGenerico{
             dataType: 'json',
             success: function(response) {
                 return self.control_success(response);
-
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 return this.control_errores(jqXHR, textStatus, errorThrown);
