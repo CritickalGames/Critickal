@@ -1,107 +1,81 @@
-//TODO: KLASx Krei Legi Agordi Sxangxi
+// CItemes.js
 import { CGenerico } from "./CGenerico.js";
 
-export class CItems extends CGenerico{
+export class CItemes extends CGenerico {
+    static url = ""
+    static setURL(url){
+        super.setURL(url);
+        CItemes.url = url;
+    }
+    static getURL(){
+        console.clear();
+        return super.getURL(CItemes.name);
+    }
+    mostrar(callback, html_id){
+        CItemes.mostrar(CItemes, callback, html_id);
+    }
+    control_success(response){
+        super.control_success(response);
+    }
+    control_errores(jqXHR, textStatus, errorThrown){
+        super.control_errores(jqXHR, textStatus, errorThrown);
+    }
     constructor() {
         super();
-        CGenerico.setURL('./server/modelos/tablas/MCiudades.php');
-    }// el resto de funciones serán KLASx para trabajar con los modelos
+        CItemes.setURL('./server/modelos/tablas/MItemes.php');
+    }
 
-    async agregar(ID,tipo,nombreprincipal,tier,nivel,rarerza,cualidad) {
+    async agregar(id, tipo, nombre_principal, tier, nivel, rareza, cualidad) {
+        const self = this;
         await $.ajax({
-            url: CGenerico.getURL(),
+            url: CItemes.getURL(),
             type: 'POST',
             data: { action: 'insertar_fila', 
-                ID:ID,
-                tipo:tipo,
-                nombreprincipal:nombreprincipal,
-                tier:tier,
-                nivel:nivel, 
-                rarerza:rarerza,
-                cualidad:cualidad},
+                id: id, 
+                tipo: tipo, 
+                nombre_principal: nombre_principal, 
+                tier: tier, 
+                nivel: nivel, 
+                rareza: rareza,
+                cualidad: cualidad },
             dataType: 'json',
             success: function(response) {
-                const result = JSON.parse(response);
-                if (result.success || result.success == null) {
-                    console.log('Ciudad agregada');
-                    console.info(result.success);
-                    console.info(result);
-                    return true;
-                }  else {
-                    console.error("AGREGAR:",
-                        "\nCodigo: ",result.error.code,
-                        "\nArchivo: ",result.error.file,
-                        "\nLinea: ",result.error.line,
-                        "\nMensaje: ",result.error.message);
-                    return false;
-                }
+                return self.control_success(response);
             },
-            error: function(e) {
-                console.error('Error en la petición:', e);
-                return false;
+            error: function(jqXHR, textStatus, errorThrown) {
+                return self.control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
-    async actualizar(ID,tipo,nombreprincipal,tier,nivel,rarerza,cualidad) { // Agordi
+
+    async actualizar(id, nuevo_tipo, nuevo_nombre_principal, nuevo_tier, nuevo_nivel, nuevo_rareza, nuevo_cualidad) {
+        const self = this;
         await $.ajax({
-            url: CGenerico.getURL(),
+            url: CItemes.getURL(),
             type: 'POST',
-            data: { action: 'insertar_fila', 
-                ID:ID,
-                tipo:tipo,
-                nombreprincipal:nombreprincipal,
-                tier:tier,
-                nivel:nivel, 
-                rarerza:rarerza,
-                cualidad:cualidad},
+            data: { action: 'actualizar_por_id', id: id, nuevo_tipo: nuevo_tipo, nuevo_nombre_principal: nuevo_nombre_principal, nuevo_tier: nuevo_tier, nuevo_nivel: nuevo_nivel, nuevo_rareza: nuevo_rareza, nuevo_cualidad: nuevo_cualidad },
             dataType: 'json',
             success: function(response) {
-                const result = JSON.parse(response);
-                if (result.success || result.success == null) {
-                    console.log('Ciudad agregada');
-                    console.info(result.success);
-                    console.info(result);
-                    return true;
-                }  else {
-                    console.error("ACTUALIZAR:",
-                        "\nCodigo: ",result.error.code,
-                        "\nArchivo: ",result.error.file,
-                        "\nLinea: ",result.error.line,
-                        "\nMensaje: ",result.error.message);
-                    return false;
-                }
+                return self.control_success(response);
             },
-            error: function() {
-                console.error('Error en la petición:', error);
-                return false;
+            error: function(jqXHR, textStatus, errorThrown) {
+                return self.control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
-    
-    async eliminar(id) { // Sxangxi
+
+    async eliminar(id) {
+        const self = this;
         await $.ajax({
-            url: CGenerico.getURL(),
+            url: CItemes.getURL(),
             type: 'POST',
-            data: { action: 'borrar_por_id', id: id},
+            data: { action: 'borrar_por_id', id: id },
+            dataType: 'json',
             success: function(response) {
-                const result = JSON.parse(response);
-                if (result.success || result.success == null) {
-                    console.log('Ciudad eleminada');
-                    console.info(result.success);
-                    console.info(result);
-                    return true;
-                }  else {
-                    console.error("ELIMINAR:",
-                        "\nCodigo: ",result.error.code,
-                        "\nArchivo: ",result.error.file,
-                        "\nLinea: ",result.error.line,
-                        "\nMensaje: ",result.error.message);
-                    return false;
-                }
+                return self.control_success(response);
             },
-            error: function() {
-                console.error('Error en la petición:', error);
-                return false;
+            error: function(jqXHR, textStatus, errorThrown) {
+                return self.control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }

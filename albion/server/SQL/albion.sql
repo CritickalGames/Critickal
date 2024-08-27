@@ -17,10 +17,10 @@ CREATE table ciudades(
 CREATE table itemes(
     ID INT not null,
     tipo varchar(20) not null,
-    nombreprincipal varchar(20) not null,
+    nombre_principal varchar(20) not null,
     tier TINYINT not null,
     nivel TINYINT not null,
-    rarerza int DEFAULT 1,
+    rareza int DEFAULT 1,
     cualidad TINYINT not null,
     PRIMARY KEY (ID)
 );
@@ -32,8 +32,7 @@ CREATE table imges(
     archivo varchar(100) DEFAULT NULL,
     formato SET('.jpg', '.jpeg', '.png') DEFAULT '.jpg' not null,
     FOREIGN KEY (itemID) REFERENCES itemes(ID),
-    PRIMARY KEY (itemID),
-    CHECK (formato IN ('.jpg', '.jpeg', '.png'))
+    PRIMARY KEY (itemID)
 );
 
 CREATE table jugadores_historiales(

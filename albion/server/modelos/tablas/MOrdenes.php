@@ -3,53 +3,90 @@ require_once "./MTabla_generica.php";
 // Llamado por su respectivo controlador en el cliente
 
 class MOrdenes extends MTabla_generica {
-    protected const TABLA = "items";
+    protected const TABLA = "ordenes";
     protected const ATRIBUTOS = ["ciudadID", "itemID", "precio_compra", "precio_venta"];
+    protected const CONDICION = self::ATRIBUTOS[0]."=? AND ".self::ATRIBUTOS[1]."=?";
+}
 
-    protected function insert_into(string ...$valores): bool {
-        return parent::insert_into(...$valores);
-    }
+class Ordenes_consultas extends MOrdenes{
     // Para que insert_into funcione, con argumentos distintos a ...$valores
-    public function insert(
-        string $ciudadID, string $itemID, 
-        string $precio_compra, string $precio_venta){
+    public function insertar_fila(string $ciudadID, string $itemID, float $precio_compra, float $precio_venta){
         $this->insert_into($ciudadID, $itemID, $precio_compra, $precio_venta);
     }
-
-    protected function borrar(string $condicion): bool {
-        return parent::borrar($condicion);
+    public function actualizar_por_id(string $ciudadID, string $itemID, float $precio_compra, float $precio_venta){
+        $set = self::ATRIBUTOS[2]."=? , ".self::ATRIBUTOS[3]."=?";
+        //El orden de los parametros importa
+        $this->update_set_where($set, static::CONDICION, "", [$precio_compra, $precio_venta, $ciudadID, $itemID]);
     }
-
-    protected function select_(string $atr="*", string $condicion="1"): array|string {
-        return parent::select_($atr, $condicion);
+    public function borrar_por_id(string $ciudadID,string $itemID){
+        $this->delete_from_where(static::CONDICION, [$ciudadID, $itemID]);
     }
-
-    protected function update_(string $set, string $condicion="1", string $update_tipo=""): array|string {
-        return parent::update_($set, $condicion, $update_tipo);
-    }
-
-    public function update_generico(string $atr, string $nuevo_valor, string $where = "1"){
-        $set = "$atr=$nuevo_valor";
-        $condicion = $where;
-        $this->update_($set, $condicion);
-    }
-    protected function executeAction($action): array {
-        switch ($action) {
-            case 'insert':
+    protected function executeAction($action): array|string{
+        switch ($action){//Select_all es generico y está en Tabla_generica
+            case 'insertar_fila':
                 $ciudadID = $_POST['ciudadID'] ?? null;
-                $itemID = $_POST['itemID'] ?? null;
-                $precio_compra = $_POST['precio_compra'] ?? null;
-                $precio_venta = $_POST['precio_venta'] ?? null;
-                return ['success' => $this->insert($ciudadID, $itemID, $precio_compra, $precio_venta)];
+                $itemID = $_POST['item'] ?? null;
+                $precio_compra = $_POST['compra'] ?? null;
+                $precio_venta = $_POST['venta'] ?? null;
+                try {
+                    return json_encode(['success' => $this->insertar_fila($ciudadID, $itemID, $precio_compra, $precio_venta)]);
+                } catch (mysqli_sql_exception $e) {
+                    // Captura el error y envíalo en formato JSON
+                    return json_encode([
+                        'success' => false,
+                        'error' => [
+                            'message' => $e->getMessage(),
+                            'code' => $e->getCode(),
+                            'file' => $e->getFile(),
+                            'line' => $e->getLine()
+                        ]
+                    ]);
+                }
+            case 'actualizar_por_id':
+                $ciudad = $_POST['ciudad'] ?? null;
+                $item = $_POST['item'] ?? null;
+                $compra = $_POST['compra'] ?? null;
+                $venta = $_POST['venta'] ?? null;
+                try{
+                    return ['success' => $this->actualizar_por_id($ciudad, $item, $compra, $venta)];
+                } catch (mysqli_sql_exception $e) {
+                    // Captura el error y envíalo en formato JSON
+                    return json_encode([
+                        'success' => false,
+                        'error' => [
+                            'message' => $e->getMessage(),
+                            'code' => $e->getCode(),
+                            'file' => $e->getFile(),
+                            'line' => $e->getLine()
+                        ]
+                    ]);
+                }
+            case 'borrar_por_id':
+                $ciudadID = $_POST['ciudadID'] ?? null;
+                $item = $_POST['item'] ?? null;
+                try {
+                    return json_encode(['success' => $this->borrar_por_id($ciudadID, $item)]);
+                } catch (mysqli_sql_exception $e) {
+                    // Captura el error y envíalo en formato JSON
+                    return json_encode([
+                        'success' => false,
+                        'error' => [
+                            'message' => $e->getMessage(),
+                            'code' => $e->getCode(),
+                            'file' => $e->getFile(),
+                            'line' => $e->getLine()
+                        ]
+                    ]);
+                }
             default:
-                return parent::executeAction($action); // Llama al método de la clase base para acciones no específicas
+                return parent::executeAction($action);// Llama al método de la clase base para acciones no específicas
         }
     }
 }
 
 //Gestor de AJAX
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $obj = new MCiudades();
+    $obj = new Ordenes_consultas();
     $obj->gestionarAjax();
 }
 ?>

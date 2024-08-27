@@ -1,94 +1,81 @@
 //TODO: KLASx Krei Legi Agordi Sxangxi
 import { CGenerico } from "./CGenerico.js";
 
-export class CImgs extends CGenerico{
+export class CImges extends CGenerico{
+    url = ""
+    static setURL(url){
+        super.setURL(url);
+        CImges.url = url;
+    }
+    static getURL(){
+        console.clear();
+        return super.getURL(CImges.name);
+    }
+    mostrar(callback, html_id){
+        CImges.mostrar(CImges, callback, html_id);
+    }
+    control_success(response){
+        super.control_success(response);
+    }
+    control_errores(jqXHR, textStatus, errorThrown){
+        super.control_errores(jqXHR, textStatus, errorThrown);
+    }
     constructor() {
-        super();
-        CGenerico.setURL('./server/modelos/tablas/MCiudades.php');
+        super();   
+        CImges.setURL('./server/modelos/tablas/MImges.php');
     }// el resto de funciones serán KLASx para trabajar con los modelos
 
     async agregar(itemID, dir, archivo, formato) {
+        if ((formato == "")) {
+            alert("Falta formato");
+            throw new Error("Falta formato");
+        }
+        if ((formato == "jpg") || (formato == "png") || (formato == "jpeg")) {
+            formato = "."+formato;
+        }
+        
+        const self = this;
         await $.ajax({
-            url: CGenerico.getURL(),
+            url: CImges.getURL(),
             type: 'POST',
             data: { action: 'insertar_fila', itemID:itemID, dir:dir, archivo:archivo, formato:formato},
             dataType: 'json',
             success: function(response) {
-                const result = JSON.parse(response);
-                if (result.success || result.success == null) {
-                    console.log('Ciudad agregada');
-                    console.info(result.success);
-                    console.info(result);
-                    return true;
-                }  else {
-                    console.error("AGREGAR:",
-                        "\nCodigo: ",result.error.code,
-                        "\nArchivo: ",result.error.file,
-                        "\nLinea: ",result.error.line,
-                        "\nMensaje: ",result.error.message);
-                    return false;
-                }
+                return self.control_success(response);
             },
             error: function(e) {
-                console.error('Error en la petición:', e);
-                return false;
+                return self.control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
     async actualizar(itemID, dir, archivo, formato) { // Agordi
+        const self = this;
         await $.ajax({
-            url: CGenerico.getURL(),
+            url: CImges.getURL(),
             type: 'POST',
             data: { action: 'actualizar_por_id', itemID:itemID, dir:dir, archivo:archivo, formato:formato },
             dataType: 'json',
             success: function(response) {
-                const result = JSON.parse(response);
-                if (result.success || result.success == null) {
-                    console.log('Ciudad agregada');
-                    console.info(result.success);
-                    console.info(result);
-                    return true;
-                }  else {
-                    console.error("ACTUALIZAR:",
-                        "\nCodigo: ",result.error.code,
-                        "\nArchivo: ",result.error.file,
-                        "\nLinea: ",result.error.line,
-                        "\nMensaje: ",result.error.message);
-                    return false;
-                }
+                return self.control_success(response);
             },
             error: function() {
-                console.error('Error en la petición:', error);
-                return false;
+                return self.control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
     
     async eliminar(id) { // Sxangxi
+        const self = this;
         await $.ajax({
-            url: CGenerico.getURL(),
+            url: CImges.getURL(),
             type: 'POST',
             data: { action: 'borrar_por_id', id: id },
             dataType: 'json',
             success: function(response) {
-                const result = JSON.parse(response);
-                if (result.success || result.success == null) {
-                    console.log('Ciudad eleminada');
-                    console.info(result.success);
-                    console.info(result);
-                    return true;
-                }  else {
-                    console.error("ELIMINAR:",
-                        "\nCodigo: ",result.error.code,
-                        "\nArchivo: ",result.error.file,
-                        "\nLinea: ",result.error.line,
-                        "\nMensaje: ",result.error.message);
-                    return false;
-                }
+                return self.control_success(response);
             },
-            error: function() {
-                console.error('Error en la petición:', error);
-                return false;
+            error: function(jqXHR, textStatus, errorThrown) {
+                return self.control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
