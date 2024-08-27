@@ -1,6 +1,6 @@
-export { default as Ciudades } from '../CCiudades';
-export { default as Imgs } from '../CImgs';
-export { default as Items } from '../CItems';
-export { default as Jugadores_historial } from '../CJugadores_historial';
-export { default as Jugadores } from '../CJugadores';
-export { default as Ordenes } from '../COrdenes';
+export { CCiudades as Ciudades } from '../CCiudades.js';
+export { CImges as Imges } from '../CImges.js';
+export { CItemes as Itemes } from '../CItemes.js';
+export { CJugadores_historiales as Jugadores_historiales } from '../CJugadores_historiales.js';
+export { CJugadores as Jugadores } from '../CJugadores.js';
+export { COrdenes as Ordenes } from '../COrdenes.js';

@@ -1,91 +1,121 @@
 //TODO: KLASx Krei Legi Agordi Sxangxi
-import * as Controlador_generico from "CGenerico";
+import { CGenerico } from "./CGenerico.js";
 
-export class CJugadores_historiales extends Controlador_generico{
+export class CJugadores_historiales extends CGenerico{
+    url = ""
+    static setURL(url){
+        super.setURL(url);
+        CJugadores_historiales.url = url;
+    }
+    static getURL(){
+        console.clear();
+        return super.getURL(CJugadores_historiales.name);
+    }
+    mostrar(callback, html_id){
+        CJugadores_historiales.mostrar(CJugadores_historiales, callback, html_id);
+    }
+    control_success(response){
+        super.control_success(response);
+    }
+    control_errores(jqXHR, textStatus, errorThrown){
+        super.control_errores(jqXHR, textStatus, errorThrown);
+    }
     constructor() {
-        this.url = './server/modelos/tablas/MJugadores_historial.php';
+        super();   
+        CJugadores_historiales.setURL('./server/modelos/tablas/MJugadores_historiales.php');
     }// el resto de funciones serán KLASx para trabajar con los modelos
 
-    async agregar(id, nombre) {
+    async agregar(id_movimiento, id_jugador, id_item, item_cant, item_precio, monto) {
+        if ((id_jugador == "") || (id_item == "") || (item_cant == "" || parseInt(item_cant) <= 0)) {
+            let error = "como mínimo uno de estos argumentos está vacío: id_jugador, id_item, item_cant. No puedes comprar o vender 0 o menos";
+            alert(error);
+            throw new Error(error);
+        }
+        if ((item_precio =="") && (monto =="")) {
+            let error = "Pon un valor distinto a 0.A precio o a monto. No pueden ser ambos vacíos";
+            alert(error);
+            throw new Error(error);
+        }
+        if ((item_precio =="0") && (monto =="0")) {
+            let error = "Pon un valor distinto a precio o a monto. No pueden ser ambos 0";
+            alert(error);
+            throw new Error(error);
+        }
+        item_precio = (item_precio=="" && monto !="") ? monto/item_cant:item_precio;
+        item_precio = (parseInt(item_precio)>0) ? item_precio : String((parseInt(item_precio)*-1))
+        monto = (monto=="" && item_precio !="") ? item_precio*item_cant:monto;
+        const self = this;
         await $.ajax({
-            url: this.url,
+            url: CJugadores_historiales.getURL(),
             type: 'POST',
-            data: { action: 'insertar_fila', id: id, nombre: nombre },
+            data: { 
+                action: 'insertar_fila', 
+                id_movimiento: id_movimiento, 
+                id_jugador: id_jugador, 
+                id_item: id_item, 
+                item_cant: item_cant, 
+                item_precio: item_precio, 
+                monto: monto 
+            },
             dataType: 'json',
             success: function(response) {
-                const result = JSON.parse(response);
-                if (result.success || result.success == null) {
-                    console.log('Ciudad agregada');
-                    console.info(result.success);
-                    console.info(result);
-                    return true;
-                }  else {
-                    console.error("AGREGAR:",
-                        "\nCodigo: ",result.error.code,
-                        "\nArchivo: ",result.error.file,
-                        "\nLinea: ",result.error.line,
-                        "\nMensaje: ",result.error.message);
-                    return false;
-                }
+                return self.control_success(response);
             },
-            error: function(e) {
-                console.error('Error en la petición:', e);
-                return false;
+            error: function(jqXHR, textStatus, errorThrown) {
+                return self.control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
-    async actualizar(id, nuevo_valor) { // Agordi
+    
+    async actualizar(id_movimiento, id_jugador, id_item, item_cant, item_precio, monto) {
+        if ((item_precio =="") && (monto =="")) {
+            let error = "Pon un valor distinto a 0.A precio o a monto. No pueden ser ambos vacíos";
+            alert(error);
+            throw new Error(error);
+        }
+        if ((item_precio =="0") && (monto =="0")) {
+            let error = "Pon un valor distinto a precio o a monto. No pueden ser ambos 0";
+            alert(error);
+            throw new Error(error);
+        }
+        item_precio = (item_precio=="" && monto !="") ? monto/item_cant:item_precio;
+        item_precio = (parseInt(item_precio)>0) ? item_precio : String((parseInt(item_precio)*-1))
+        monto = (monto=="" && item_precio !="") ? item_precio*item_cant:monto;
+        const self = this;
         await $.ajax({
-            url: this.url,
+            url: CJugadores_historiales.getURL(),
             type: 'POST',
-            data: { action: 'actualizar_por_id', id: id, nuevo_valor: nuevo_valor},
-            success: function(response) {
-                const result = JSON.parse(response);
-                if (result.success || result.success == null) {
-                    console.log('Ciudad agregada');
-                    console.info(result.success);
-                    console.info(result);
-                    return true;
-                }  else {
-                    console.error("ACTUALIZAR:",
-                        "\nCodigo: ",result.error.code,
-                        "\nArchivo: ",result.error.file,
-                        "\nLinea: ",result.error.line,
-                        "\nMensaje: ",result.error.message);
-                    return false;
-                }
+            data: { 
+                action: 'actualizar_por_id', 
+                id_movimiento: id_movimiento, 
+                id_jugador: id_jugador, 
+                id_item: id_item, 
+                item_cant: item_cant, 
+                item_precio: item_precio, 
+                monto: monto 
             },
-            error: function() {
-                console.error('Error en la petición:', error);
-                return false;
+            dataType: 'json',
+            success: function(response) {
+                return self.control_success(response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                return self.control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
     
     async eliminar(id) { // Sxangxi
+        const self = this;
         await $.ajax({
-            url: this.url,
+            url: CJugadores_historiales.getURL(),
             type: 'POST',
-            data: { action: 'borrar_por_id', id: id},
+            data: { action: 'borrar_por_id', id_movimiento: id},
+            dataType: 'json',
             success: function(response) {
-                const result = JSON.parse(response);
-                if (result.success || result.success == null) {
-                    console.log('Ciudad eleminada');
-                    console.info(result.success);
-                    console.info(result);
-                    return true;
-                }  else {
-                    console.error("ELIMINAR:",
-                        "\nCodigo: ",result.error.code,
-                        "\nArchivo: ",result.error.file,
-                        "\nLinea: ",result.error.line,
-                        "\nMensaje: ",result.error.message);
-                    return false;
-                }
+                return self.control_success(response);
             },
-            error: function() {
-                console.error('Error en la petición:', error);
-                return false;
+            error: function(jqXHR, textStatus, errorThrown) {
+                return self.control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }

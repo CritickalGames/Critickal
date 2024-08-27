@@ -9,18 +9,18 @@ CREATE table jugadores(
 );
 
 CREATE table ciudades(
-    ID ENUM("pl","pm","pb","pd","pp","cl","cm","cb","cd","cp") not null PRIMARY KEY,
+    ID ENUM("pp","pc","mp","mc","bp","bc","dp","dc","lp","lc") not null PRIMARY KEY,
     nombre varchar(20) not null,
-    CHECK (ID IN ('pl', 'pm', 'pb', 'pd', 'pp', 'cl', 'cm', 'cb', 'cd', 'cp'))
+    CHECK (ID IN ("pp","pc","mp","mc","bp","bc","dp","dc","lp","lc"))
 );
 
 CREATE table itemes(
     ID INT not null,
     tipo varchar(20) not null,
-    nombreprincipal varchar(20) not null,
+    nombre_principal varchar(20) not null,
     tier TINYINT not null,
     nivel TINYINT not null,
-    rarerza int DEFAULT 1,
+    rareza int DEFAULT 1,
     cualidad TINYINT not null,
     PRIMARY KEY (ID)
 );
@@ -32,8 +32,7 @@ CREATE table imges(
     archivo varchar(100) DEFAULT NULL,
     formato SET('.jpg', '.jpeg', '.png') DEFAULT '.jpg' not null,
     FOREIGN KEY (itemID) REFERENCES itemes(ID),
-    PRIMARY KEY (itemID),
-    CHECK (formato IN ('.jpg', '.jpeg', '.png'))
+    PRIMARY KEY (itemID)
 );
 
 CREATE table jugadores_historiales(
@@ -49,7 +48,7 @@ CREATE table jugadores_historiales(
 );
 
 CREATE table ordenes(
-    ciudadID ENUM("pl","pm","pb","pd","pp","cl","cm","cb","cd","cp") not null,
+    ciudadID ENUM("pp","pc","mp","mc","bp","bc","dp","dc","lp","lc") not null,
     itemID INT not null,
     precio_compra INT not null,
     precio_venta INT not null,

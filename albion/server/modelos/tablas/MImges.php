@@ -2,42 +2,35 @@
 require_once "./MTabla_generica.php"; 
 // Llamado por su respectivo controlador en el cliente
 
-class MImgs extends MTabla_generica {
-    protected const TABLA = "Imgs";
+class MImges extends MTabla_generica {
+    protected const TABLA = "Imges";
     protected const ATRIBUTOS = ["itemID", "dir", "archivo", "formato"];
-
-    protected function insert_into(string ...$valores){
-        return parent::insert_into(...$valores);
-    }
-    protected function select_from_where(string $atr="*", string $condicion="1", array $params=[]) {
-        return parent::select_from_where($atr, $condicion, $params);
-    }
-    
-    protected function update_set_where(string $set, string $condicion = "1", string $update_tipo = "", array $params=[]) {
-        return parent::update_set_where($set, $condicion, $update_tipo, $params);
-    }
-    protected function delete_from_where(string $condicion, array $params=[]) {
-        return parent::delete_from_where($condicion, $params);
-    }
+    protected const CONDICION = self::ATRIBUTOS[0]."=?";
 }
-class ImgConsultas extends MImgs{
+class Imges_consultas extends MImges{
     // Para que insert_into funcione, con argumentos distintos a ...$valores
     public function insertar_fila(string $itemID, string $dir, string $archivo, string $formato){
         $this->insert_into($itemID, $dir, $archivo, $formato);
     }
     public function actualizar_por_id(string $itemID, string $dir, string $archivo, string $formato){
-        $atributos = [$dir, $archivo, $formato];
-        $set = "";
-        for ($i=1; $i <= count($atributos); $i++) { 
-            $set = ($atributos[$i]!=0) ? self::ATRIBUTOS[$i]."=?" : "" ;
+        $set = '';
+        $externos = array();
+        $array = [$dir, $archivo, $formato]; // eliminar elementos vacíos
+        $keys = array_keys($array); // obtener los índices del array original
+        foreach ($keys as $i => $key) {
+            if ($array[$key] == "") {
+                continue; // Sale del bucle completamente
+            }
+            $set .= self::ATRIBUTOS[$i+1] . "=?, ";
+            $externos[] = $array[$key];
         }
-        $condicion = self::ATRIBUTOS[0]."=?";
+        $externos[] = $itemID;
+        $set = rtrim($set, ', ');
         //El orden de los parametros importa
-        $this->update_set_where($set, $condicion, "", [$itemID, $dir, $archivo, $formato]);
+        $this->update_set_where($set, static::CONDICION, "", $externos);
     }
     public function borrar_por_id(string $id){
-        $condicion = self::ATRIBUTOS[0]."=?";
-        $this->delete_from_where($condicion, [$id]);
+        $this->delete_from_where(static::CONDICION, [$id]);
     }
     protected function executeAction($action): array|string{
         switch ($action) {//Select_all es generico y está en Tabla_generica
@@ -66,7 +59,7 @@ class ImgConsultas extends MImgs{
                 $archivo = $_POST['archivo'] ?? null;
                 $formato = $_POST['formato'] ?? null;
                 try{
-                    return ['success' => $this->actualizar_por_id($itemID, $dir, $archivo, $formato)];
+                    return json_encode(['success' => $this->actualizar_por_id($itemID, $dir, $archivo, $formato)]);
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
                     return json_encode([
@@ -102,7 +95,7 @@ class ImgConsultas extends MImgs{
 }
 //Gestor de AJAX
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $obj = new ImgConsultas();
+    $obj = new Imges_consultas();
     $obj->gestionarAjax();
 }
 

@@ -5,49 +5,84 @@ require_once "./MTabla_generica.php";
 class MJugadores extends MTabla_generica {
     protected const TABLA = "jugadores";
     protected const ATRIBUTOS = ["ID", "Nombre", "presupuesto"];
+    protected const CONDICION = self::ATRIBUTOS[0]."=?";
+}
 
-    protected function insert_into(string ...$valores): bool {
-        return parent::insert_into(...$valores);
-    }
-    protected function update_(string $set, string $condicion="1", string $update_tipo=""): array|string {
-        return parent::update_($set, $condicion, $update_tipo);
-    }
-
-    protected function select_(string $atr="*", string $condicion="1"): array|string {
-        return parent::select_($atr, $condicion);
-    }
-    
-    public function update_generico(string $atr, string $nuevo_valor, string $where = "1"){
-        $set = "$atr=$nuevo_valor";
-        $condicion = $where;
-        $this->update_($set, $condicion);
-    }
-
+class Jugadores_consultas extends MJugadores{
     // Para que insert_into funcione, con argumentos distintos a ...$valores
-    public function insert(string $id, string $nombre, string $presupuesto){
+    public function insertar_fila(string $id, string $nombre, float $presupuesto){
         $this->insert_into($id, $nombre, $presupuesto);
     }
-
-    protected function borrar(string $condicion): bool {
-        return parent::borrar($condicion);
+    public function actualizar_por_id(string $id, string $nombre, float $presupuesto){
+        $set = self::ATRIBUTOS[1]."=?,".self::ATRIBUTOS[2]."=?";
+        //El orden de los parametros importa
+        $this->update_set_where($set, static::CONDICION, "", [$nombre, $presupuesto, $id]);
     }
-    protected function executeAction($action): array {
-        switch ($action) {
-            case 'insert':
-                //ID, Nombre, presupuesto
+    public function borrar_por_id(string $id){
+        $this->delete_from_where(static::CONDICION, [$id]);
+    }
+    protected function executeAction($action): array|string{
+        switch ($action){//Select_all es generico y está en Tabla_generica
+            case 'insertar_fila':
                 $id = $_POST['id'] ?? null;
-                $Nombre = $_POST['Nombre'] ?? null;
+                $nombre = $_POST['nombre'] ?? null;
                 $presupuesto = $_POST['presupuesto'] ?? null;
-                return ['success' => $this->insert($id, $Nombre, $presupuesto)];
+                try {
+                    return json_encode(['success' => $this->insertar_fila($id, $nombre, $presupuesto)]);
+                } catch (mysqli_sql_exception $e) {
+                    // Captura el error y envíalo en formato JSON
+                    return json_encode([
+                        'success' => false,
+                        'error' => [
+                            'message' => $e->getMessage(),
+                            'code' => $e->getCode(),
+                            'file' => $e->getFile(),
+                            'line' => $e->getLine()
+                        ]
+                    ]);
+                }
+            case 'actualizar_por_id':
+                $id = $_POST['id'] ?? null;
+                $nombre = $_POST['nuevo_valor'] ?? null;
+                $presupuesto = $_POST['presupuesto'] ?? null;
+                try{
+                    return json_encode(['success' => $this->actualizar_por_id($id, $nombre, $presupuesto)]);
+                } catch (mysqli_sql_exception $e) {
+                    // Captura el error y envíalo en formato JSON
+                    return json_encode([
+                        'success' => false,
+                        'error' => [
+                            'message' => $e->getMessage(),
+                            'code' => $e->getCode(),
+                            'file' => $e->getFile(),
+                            'line' => $e->getLine()
+                        ]
+                    ]);
+                }
+            case 'borrar_por_id':
+                $id = $_POST['id'] ?? null;
+                try {
+                    return json_encode(['success' => $this->borrar_por_id($id)]);
+                } catch (mysqli_sql_exception $e) {
+                    // Captura el error y envíalo en formato JSON
+                    return json_encode([
+                        'success' => false,
+                        'error' => [
+                            'message' => $e->getMessage(),
+                            'code' => $e->getCode(),
+                            'file' => $e->getFile(),
+                            'line' => $e->getLine()
+                        ]
+                    ]);
+                }
             default:
-                return parent::executeAction($action); // Llama al método de la clase base para acciones no específicas
+                return parent::executeAction($action);// Llama al método de la clase base para acciones no específicas
         }
     }
 }
-
 //Gestor de AJAX
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $obj = new MCiudades();
+    $obj = new Jugadores_consultas();
     $obj->gestionarAjax();
 }
 ?>
