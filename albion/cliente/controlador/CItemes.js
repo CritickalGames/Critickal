@@ -1,34 +1,42 @@
 // CItemes.js
-import { CGenerico } from "./CGenerico.js";
+import { CGenerico } from "./generico/CGenerico.js";
 
 export class CItemes extends CGenerico {
     static url = ""
-    static setURL(url){
+    static CLASE = CItemes
+    static _super_setURL(url){
         super.setURL(url);
-        CItemes.url = url;
+        this.CLASE.url = url;
     }
-    static getURL(){
-        console.clear();
-        return super.getURL(CItemes.name);
+    static _super_getURL(){
+        return super.getURL(this.CLASE.name);
     }
-    mostrar(callback, html_id){
-        CItemes.mostrar(CItemes, callback, html_id);
+    super_mostrar(callback, html_id){
+        this.constructor.mostrar(this.constructor, callback, html_id);
     }
-    control_success(response){
+    _super_control_success(response){
         super.control_success(response);
     }
-    control_errores(jqXHR, textStatus, errorThrown){
+    _super_control_errores(jqXHR, textStatus, errorThrown){
         super.control_errores(jqXHR, textStatus, errorThrown);
     }
     constructor() {
         super();
-        CItemes.setURL('./server/modelos/tablas/MItemes.php');
+        this.constructor._super_setURL('./server/modelos/tablas/MItemes.php');
     }
 
     async agregar(id, tipo, nombre_principal, tier, nivel, rareza, cualidad) {
+        if (!id) {
+            alert("ID necesita valor");
+            throw new Error("Falta itemID: es una foreing key");
+        }
+        tier = tier || 1;
+        nivel = nivel || 0;
+        rareza = rareza || 1;
+        cualidad = cualidad ||1;
         const self = this;
         await $.ajax({
-            url: CItemes.getURL(),
+            url: this.constructor._super_getURL(),
             type: 'POST',
             data: { action: 'insertar_fila', 
                 id: id, 
@@ -40,10 +48,10 @@ export class CItemes extends CGenerico {
                 cualidad: cualidad },
             dataType: 'json',
             success: function(response) {
-                return self.control_success(response);
+                return self._super_control_success(response);
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                return self.control_errores(jqXHR, textStatus, errorThrown);
+                return self._super_control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
@@ -51,15 +59,15 @@ export class CItemes extends CGenerico {
     async actualizar(id, nuevo_tipo, nuevo_nombre_principal, nuevo_tier, nuevo_nivel, nuevo_rareza, nuevo_cualidad) {
         const self = this;
         await $.ajax({
-            url: CItemes.getURL(),
+            url: this.constructor._super_getURL(),
             type: 'POST',
             data: { action: 'actualizar_por_id', id: id, nuevo_tipo: nuevo_tipo, nuevo_nombre_principal: nuevo_nombre_principal, nuevo_tier: nuevo_tier, nuevo_nivel: nuevo_nivel, nuevo_rareza: nuevo_rareza, nuevo_cualidad: nuevo_cualidad },
             dataType: 'json',
             success: function(response) {
-                return self.control_success(response);
+                return self._super_control_success(response);
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                return self.control_errores(jqXHR, textStatus, errorThrown);
+                return self._super_control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
@@ -67,15 +75,15 @@ export class CItemes extends CGenerico {
     async eliminar(id) {
         const self = this;
         await $.ajax({
-            url: CItemes.getURL(),
+            url: this.constructor._super_getURL(),
             type: 'POST',
             data: { action: 'borrar_por_id', id: id },
             dataType: 'json',
             success: function(response) {
-                return self.control_success(response);
+                return self._super_control_success(response);
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                return self.control_errores(jqXHR, textStatus, errorThrown);
+                return self._super_control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }

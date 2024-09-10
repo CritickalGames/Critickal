@@ -40,18 +40,10 @@ class Imges_consultas extends MImges{
                 $archivo = $_POST['archivo'] ?? null;
                 $formato = $_POST['formato'] ?? null;
                 try {
-                    return json_encode(['success' => $this->insertar_fila($itemID, $dir, $archivo, $formato)]);
+                    return ['success' => $this->insertar_fila($itemID, $dir, $archivo, $formato)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             case 'actualizar_por_id':
                 $itemID = $_POST['itemID'] ?? null;
@@ -59,18 +51,10 @@ class Imges_consultas extends MImges{
                 $archivo = $_POST['archivo'] ?? null;
                 $formato = $_POST['formato'] ?? null;
                 try{
-                    return json_encode(['success' => $this->actualizar_por_id($itemID, $dir, $archivo, $formato)]);
+                    return ['success' => $this->actualizar_por_id($itemID, $dir, $archivo, $formato)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             case 'borrar_por_id':
                 $id = $_POST['id'] ?? null;
@@ -78,15 +62,7 @@ class Imges_consultas extends MImges{
                     return ['success' => $this->borrar_por_id($id)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             default:
                 return parent::executeAction($action);// Llama al método de la clase base para acciones no específicas

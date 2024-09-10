@@ -15,30 +15,35 @@ export class CGenerico {
     }
 
     static getURL(hijo_nombre) {
+        console.log(hijo_nombre);
         console.log(CGenerico.urls[hijo_nombre]);
-        
         return CGenerico.urls[hijo_nombre];
     }
 
     control_success(res){
+        console.clear();
+        console.log(typeof (res))
         if (res.success || res.success == null) {
-            console.log('Ciudad eleminada');
+            console.log('Operación exitosa');
             console.info(res.success);
             return true;
         }  else {
+            alert("ERROR EN CONSULTA")
             console.error("ELIMINAR:",
                 "\nCodigo: ",res.error.code,
                 "\nArchivo: ",res.error.file,
                 "\nLinea: ",res.error.line,
-                "\nMensaje: ",res.error.menssage);
-            alert("Mensaje: ",res.error.menssage);
+                "\nMensaje: ",res.error.menssage,
+                "\nRastro: ",res.error.Trace
+            );
             return false;
         }
     }
 
     control_errores(jqXHR, textStatus, errorThrown){
+        alert("ERROR")
         console.error('Error en la petición:', textStatus, errorThrown);
-        console.error('Detalles:', jqXHR.responseText);
+        console.error('Detalles:', jqXHR);
         return false;
     }
 

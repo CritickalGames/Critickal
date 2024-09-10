@@ -1,19 +1,26 @@
 //?Elige el usuario
 //!De momento, sólo habrá un usuario
 /**
+ * ! TODO: hacer que CJugadores_historiales.js actualice el presupuesto del jugador en cuestion
+ * ! NO controlar los auto increment. Se supone que los movimientos no se deben eliminar
+ * ! TODO: cuando una orden misma orden se agregue por segunda vez y salte el error 1062, debe llamar a Actualizar tabla
+ * ! TODO: cambiar nombre de la tabla "jugadores_historial" a "movimientos". También actualizar nombre en html
  * *TODO: Comprobar si funcionan "historailes" y "ordenes"
  * Todo: Login
  * Todo: Perfiles para la base de datos
- * !Todo: Evitar inyección SQL
- * Todo: perfiles en el cliente
- * Todo: un motor de busqueda para items ya que los nombres de los items están separados por categorias.
+ * //!Todo: Evitar inyección SQL
+ * Todo: Perfiles en el cliente
+ * Todo: Un motor de busqueda para items ya que los nombres de los items están separados por categorias.
  * Todo: Un selector de itmes en forma de lista similar a albion
  * Todo: Una lista de "objetos favoritos del jugador" para que revise actualice sus precios de formas más rápida
- * !Todo: evitar que si hay 1 elemento y lo elimino, el siguiente sea 2
+ */
+/** 
+ * *Cosas que ya funcionan
+ * * KLASx: Ciudades, Itemes, Imges, Jugadores, Jugadores_historial, Ordenes
+ * * Evitar Iyección SQL
  */
 
 import * as ADMIN from './controlador/barriles/Barril_admin.js'; // Asegúrate de que la ruta sea correcta
-import {CCiudades} from './controlador/CCiudades.js'; // Asegúrate de que la ruta sea correcta
 
 $(document).ready(function() {
     // Crear una instancia de CCiudades
@@ -55,7 +62,7 @@ $(document).ready(function() {
     async function control_errors(success, OBJ, operacion, html_id) {
         if (success || success==null) {
             console.log("Operación: "+operacion+" ciudad");  
-            await OBJ.mostrar(actualizarHTML_callback, html_id);
+            await OBJ.super_mostrar(actualizarHTML_callback, html_id);
         } else {
             console.error("No se pudo "+operacion+" la ciudad", success);
         }
@@ -71,7 +78,7 @@ $(document).ready(function() {
             control_errors(success,Ciudades,"agregar", html_ciudades);
         });
         $('#mostrar_Ciudades').on('click', async function() {
-            await Ciudades.mostrar(actualizarHTML_callback, html_ciudades);
+            await Ciudades.super_mostrar(actualizarHTML_callback, html_ciudades);
         });
         $("#actualizar_Ciudad").click(async function() {
             const id = $("#ciudad_ID").val();
@@ -101,7 +108,7 @@ $(document).ready(function() {
             control_errors(success,Imges,"agregar", html_imges);
         });
         $('#mostrar_Imges').on('click', async function() {
-            await Imges.mostrar(actualizarHTML_callback, html_imges);
+            await Imges.super_mostrar(actualizarHTML_callback, html_imges);
         });
         $("#actualizar_Img").click(async function() {
             const id = $("#img_itemID").val();
@@ -139,7 +146,7 @@ $(document).ready(function() {
             control_errors(success,Itemes,"agregar", html_itemes);
         });
         $('#mostrar_Itemes').on('click', async function() {
-            await Itemes.mostrar(actualizarHTML_callback, html_itemes);
+            await Itemes.super_mostrar(actualizarHTML_callback, html_itemes);
         });
         $("#actualizar_Item").click(async function() {
             const id = $('#itemes_ID').val();
@@ -176,7 +183,7 @@ $(document).ready(function() {
             control_errors(success,Jugadores,"agregar", html_jugadores);
         });
         $('#mostrar_Jugadores').on('click', async function() {
-            await Jugadores.mostrar(actualizarHTML_callback, html_jugadores);
+            await Jugadores.super_mostrar(actualizarHTML_callback, html_jugadores);
         });
         $("#actualizar_Jugador").click(async function() {
             const id = $('#jugador_ID').val();
@@ -211,7 +218,7 @@ $(document).ready(function() {
             control_errors(success,Jugadores_historiales,"agregar", html_jugadores_historiales);
         });
         $('#mostrar_Jugadores_historiales').on('click', async function() {
-            await Jugadores_historiales.mostrar(actualizarHTML_callback, html_jugadores_historiales);
+            await Jugadores_historiales.super_mostrar(actualizarHTML_callback, html_jugadores_historiales);
         });
         $("#actualizar_Jugador_historial").click(async function() {
             const movimiento = $('#jugador_historial_id_movimiento').val();
@@ -247,7 +254,7 @@ $(document).ready(function() {
             control_errors(success,Ordenes,"agregar", html_ordenes);
         });
         $('#mostrar_Ordenes').on('click', async function() {
-            await Ordenes.mostrar(actualizarHTML_callback, html_ordenes);
+            await Ordenes.super_mostrar(actualizarHTML_callback, html_ordenes);
         });
         $("#actualizar_Orden").click(async function() {
             const ciudad = $('#orden_ciudad').val();
@@ -269,11 +276,11 @@ $(document).ready(function() {
     
 
     // * Llamar al método mostrar para inicializar la vista
-    Ciudades.mostrar(actualizarHTML_callback, html_ciudades)
-    Imges.mostrar(actualizarHTML_callback, html_imges)
-    Itemes.mostrar(actualizarHTML_callback, html_itemes)
-    Jugadores_historiales.mostrar(actualizarHTML_callback, html_jugadores_historiales)
-    Jugadores.mostrar(actualizarHTML_callback, html_jugadores)
-    Ordenes.mostrar(actualizarHTML_callback, html_ordenes)
+    Ciudades.super_mostrar(actualizarHTML_callback, html_ciudades)
+    Imges.super_mostrar(actualizarHTML_callback, html_imges)
+    Itemes.super_mostrar(actualizarHTML_callback, html_itemes)
+    Jugadores_historiales.super_mostrar(actualizarHTML_callback, html_jugadores_historiales)
+    Jugadores.super_mostrar(actualizarHTML_callback, html_jugadores)
+    Ordenes.super_mostrar(actualizarHTML_callback, html_ordenes)
 });
 

@@ -46,7 +46,21 @@ class MTabla_generica {
         $stmt = $this->enviar_consulta($sql, $params);
         return $stmt;
     }
-    public function select_todo(){
+
+    protected function error(mysqli_sql_exception $e):array{
+        return [
+            'success' => false,
+            'error' => [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'Trace' => $e->getTrace()
+            ]
+        ];
+    }
+    public function select_todo():array
+    {
         $return = $this->select_from_where("*", "1");
         return $return;
     }

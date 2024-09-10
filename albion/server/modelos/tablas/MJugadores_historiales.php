@@ -45,18 +45,11 @@ class Jugadores_historiales_consultas extends MJugadores_historiales {
                 $item_precio = $_POST['item_precio'] ?? null;
                 $monto = $_POST['monto'] ?? null;
                 try {
-                    return json_encode(['success' => $this->insertar_fila($id_movimiento, $id_jugador, $id_item, $item_cant, $item_precio, $monto)]);
+                    return ['success' =>
+                    $this->insertar_fila($id_movimiento, $id_jugador, $id_item, $item_cant, $item_precio, $monto)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             case 'actualizar_por_id':
                 $id_movimiento = $_POST['id_movimiento'] ?? null;
@@ -66,34 +59,20 @@ class Jugadores_historiales_consultas extends MJugadores_historiales {
                 $item_precio = $_POST['item_precio'] ?? null;
                 $monto = $_POST['monto'] ?? null;
                 try {
-                    return json_encode(['success' => $this->actualizar_por_id($id_movimiento, $id_jugador, $id_item, $item_cant, $item_precio, $monto)]);
+                    return ['success' =>
+                    $this->actualizar_por_id($id_movimiento, $id_jugador, $id_item, $item_cant, $item_precio, $monto)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             case 'borrar_por_id':
                 $id_movimiento = $_POST['id_movimiento'] ?? null;
                 try {
-                    return json_encode(['success' => $this->borrar_por_id($id_movimiento)]);
+                    return ['success' =>
+                    $this->borrar_por_id($id_movimiento)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             default:
                 return parent::executeAction($action); // Llama al método de la clase base para acciones no específicas

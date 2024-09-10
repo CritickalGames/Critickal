@@ -1,57 +1,57 @@
 //TODO: KLASx Krei Legi Agordi Sxangxi
-import { CGenerico } from "./CGenerico.js";
+import { CGenerico } from "./generico/CGenerico.js";
 
 export class CJugadores extends CGenerico{
-    url = ""
-    static setURL(url){
+    static url = ""
+    static CLASE = CJugadores
+    static _super_setURL(url){
         super.setURL(url);
-        CJugadores.url = url;
+        this.CLASE.url = url;
     }
-    static getURL(){
-        console.clear();
-        return super.getURL(CJugadores.name);
+    static _super_getURL(){
+        return super.getURL(this.CLASE.name);
     }
-    mostrar(callback, html_id){
-        CJugadores.mostrar(CJugadores, callback, html_id);
+    super_mostrar(callback, html_id){
+        this.constructor.mostrar(this.constructor, callback, html_id);
     }
-    control_success(response){
+    _super_control_success(response){
         super.control_success(response);
     }
-    control_errores(jqXHR, textStatus, errorThrown){
+    _super_control_errores(jqXHR, textStatus, errorThrown){
         super.control_errores(jqXHR, textStatus, errorThrown);
     }
     constructor() {
         super();   
-        CJugadores.setURL('./server/modelos/tablas/MJugadores.php');
+        this.constructor._super_setURL('./server/modelos/tablas/MJugadores.php');
     }// el resto de funciones serán KLASx para trabajar con los modelos
 
-    async agregar(id, nombre, presupuesto) {
+    async agregar(id, nombre, presupuesto) { //krei
         const self = this;
         await $.ajax({
-            url: CJugadores.getURL(),
+            url: this.constructor._super_getURL(),
             type: 'POST',
             data: { action: 'insertar_fila', id: id, nombre: nombre, presupuesto:presupuesto },
             dataType: 'json',
             success: function(response) {
-                return self.control_success(response);
+                return self._super_control_success(response);
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                return self.control_errores(jqXHR, textStatus, errorThrown);
+                return self._super_control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
     async actualizar(id, nuevo_valor, presupuesto) { // Agordi
         const self = this;
         await $.ajax({
-            url: CJugadores.getURL(),
+            url: this.constructor._super_getURL(),
             type: 'POST',
             data: { action: 'actualizar_por_id', id: id, nuevo_valor: nuevo_valor, presupuesto: presupuesto},
             dataType: 'json',
             success: function(response) {
-                return self.control_success(response);
+                return self._super_control_success(response);
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                return self.control_errores(jqXHR, textStatus, errorThrown);
+                return self._super_control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
@@ -59,15 +59,15 @@ export class CJugadores extends CGenerico{
     async eliminar(id) { // Sxangxi
         const self = this;
         await $.ajax({
-            url: CJugadores.getURL(),
+            url: this.constructor._super_getURL(),
             type: 'POST',
             data: { action: 'borrar_por_id', id: id},
             dataType: 'json',
             success: function(response) {
-                return self.control_success(response);
+                return self._super_control_success(response);
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                return self.control_errores(jqXHR, textStatus, errorThrown);
+                return self._super_control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }

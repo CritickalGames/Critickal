@@ -42,17 +42,10 @@ class Itemes_consultas extends MItemes{
                 $rareza = $_POST['rareza'] ?? null;
                 $cualidad = $_POST['cualidad'] ?? null;
                 try {
-                    return json_encode(['success' => $this->insertar_fila($id, $tipo, $nombre_principal, $tier, $nivel, $rareza, $cualidad)]);
+                    return ['success' => 
+                    $this->insertar_fila($id, $tipo, $nombre_principal, $tier, $nivel, $rareza, $cualidad)];
                 } catch (mysqli_sql_exception $e) {
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             case 'actualizar_por_id':
                 $id = $_POST['id'] ?? null;
@@ -63,32 +56,17 @@ class Itemes_consultas extends MItemes{
                 $nuevo_rareza = $_POST['nuevo_rareza'] ?? null;
                 $nuevo_cualidad = $_POST['nuevo_cualidad'] ?? null;
                 try {
-                    return json_encode(['success' => $this->actualizar_por_id($id, $nuevo_tipo, $nuevo_nombre_principal, $nuevo_tier, $nuevo_nivel, $nuevo_rareza, $nuevo_cualidad)]);
+                    return ['success' =>
+                    $this->actualizar_por_id($id, $nuevo_tipo, $nuevo_nombre_principal, $nuevo_tier, $nuevo_nivel, $nuevo_rareza, $nuevo_cualidad)];
                 } catch (mysqli_sql_exception $e) {
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             case 'borrar_por_id':
                 $id = $_POST['id'] ?? null;
                 try {
-                    return json_encode(['success' => $this->borrar_por_id($id)]);
+                    return ['success' => $this->borrar_por_id($id)];
                 } catch (mysqli_sql_exception $e) {
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             default:
                 return parent::executeAction($action);// Llama al método de la clase base para acciones no específicas

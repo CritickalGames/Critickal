@@ -28,18 +28,10 @@ class Ciudad_consultas extends MCiudades{
                 $id = $_POST['id'] ?? null;
                 $nombre = $_POST['nombre'] ?? null;
                 try {
-                    return json_encode(['success' => $this->insertar_fila($id, $nombre)]);
+                    return ['success' => $this->insertar_fila($id, $nombre)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             case 'actualizar_por_id':
                 $id = $_POST['id'] ?? null;
@@ -48,31 +40,15 @@ class Ciudad_consultas extends MCiudades{
                     return ['success' => $this->actualizar_por_id($id, $nuevo_valor)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             case 'borrar_por_id':
                 $id = $_POST['id'] ?? null;
                 try {
-                    return json_encode(['success' => $this->borrar_por_id($id)]);
+                    return ['success' => $this->borrar_por_id($id)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             default:
                 return parent::executeAction($action);// Llama al método de la clase base para acciones no específicas

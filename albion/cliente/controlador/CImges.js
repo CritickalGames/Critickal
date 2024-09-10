@@ -1,65 +1,68 @@
 //TODO: KLASx Krei Legi Agordi Sxangxi
-import { CGenerico } from "./CGenerico.js";
+import { CGenerico } from "./generico/CGenerico.js";
 
 export class CImges extends CGenerico{
-    url = ""
-    static setURL(url){
+    static url = ""
+    static CLASE = CImges
+    static _super_setURL(url){
         super.setURL(url);
-        CImges.url = url;
+        this.CLASE.url = url;
     }
-    static getURL(){
-        console.clear();
-        return super.getURL(CImges.name);
+    static _super_getURL(){
+        return super.getURL(this.CLASE.name);
     }
-    mostrar(callback, html_id){
-        CImges.mostrar(CImges, callback, html_id);
+    super_mostrar(callback, html_id){
+        this.constructor.mostrar(this.constructor, callback, html_id);
     }
-    control_success(response){
+    _super_control_success(response){
         super.control_success(response);
     }
-    control_errores(jqXHR, textStatus, errorThrown){
+    _super_control_errores(jqXHR, textStatus, errorThrown){
         super.control_errores(jqXHR, textStatus, errorThrown);
     }
     constructor() {
         super();   
-        CImges.setURL('./server/modelos/tablas/MImges.php');
+        this.constructor._super_setURL('./server/modelos/tablas/MImges.php');
     }// el resto de funciones serán KLASx para trabajar con los modelos
 
     async agregar(itemID, dir, archivo, formato) {
-        if ((formato == "")) {
-            alert("Falta formato");
-            throw new Error("Falta formato");
+        if (!itemID) {
+            alert("Falta itemID: es una foreing key");
+            throw new Error("Falta itemID: es una foreing key");
+        }
+        if ((formato == "")||(formato != "jpg") && (formato != "png") && (formato != "jpeg")) {
+            alert(`Falta formato: .jpg||.png||.jpeg El punto no es nacesario;${formato}`);
+            throw new Error("Falta formato: jpg||png||jpeg El punto no es nacesario");
         }
         if ((formato == "jpg") || (formato == "png") || (formato == "jpeg")) {
             formato = "."+formato;
         }
-        
         const self = this;
         await $.ajax({
-            url: CImges.getURL(),
+            url: this.constructor._super_getURL(),
             type: 'POST',
             data: { action: 'insertar_fila', itemID:itemID, dir:dir, archivo:archivo, formato:formato},
             dataType: 'json',
             success: function(response) {
-                return self.control_success(response);
+                return self._super_control_success(response);
             },
-            error: function(e) {
-                return self.control_errores(jqXHR, textStatus, errorThrown);
+            error: function(jqXHR, textStatus, errorThrown) {
+                return self._super_control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
     async actualizar(itemID, dir, archivo, formato) { // Agordi
         const self = this;
         await $.ajax({
-            url: CImges.getURL(),
+            url: this.constructor._super_getURL(),
             type: 'POST',
             data: { action: 'actualizar_por_id', itemID:itemID, dir:dir, archivo:archivo, formato:formato },
             dataType: 'json',
             success: function(response) {
-                return self.control_success(response);
+                return self._super_control_success(response);
             },
-            error: function() {
-                return self.control_errores(jqXHR, textStatus, errorThrown);
+            error: function(jqXHR, textStatus, errorThrown) {
+                return self._super_control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }
@@ -67,15 +70,15 @@ export class CImges extends CGenerico{
     async eliminar(id) { // Sxangxi
         const self = this;
         await $.ajax({
-            url: CImges.getURL(),
+            url: this.constructor._super_getURL(),
             type: 'POST',
             data: { action: 'borrar_por_id', id: id },
             dataType: 'json',
             success: function(response) {
-                return self.control_success(response);
+                return self._super_control_success(response);
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                return self.control_errores(jqXHR, textStatus, errorThrown);
+                return self._super_control_errores(jqXHR, textStatus, errorThrown);
             }
         });
     }

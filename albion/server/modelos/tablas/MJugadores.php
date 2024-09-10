@@ -10,10 +10,10 @@ class MJugadores extends MTabla_generica {
 
 class Jugadores_consultas extends MJugadores{
     // Para que insert_into funcione, con argumentos distintos a ...$valores
-    public function insertar_fila(string $id, string $nombre, float $presupuesto){
+    public function insertar_fila(string $id, string $nombre, string $presupuesto){
         $this->insert_into($id, $nombre, $presupuesto);
     }
-    public function actualizar_por_id(string $id, string $nombre, float $presupuesto){
+    public function actualizar_por_id(string $id, string $nombre, string $presupuesto){
         $set = self::ATRIBUTOS[1]."=?,".self::ATRIBUTOS[2]."=?";
         //El orden de los parametros importa
         $this->update_set_where($set, static::CONDICION, "", [$nombre, $presupuesto, $id]);
@@ -28,52 +28,28 @@ class Jugadores_consultas extends MJugadores{
                 $nombre = $_POST['nombre'] ?? null;
                 $presupuesto = $_POST['presupuesto'] ?? null;
                 try {
-                    return json_encode(['success' => $this->insertar_fila($id, $nombre, $presupuesto)]);
+                    return ['success' => $this->insertar_fila($id, $nombre, $presupuesto)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             case 'actualizar_por_id':
                 $id = $_POST['id'] ?? null;
                 $nombre = $_POST['nuevo_valor'] ?? null;
                 $presupuesto = $_POST['presupuesto'] ?? null;
                 try{
-                    return json_encode(['success' => $this->actualizar_por_id($id, $nombre, $presupuesto)]);
+                    return ['success' => $this->actualizar_por_id($id, $nombre, $presupuesto)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             case 'borrar_por_id':
                 $id = $_POST['id'] ?? null;
                 try {
-                    return json_encode(['success' => $this->borrar_por_id($id)]);
+                    return ['success' => $this->borrar_por_id($id)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
-                    return json_encode([
-                        'success' => false,
-                        'error' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine()
-                        ]
-                    ]);
+                    return $this->error($e);
                 }
             default:
                 return parent::executeAction($action);// Llama al método de la clase base para acciones no específicas

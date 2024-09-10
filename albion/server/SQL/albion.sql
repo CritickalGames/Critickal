@@ -9,9 +9,9 @@ CREATE table jugadores(
 );
 
 CREATE table ciudades(
-    ID ENUM("pp","pc","mp","mc","bp","bc","dp","dc","lp","lc") not null PRIMARY KEY,
-    nombre varchar(20) not null,
-    CHECK (ID IN ("pp","pc","mp","mc","bp","bc","dp","dc","lp","lc"))
+    ID ENUM("pp","pc","mp","mc","bp","bc","dp","dc","lp","lc") not null PRIMARY KEY
+        CHECK (ID IN ("pp","pc","mp","mc","bp","bc","dp","dc","lp","lc")),
+    nombre varchar(20) not null
 );
 
 CREATE table itemes(
@@ -20,7 +20,7 @@ CREATE table itemes(
     nombre_principal varchar(20) not null,
     tier TINYINT not null,
     nivel TINYINT not null,
-    rareza int DEFAULT 1,
+    rareza TINYINT not null,
     cualidad TINYINT not null,
     PRIMARY KEY (ID)
 );
