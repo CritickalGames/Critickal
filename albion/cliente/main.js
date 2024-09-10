@@ -1,6 +1,7 @@
 //?Elige el usuario
 //!De momento, sólo habrá un usuario
 /**
+ * ! Incorporar KLASx a la tabla
  * ! TODO: hacer que CJugadores_historiales.js actualice el presupuesto del jugador en cuestion
  * ! NO controlar los auto increment. Se supone que los movimientos no se deben eliminar
  * ! TODO: cuando una orden misma orden se agregue por segunda vez y salte el error 1062, debe llamar a Actualizar tabla
