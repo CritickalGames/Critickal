@@ -12,7 +12,7 @@ const Procesador = {
     } 
     return `<h${headerLevel}>${headerContent}</h${headerLevel}>`
   },
-  lista_ord:[],
+  lista_ord:[],//La lista debe comportarse como un la estructura que tiene una copia de cada elemento
   processOrderedListItem: function (line) {
     const textoDespuesDeExpresionRegular = line.match(/^\s*\d*\.\s*(.*)/)[1];
     // Reemplazar 4 espacios por una tabulación
@@ -22,6 +22,7 @@ const Procesador = {
     if(tabCount==0){
       let mensaje="";
       if(this.lista_ord.length!=0){
+        console.log(this.lista_ord);
         const [txt, trueOrFalse_No_Necesario] = this.processCloseOrderedList(1);
         mensaje =txt;
         console.log("nuevo borrón", tabCount);
@@ -31,11 +32,13 @@ const Procesador = {
       console.log(`${mensaje}<li>${textoDespuesDeExpresionRegular}</li>`);
       return `${mensaje}<li>${textoDespuesDeExpresionRegular}</li>`;
     }else{
-      if (this.lista_ord[this.lista_ord.length -1]<=tabCount) {
+      if (this.lista_ord[this.lista_ord.length -1]<tabCount) {
         this.lista_ord.push(tabCount);
         return `<ol><li>${textoDespuesDeExpresionRegular}</li>`;
+      }else if(this.lista_ord[this.lista_ord.length -1]==tabCount){
+        return `<li>${textoDespuesDeExpresionRegular}</li>`;
       }else{
-        this.lista_ord.push(tabCount);
+        this.lista_ord.pop();//Elimino el nivel anterior porque ya se cerró
         return `</ol><li>${textoDespuesDeExpresionRegular}</li>`;
       }
     }
@@ -43,12 +46,51 @@ const Procesador = {
   processCloseOrderedList: function(conservar = 0){//Si [0,1,2] conservar 1 no elimina [0] conservar 2 no elimina [0,1]
     let cerrado;
     let mensaje = "";
-    console.log(this.lista_ord[this.lista_ord.length-1]);
-    console.log(this.lista_ord);
-    while(this.lista_ord.length!=(0+conservar)){
+    while(this.lista_ord.length>(conservar)){
         this.lista_ord.pop();
         cerrado = (this.lista_ord.length == 0) ? true: false;
         mensaje+=`</ol>`;
+        console.log(mensaje);
+    }
+    return[mensaje, cerrado];
+  },
+  lista_desord:[],//La lista debe comportarse como un la estructura que tiene una copia de cada elemento
+  processUnorderedListItem: function (line) {
+    const textoDespuesDeExpresionRegular = line.match(/^\s*-\s(.*)/)[1];
+    // Reemplazar 4 espacios por una tabulación
+    const formattedLine = line.replace(/\s{4}/g, '\t');
+    // Cuenta los tabs
+    const tabCount = (formattedLine.match(/\t/g) || []).length;
+    if(tabCount==0){
+      let mensaje="";
+      if(this.lista_desord.length!=0){
+        const [txt, trueOrFalse_No_Necesario] = this.processCloseUnorderedList(1);
+        mensaje =txt;
+      }else{
+        this.lista_desord.push(tabCount);
+      }
+      console.log(`<li>${textoDespuesDeExpresionRegular}</li>`);
+      return `${mensaje}<li>${textoDespuesDeExpresionRegular}</li>`;
+    }else{
+      if (this.lista_desord[this.lista_desord.length -1]<tabCount) {
+        this.lista_desord.push(tabCount);
+        return `<ul><li>${textoDespuesDeExpresionRegular}</li>`;
+      }else if(this.lista_desord[this.lista_desord.length -1]==tabCount){
+        return `<li>${textoDespuesDeExpresionRegular}</li>`;
+      }else{
+        this.lista_desord.pop();//Elimino el nivel anterior porque ya se cerró
+        return `</ul><li>${textoDespuesDeExpresionRegular}</li>`;
+      }
+    }
+  },
+  processCloseUnorderedList: function(conservar = 0){//Si [0,1,2] conservar 1 no elimina [0] conservar 2 no elimina [0,1]
+    let cerrado;
+    let mensaje = "";
+    console.log(this.lista_desord);
+    while(this.lista_desord.length>(conservar)){
+        this.lista_desord.pop();
+        cerrado = (this.lista_desord.length == 0) ? true: false;
+        mensaje+=`</ul>`;
         console.log(mensaje);
     }
     return[mensaje, cerrado];

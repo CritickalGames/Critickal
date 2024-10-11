@@ -1,5 +1,6 @@
 /**
- * ! TODO: Aplicar "processOrderedListItem" versión "processUnorderedListItem"
+ * ! TODO: Aplicar la Tabla. No existe ya. No sé ni recuerdo porque. Buscaré en los comits anteriores.
+ * Todo: subir página a Tokurim
  */
 window.addEventListener("load", main);
 

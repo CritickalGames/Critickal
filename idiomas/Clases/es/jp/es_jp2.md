@@ -104,13 +104,11 @@ Por motivos gramáticos, al hay 3 hiraganas que tienen una segunda lectura cuand
 ### Importante
 
 - **Consonantes Pronunciadas sin Vocal**:
-    
     - La única consonante que se puede pronunciar sin una vocal en japonés es la "N".
     - Ejemplo: "lambda" se lee "RamUbUda".
     - Si no pueden pronunciar la vocal en solitario, agregan una U. Pero si la consonante es T o D, agregan una O.
     - Ejemplo: "Toad" se lee "ToadO".
 - **Ausencia de Consonantes L y V**:
-    
     - **L**: Se usa la R.
     - **V**: Se usa la B o U.
     - Esto se debe a que los sonidos "L" y "V" no existen en el sistema fonético japonés.
