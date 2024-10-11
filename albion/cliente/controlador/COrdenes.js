@@ -37,7 +37,11 @@ export class COrdenes extends CGenerico{
             data: { action: 'insertar_fila', ciudadID: ciudad, item:item, compra:compra, venta:venta},
             dataType: 'json',
             success: function(response) {
-                return self._super_control_success(response);
+                if (response.error.code == 1062) {
+                    self.actualizar(ciudad, item, compra, venta);
+                }else{
+                    return self._super_control_success(response);
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 return self._super_control_errores(jqXHR, textStatus, errorThrown);
@@ -60,7 +64,6 @@ export class COrdenes extends CGenerico{
             }
         });
     }
-    
     async eliminar(ciudad, item) { // Sxangxi
         await $.ajax({
             url: this.constructor._super_getURL(),

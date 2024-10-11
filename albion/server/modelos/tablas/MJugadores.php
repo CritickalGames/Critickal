@@ -18,6 +18,23 @@ class Jugadores_consultas extends MJugadores{
         //El orden de los parametros importa
         $this->update_set_where($set, static::CONDICION, "", [$nombre, $presupuesto, $id]);
     }
+    private function _actualizar_por_id_sin_nombre(string $id, string $presupuesto){
+        $set = self::ATRIBUTOS[2]."=?";
+        //El orden de los parametros importa
+        $this->update_set_where($set, static::CONDICION, "", [$presupuesto, $id]);
+    }
+    private function _actualizar_por_id_sin_presupuesto(string $id, string $nombre){
+        $set = self::ATRIBUTOS[1]."=?";
+        //El orden de los parametros importa
+        $this->update_set_where($set, static::CONDICION, "", [$nombre, $id]);
+    }
+
+    public function actualizar_sumar_al_presupuesto($id, $presupuesto){
+        $set = self::ATRIBUTOS[2]."=?";
+        $viejo_presupuesto = $this->select_from_where("presupuesto", static::CONDICION,[$id]);
+        $nuevo_presupuesto = (int)$viejo_presupuesto[0]["presupuesto"]+$presupuesto;
+        $this->update_set_where($set, static::CONDICION, "", [$nuevo_presupuesto, $id]);
+    }
     public function borrar_por_id(string $id){
         $this->delete_from_where(static::CONDICION, [$id]);
     }
@@ -35,18 +52,43 @@ class Jugadores_consultas extends MJugadores{
                 }
             case 'actualizar_por_id':
                 $id = $_POST['id'] ?? null;
-                $nombre = $_POST['nuevo_valor'] ?? null;
+                $nombre = $_POST['nombre'] ?? null;
                 $presupuesto = $_POST['presupuesto'] ?? null;
-                try{
-                    return ['success' => $this->actualizar_por_id($id, $nombre, $presupuesto)];
-                } catch (mysqli_sql_exception $e) {
-                    // Captura el error y envíalo en formato JSON
-                    return $this->error($e);
+                if($nombre && $presupuesto){
+                    try{
+                        return ['success' => $this->actualizar_por_id($id, $nombre, $presupuesto)];
+                    } catch (mysqli_sql_exception $e) {
+                        // Captura el error y envíalo en formato JSON
+                        return $this->error($e);
+                    }
+                }else if ($presupuesto) {
+                    try{
+                        return ['success' => $this->_actualizar_por_id_sin_nombre($id, $presupuesto)];
+                    } catch (mysqli_sql_exception $e) {
+                        // Captura el error y envíalo en formato JSON
+                        return $this->error($e);
+                    }
+                }else if ($nombre){
+                    try{
+                        return ['success' => $this->_actualizar_por_id_sin_presupuesto($id, $nombre)];
+                    } catch (mysqli_sql_exception $e) {
+                        // Captura el error y envíalo en formato JSON
+                        return $this->error($e);
+                    }
                 }
             case 'borrar_por_id':
                 $id = $_POST['id'] ?? null;
                 try {
                     return ['success' => $this->borrar_por_id($id)];
+                } catch (mysqli_sql_exception $e) {
+                    // Captura el error y envíalo en formato JSON
+                    return $this->error($e);
+                }
+            case 'actualizar_sumar_al_presupuesto':
+                $id = $_POST['id'] ?? null;
+                $presupuesto = $_POST['presupuesto'] ?? null;
+                try {
+                    return ['success' => $this->actualizar_sumar_al_presupuesto($id, $presupuesto)];
                 } catch (mysqli_sql_exception $e) {
                     // Captura el error y envíalo en formato JSON
                     return $this->error($e);

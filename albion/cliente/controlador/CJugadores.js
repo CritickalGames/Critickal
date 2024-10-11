@@ -40,12 +40,33 @@ export class CJugadores extends CGenerico{
             }
         });
     }
-    async actualizar(id, nuevo_valor, presupuesto) { // Agordi
+    async actualizar(id, nombre, presupuesto) { // Agordi
         const self = this;
+        if (!id) {
+            alert("necesita ID")
+        }
         await $.ajax({
             url: this.constructor._super_getURL(),
             type: 'POST',
-            data: { action: 'actualizar_por_id', id: id, nuevo_valor: nuevo_valor, presupuesto: presupuesto},
+            data: { action: 'actualizar_por_id', id: id, nombre: nombre, presupuesto: presupuesto},
+            dataType: 'json',
+            success: function(response) {
+                return self._super_control_success(response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                return self._super_control_errores(jqXHR, textStatus, errorThrown);
+            }
+        });
+    }
+    async actualizar_sumar_al_presupuesto(id, monto) { // Agordi
+        const self = this;
+        if (!id) {
+            alert("necesita ID de jugador")
+        }
+        await $.ajax({
+            url: this.constructor._super_getURL(),
+            type: 'POST',
+            data: { action: 'actualizar_sumar_al_presupuesto', id: id, presupuesto: monto},
             dataType: 'json',
             success: function(response) {
                 return self._super_control_success(response);

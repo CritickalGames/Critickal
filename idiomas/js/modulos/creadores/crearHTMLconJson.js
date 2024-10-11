@@ -1,4 +1,4 @@
-import * as etikedo from "./manipularHTML.js";
+import * as etikedo from "./../manipuladores/manipular_html";
 
 export function crearPagina(ARCHIVO, PADRE) {
     console.log(PADRE);

@@ -1,10 +1,13 @@
+/**
+ * ! TODO: Aplicar "processOrderedListItem" versión "processUnorderedListItem"
+ */
 window.addEventListener("load", main);
 
 import cst from "./modulos/constantes.js";
-import MkP from './modulos/markdownProcessor.js';
-import * as etikedo from "./modulos/manipular_html.js";
+import MkP from './modulos/manipuladores/markdownProcessor.js';
+import * as etikedo from "./modulos/manipuladores/manipular_html.js";
 
-import insertar_botones from "./modulos/iniciar_botones.js";
+import insertar_botones from "./modulos/creadores/iniciar_botones.js";
 
 let idioma_elegido = "";
 let textoBoton = "";
@@ -19,18 +22,30 @@ async function main() {
 }
 
 async function insertar_idiomas() {
-    await insertar_botones.insertar("./Clases", "btn_idioma", cst.html_id.contenedor_botones.idiomas, cst.html_id.dataset.idiomas, "col-1 mx-3 my-1 btn btn-secondary");
+    await insertar_botones.insertar("./Clases", 
+        "btn_idioma", 
+        cst.html_id.contenedor_botones.idiomas, 
+        cst.html_id.dataset.idiomas, 
+        "col-1 mx-3 my-1 btn btn-secondary");
 }
 async function insertar_cursos_disponibles(dir) {
     const DIR = `./Clases/${dir}`;
     console.log("IDIOMA Y DIR: "+idioma_elegido+"----"+DIR);
-    await insertar_botones.insertar(DIR, "btn_cursos", cst.html_id.contenedor_botones.cursos, cst.html_id.dataset.cursos, "col-1 mx-3 my-1 btn btn-secondary");
+    await insertar_botones.insertar(DIR, 
+        "btn_cursos", 
+        cst.html_id.contenedor_botones.cursos, 
+        cst.html_id.dataset.cursos, 
+        "col-1 mx-3 my-1 btn btn-secondary");
     return DIR;
 }
 async function insertar_clases(dir, dir2) {
     const DIR = `${dir}/${dir2}`;
     //console.log("IDIOMA Y DIR: "+idioma_elegido+"----"+DIR);
-    await insertar_botones.insertar(DIR, "btn_clases", cst.html_id.contenedor_botones.clases, cst.html_id.dataset.clases, "col-1 mx-3 my-1 btn btn-secondary");
+    await insertar_botones.insertar(DIR, 
+        "btn_clases", 
+        cst.html_id.contenedor_botones.clases, 
+        cst.html_id.dataset.clases, 
+        "col-1 mx-3 my-1 btn btn-secondary");
     return DIR;
 }
 

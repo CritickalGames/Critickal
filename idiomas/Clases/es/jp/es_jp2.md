@@ -33,7 +33,7 @@ Es cuestión de practicar y acostumbrarse para dominar la pronunciación.
     - Los sonidos de "consonante" + "i" + "vocal diferente a la i" se representan con una silaba(generalmente de la columna de la i) y se le suma una versión pequeña de la silabas や、ゆ、よ
     - Representación: にゃ (nya)、きゅ (kyu)、ふゅ (fyu).
     - Hay otros sonidos que requieren una silaba chiquita. Por ejemplo ヴぁ (va)
-	    - La ウ se convierte en ヴ (Vu) agregando el 〃(てんてん)
+        - La ウ se convierte en ヴ (Vu) agregando el 〃(てんてん)
 
 #### Romanización Variada
 

@@ -2,13 +2,13 @@
 require_once "./MTabla_generica.php"; 
 // Llamado por su respectivo controlador en el cliente
 
-class MJugadores_historiales extends MTabla_generica {
-    protected const TABLA = "jugadores_historiales";
+class MMovimientos extends MTabla_generica {
+    protected const TABLA = "movimientos";
     protected const ATRIBUTOS = ["id_movimiento", "id_jugador", "id_item", "item_cant", "item_precio", "monto"];
     protected const CONDICION = self::ATRIBUTOS[0]."=?";
 }
 
-class Jugadores_historiales_consultas extends MJugadores_historiales {
+class Movimientos_consultas extends MMovimientos {
     public function insertar_fila(string $id_movimiento, string $id_jugador, string $id_item, string $item_cant, string $item_precio, string $monto) {
         return $this->insert_into($id_movimiento, $id_jugador, $id_item, $item_cant, $item_precio, $monto);
     }
@@ -82,7 +82,7 @@ class Jugadores_historiales_consultas extends MJugadores_historiales {
 
 //Gestor de AJAX
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $obj = new Jugadores_historiales_consultas();
+    $obj = new Movimientos_consultas();
     $obj->gestionarAjax();
 }
 ?>

@@ -1,10 +1,8 @@
 //?Elige el usuario
 //!De momento, sólo habrá un usuario
 /**
- * ! Incorporar KLASx a la tabla
- * ! TODO: hacer que CJugadores_historiales.js actualice el presupuesto del jugador en cuestion
+ * ! TODO: Incorporar KLASx a la tabla
  * ! NO controlar los auto increment. Se supone que los movimientos no se deben eliminar
- * ! TODO: cuando una orden misma orden se agregue por segunda vez y salte el error 1062, debe llamar a Actualizar tabla
  * ! TODO: cambiar nombre de la tabla "jugadores_historial" a "movimientos". También actualizar nombre en html
  * *TODO: Comprobar si funcionan "historailes" y "ordenes"
  * Todo: Login
@@ -28,7 +26,7 @@ $(document).ready(function() {
     const Ciudades = new ADMIN.Ciudades();
     const Imges = new ADMIN.Imges();
     const Itemes = new ADMIN.Itemes();
-    const Jugadores_historiales = new ADMIN.Jugadores_historiales();
+    const Movimientos = new ADMIN.Movimientos();
     const Jugadores = new ADMIN.Jugadores();
     const Ordenes = new ADMIN.Ordenes();
     
@@ -36,7 +34,7 @@ $(document).ready(function() {
     const html_imges = "resultado_imges"
     const html_itemes = "resultado_itemes"
     const html_jugadores = "resultado_jugadores"
-    const html_jugadores_historiales = "resultado_jugadores_historiales"
+    const html_movimientos = "resultado_movimientos"
     const html_ordenes = "resultado_ordenes"
 
 
@@ -62,7 +60,7 @@ $(document).ready(function() {
     
     async function control_errors(success, OBJ, operacion, html_id) {
         if (success || success==null) {
-            console.log("Operación: "+operacion+" ciudad");  
+            console.log("Operación: "+operacion+" "+html_id);  
             await OBJ.super_mostrar(actualizarHTML_callback, html_id);
         } else {
             console.error("No se pudo "+operacion+" la ciudad", success);
@@ -203,42 +201,42 @@ $(document).ready(function() {
     } catch (error) {
         
     }
-    // * Botones de Jugadores_historial
+    // * Botones de Movimientos
     try {
-        $('#agregar_Jugador_historial').on('click', async function() {
-            const movimiento = $('#jugador_historial_id_movimiento').val();
-            const jugador = $('#jugador_historial_id_jugador').val();
-            const item = $('#jugador_historial_id_item').val();
-            const cant = $('#jugador_historial_item_cant').val();
-            const precio = $('#jugador_historial_item_precio').val();
-            const monto = $('#jugador_historial_monto').val();
+        $('#agregar_Movimientos').on('click', async function() {
+            const movimiento = $('#movimiento_id_movimiento').val();
+            const jugador = $('#movimiento_id_jugador').val();
+            const item = $('#movimiento_id_item').val();
+            const cant = $('#movimiento_item_cant').val();
+            const precio = $('#movimiento_item_precio').val();
+            const monto = $('#movimiento_monto').val();
         
-            const success = await Jugadores_historiales.agregar(
+            const success = await Movimientos.agregar(
                 movimiento, jugador, item, cant, precio, monto
             );
-            control_errors(success,Jugadores_historiales,"agregar", html_jugadores_historiales);
+            control_errors(success,Movimientos,"agregar", html_movimientos);
         });
-        $('#mostrar_Jugadores_historiales').on('click', async function() {
-            await Jugadores_historiales.super_mostrar(actualizarHTML_callback, html_jugadores_historiales);
+        $('#mostrar_Movimientos').on('click', async function() {
+            await Movimientos.super_mostrar(actualizarHTML_callback, html_movimientos);
         });
-        $("#actualizar_Jugador_historial").click(async function() {
-            const movimiento = $('#jugador_historial_id_movimiento').val();
-            const jugador = $('#jugador_historial_id_jugador').val();
-            const item = $('#jugador_historial_id_item').val();
-            const cant = $('#jugador_historial_item_cant').val();
-            const precio = $('#jugador_historial_item_precio').val();
-            const monto = $('#jugador_historial_monto').val();
+        $("#actualizar_Movimientos").click(async function() {
+            const movimiento = $('#movimiento_id_movimiento').val();
+            const jugador = $('#movimiento_id_jugador').val();
+            const item = $('#movimiento_id_item').val();
+            const cant = $('#movimiento_item_cant').val();
+            const precio = $('#movimiento_item_precio').val();
+            const monto = $('#movimiento_monto').val();
     
-            const success = await Jugadores_historiales.actualizar(
+            const success = await Movimientos.actualizar(
                 movimiento, jugador, item, cant, precio, monto
             );
-            control_errors(success,Jugadores_historiales,"actualizar", html_jugadores_historiales);
+            control_errors(success,Movimientos,"actualizar", html_movimientos);
         });
-        $("#eliminar_Jugador_historial").click(async function() {
-            const id = $("#jugador_historial_id_movimiento").val();
+        $("#eliminar_Movimientos").click(async function() {
+            const id = $("#movimiento_id_movimiento").val();
 
-            const success = await Jugadores_historiales.eliminar(id);
-            control_errors(success,Jugadores_historiales,"eliminar", html_jugadores_historiales);
+            const success = await Movimientos.eliminar(id);
+            control_errors(success,Movimientos,"eliminar", html_movimientos);
         });
     } catch (error) {
         
@@ -280,7 +278,7 @@ $(document).ready(function() {
     Ciudades.super_mostrar(actualizarHTML_callback, html_ciudades)
     Imges.super_mostrar(actualizarHTML_callback, html_imges)
     Itemes.super_mostrar(actualizarHTML_callback, html_itemes)
-    Jugadores_historiales.super_mostrar(actualizarHTML_callback, html_jugadores_historiales)
+    Movimientos.super_mostrar(actualizarHTML_callback, html_movimientos)
     Jugadores.super_mostrar(actualizarHTML_callback, html_jugadores)
     Ordenes.super_mostrar(actualizarHTML_callback, html_ordenes)
 });

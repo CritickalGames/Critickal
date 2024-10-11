@@ -35,7 +35,7 @@ CREATE table imges(
     PRIMARY KEY (itemID)
 );
 
-CREATE table jugadores_historiales(
+CREATE table movimientos(
     id_movimiento int AUTO_INCREMENT not null,
     id_jugador int not null,
     id_item int not null,

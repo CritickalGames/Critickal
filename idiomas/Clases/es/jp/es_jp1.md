@@ -31,7 +31,7 @@ Si 子供っぽい(Kodomoppoi) no te convence, entonces también te digo que aho
 
 Comprendo que éste sistema no es para todos, y que puede haberte asustado ver algo como tan raro como 猫, 食べる, 魚, 青い, pero te prometo que si tienes paciencia, verás lo fácil y lindo que es aprender. Sin mucho que agregar a esta "pequeña" idea inicial.
 
-# GANBAROU KOUHAI
+# <center> GANBAROU KOUHAI
 # Clase 1: ¿Cómo escribir en japonés?
 
 ## Los sistemas de escritura

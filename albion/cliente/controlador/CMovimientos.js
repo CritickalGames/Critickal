@@ -1,9 +1,10 @@
 //TODO: KLASx Krei Legi Agordi Sxangxi
 import { CGenerico } from "./generico/CGenerico.js";
+import * as CJugadores from "./CJugadores.js";
 
-export class CJugadores_historiales extends CGenerico{
+export class CMovimientos extends CGenerico{
     static url = ""
-    static CLASE = CJugadores_historiales
+    static CLASE = CMovimientos
     static _super_setURL(url){
         super.setURL(url);
         this.CLASE.url = url;
@@ -22,7 +23,7 @@ export class CJugadores_historiales extends CGenerico{
     }
     constructor() {
         super();   
-        this.constructor._super_setURL('./server/modelos/tablas/MJugadores_historiales.php');
+        this.constructor._super_setURL('./server/modelos/tablas/MMovimientos.php');
     }// el resto de funciones serán KLASx para trabajar con los modelos
 
     _control_de_datos(id_jugador, id_item, item_cant, item_precio, monto){
@@ -71,6 +72,8 @@ export class CJugadores_historiales extends CGenerico{
             },
             dataType: 'json',
             success: function(response) {
+                const OBJ_CJugadores = new CJugadores.CJugadores();
+                OBJ_CJugadores.actualizar_sumar_al_presupuesto(id_jugador, monto);
                 return self._super_control_success(response);
             },
             error: function(jqXHR, textStatus, errorThrown) {

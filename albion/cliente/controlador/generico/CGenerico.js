@@ -22,10 +22,9 @@ export class CGenerico {
 
     control_success(res){
         console.clear();
-        console.log(typeof (res))
         if (res.success || res.success == null) {
             console.log('Operación exitosa');
-            console.info(res.success);
+            console.info("-----------");
             return true;
         }  else {
             alert("ERROR EN CONSULTA")
@@ -43,7 +42,7 @@ export class CGenerico {
     control_errores(jqXHR, textStatus, errorThrown){
         alert("ERROR")
         console.error('Error en la petición:', textStatus, errorThrown);
-        console.error('Detalles:', jqXHR);
+        console.error('Detalles:', jqXHR.responseText);
         return false;
     }
 

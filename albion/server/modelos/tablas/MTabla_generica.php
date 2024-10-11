@@ -66,10 +66,9 @@ class MTabla_generica {
     }
 
 
-    public function gestionarAjax() {
-        $action = $_POST['action'] ?? null;
+    public function gestionarAjax($action ="") {
+        $action = ($action == "") ? ($_POST['action'] ?? null) : $action;
         $response = $this->executeAction($action);
-
         echo json_encode($response);
         exit;
     }

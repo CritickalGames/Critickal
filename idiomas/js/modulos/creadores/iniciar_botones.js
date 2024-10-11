@@ -1,5 +1,5 @@
-import * as Xson from "./json.js";
-import * as etikedo from "./manipular_html.js";
+import * as Xson from "./../manipuladores/json.js";
+import * as etikedo from "./../manipuladores/manipular_html.js";
 
 function abrirJson(carpeta, json) {
     return Xson.abrirJson(carpeta, json)
