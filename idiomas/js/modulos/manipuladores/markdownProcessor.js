@@ -5,9 +5,7 @@ import { default as md_proceso } from "./mk_procesos.js";
 const MarkdownProcessor = {
     // Lista para almacenar las listas ordenadas creadas
     html_p: etikedo.krei("p"),
-    sangria: false,
     tablo: [],
-    cxuTablo: false,
 
     // Método para procesar el contenido Markdown y darle etiquetas y estilo
     process: function (markdownContent) {
@@ -19,6 +17,7 @@ const MarkdownProcessor = {
 
         let cxu_lista_ord = false, cxu_lista_desord =false;
         let cxu_abierta_lista_ord = false, cxu_abierta_lista_desord =false;
+        let cxu_tablo = false;
         // Iterar sobre cada línea del contenido Markdown
         lines.forEach(line => {
             // Reemplazar ** por negritas
@@ -26,6 +25,7 @@ const MarkdownProcessor = {
             // Encontrar inicio de listas
             cxu_lista_ord = (line.match(/^\s*\d+\.\s.+/)) ? true:false;
             cxu_lista_desord = (line.match(/^\s*-\s/)) ? true:false;
+            cxu_tablo = (line.startsWith('|')) ? true : false;
             // Procesar la línea
             switch (true) {
                 case line.startsWith('#'):
@@ -35,9 +35,10 @@ const MarkdownProcessor = {
                     // Título
                     processedContent += md_proceso.processHeader(line);
                     break;
-                case line.startsWith('|'): // Tabla
+                case cxu_tablo: // Tabla
                     this.tablo.push(line);
-                    this.cxuTablo = true;
+                    console.log(this.tablo);
+                    
                     break;
                 case cxu_lista_ord:
                     if (!cxu_abierta_lista_ord) {
@@ -88,6 +89,11 @@ const MarkdownProcessor = {
             const [contenido, cxu_cerrar_lista] = md_proceso.processCloseUnorderedList();
             processedContent += contenido;
             cxu_abierta_lista_desord = (cxu_cerrar_lista) ? false: true;
+        }
+        //Agregar tabla
+        if(this.tablo.length > 0){
+            processedContent += md_proceso.processTable(this.tablo);
+            this.tablo = [];
         }
         return [processedContent,cxu_abierta_lista_ord,cxu_abierta_lista_desord];
     }

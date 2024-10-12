@@ -22,14 +22,11 @@ const Procesador = {
     if(tabCount==0){
       let mensaje="";
       if(this.lista_ord.length!=0){
-        console.log(this.lista_ord);
         const [txt, trueOrFalse_No_Necesario] = this.processCloseOrderedList(1);
         mensaje =txt;
-        console.log("nuevo borrón", tabCount);
       }else{
         this.lista_ord.push(tabCount);
       }
-      console.log(`${mensaje}<li>${textoDespuesDeExpresionRegular}</li>`);
       return `${mensaje}<li>${textoDespuesDeExpresionRegular}</li>`;
     }else{
       if (this.lista_ord[this.lista_ord.length -1]<tabCount) {
@@ -50,7 +47,6 @@ const Procesador = {
         this.lista_ord.pop();
         cerrado = (this.lista_ord.length == 0) ? true: false;
         mensaje+=`</ol>`;
-        console.log(mensaje);
     }
     return[mensaje, cerrado];
   },
@@ -69,7 +65,6 @@ const Procesador = {
       }else{
         this.lista_desord.push(tabCount);
       }
-      console.log(`<li>${textoDespuesDeExpresionRegular}</li>`);
       return `${mensaje}<li>${textoDespuesDeExpresionRegular}</li>`;
     }else{
       if (this.lista_desord[this.lista_desord.length -1]<tabCount) {
@@ -86,12 +81,10 @@ const Procesador = {
   processCloseUnorderedList: function(conservar = 0){//Si [0,1,2] conservar 1 no elimina [0] conservar 2 no elimina [0,1]
     let cerrado;
     let mensaje = "";
-    console.log(this.lista_desord);
     while(this.lista_desord.length>(conservar)){
         this.lista_desord.pop();
         cerrado = (this.lista_desord.length == 0) ? true: false;
         mensaje+=`</ul>`;
-        console.log(mensaje);
     }
     return[mensaje, cerrado];
   },
@@ -105,6 +98,8 @@ const Procesador = {
   processTable: function (lines) {
     // Separar las filas de la tabla
     const rows = lines.filter(line => line.includes('|')).map(line => {
+      console.log(line);
+      
       const cells = line.split('|').map(cell => cell.trim());
       // Eliminar la primera y última celda vacía si existen
       if (cells.length > 0 && cells[0] === '') cells.shift();
