@@ -37,8 +37,6 @@ $(document).ready(function() {
     const html_movimientos = "resultado_movimientos"
     const html_ordenes = "resultado_ordenes"
 
-
-    
     async function actualizarHTML_callback(data,html_id) {
         html_id = "#"+html_id
         console.log(html_id);
